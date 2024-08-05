@@ -6,6 +6,13 @@ public class Boleta {
 	private Sala sala;
 	private double precio;
 	
+
+	public Boleta(Funcion funcion, Cliente cliente, Sala sala){
+		this.funcion = funcion;
+		this.cliente = cliente;
+		this.sala = sala;
+
+	}
 	
 	
 	

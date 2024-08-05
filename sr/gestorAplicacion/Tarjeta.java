@@ -27,6 +27,7 @@ public class Tarjeta {
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
+
 	public double getSaldo() {
 		return saldo;
 	}
@@ -34,13 +35,25 @@ public class Tarjeta {
 		this.saldo = saldo;
 	}
 	
+
+	public void comprarConPuntos(double monto){
+		this.puntos -= monto;
+	}
 	
 	
-	public void comprar(double monto) {
+	public void comprarConSaldo(double monto) {
+		this.saldo -= monto;
 		
 	}
-	public void agregarPuntos(int puntos) {
-		
+	public void agregarPuntos() {
+
+		if (this.plan.equals("platino")){
+			this.setPuntos(this.getPuntos() + 10000);
+		} else if(this.plan.equals("oro")){
+			this.setPuntos(this.getPuntos() + 5000);
+		}else{
+			this.setPuntos(this.getPuntos() + 2500);
+		}
 	}
 	
 	

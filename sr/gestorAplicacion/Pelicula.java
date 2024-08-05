@@ -8,6 +8,11 @@ public class Pelicula {
 	private double calificacionPromedio;
 	private int numeroCalificaciones;
 	
+
+	public pelicula(String titulo, String genero){
+		this.titulo = titulo;
+		this.genero = genero;
+	}
 	
 	
 	public String getTitulo() {

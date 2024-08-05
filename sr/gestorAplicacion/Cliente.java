@@ -6,6 +6,11 @@ public class Cliente {
 	private ArrayList<Boleta> boletas;
 	private double saldo;
 	private Tarjeta tarjeta;
+
+	public Cliente(String nombre, double saldo){
+		this.nombre = nombre;
+		this.saldo = saldo;
+	}
 	
 	
 	public double getSaldo() {
@@ -32,7 +37,9 @@ public class Cliente {
 	public void setTarjeta(Tarjeta tarjeta) {
 		this.tarjeta = tarjeta;
 	}
-	
+	public void agregarBoleta(Boleta boleta){
+		this.boletas.add(boleta);
+	}
 	
 	
 	public boolean haVistoPelicula(Pelicula pelicula) {
@@ -47,18 +54,41 @@ public class Cliente {
 	public void utilizarCupon(Producto producto) {
 		
 	}
-	public void comprarBoleta(Cine cine, Pelicula pelicula) {
-		
+	public boolean comprarBoleta(Cine cine, Pelicula pelicula) {
+		boolean booleano = cine.hayPelicula(pelicula);
+		if (booleano){
+			return true;
+		}else{
+			return false;
+		}
 	}
-	private void pagarConTarjeta(double monto, boolean usarPuntos) {
-		
-	}
-	private void pagarConSaldo(double monto) {
-		
-	}
-	
-	
-	
 
+	public boolean pagarConTarjeta(double monto, boolean usarPuntos) {
 
+		if (usarPuntos){
+			int puntosTarjeta = this.tarjeta.getPuntos();
+			if (puntosTarjeta >= monto){
+				this.tarjeta.comprarConPuntos(monto);
+				return true
+			}
+		} else{
+			double saldoTarjeta = this.tarjeta.getSaldo();
+			if(saldoTarjeta >= monto){
+				this.tarjeta.comprarConSaldo();
+				this.agregarPuntos();
+			}
+			return false;
+		}
+		
+	}
+	public void pagarConSaldo(double monto) {
+
+		if (this.saldo >= monto){
+			this.saldo -= monto;
+		}
+		
+	}
+	
+	
+	
 }

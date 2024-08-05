@@ -5,8 +5,14 @@ public class Funcion {
 	private String Horario;
 	private int tipo;
 	private Sala sala;
+	private Boleta boleta;
 	
-	
+	public Funcion(Pelicula pelicula, String horario, int tipo, Sala sala){
+		this.pelicula = pelicula;
+		this.horario = horario;
+		this.tipo = tipo;
+		this.sala = sala;
+	}
 	
 	public Pelicula getPelicula() {
 		return pelicula;
@@ -23,6 +29,14 @@ public class Funcion {
 	public int getTipo() {
 		return tipo;
 	}
+
+	public void setBoleta(Boleta boleta) {
+		this.boleta = boleta
+	}
+	public Boleta getBoleta() {
+		return boleta;
+	}
+
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
