@@ -37,7 +37,7 @@ public class Cine {
 	public ArrayList<Funcion> obtenerFunciones(Pelicula pelicula){
 		ArrayList<Funcion> posibilidades = new ArrayList<Funcion>();
 		for( Funcion funcion: this.funciones){
-			if (funcion.getPelicula().getTitulo(),equals(pelicula.getTitulo())){
+			if (funcion.getPelicula().getTitulo().equals(pelicula.getTitulo())){
 				boolean[][] lugares = funcion.getSala().getSillas();
 				for (int i = 0; i<lugares.length; i++){
 					for(int j = 0; j<lugares[0].length; i++){

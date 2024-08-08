@@ -26,11 +26,26 @@ public class Sala {
 	
 	
 	public boolean reservarSilla(int fila, int columna) {
-		
+	   
+	    if (fila >= 0 && fila < sillas.length && columna >= 0 && columna < sillas[fila].length) {
+	       if (sillas[fila][columna]) {
+	            sillas[fila][columna] = false;
+	            return true; 
+	        } else {
+	            return false; 
+	        }
+	    } else {
+	        return false; 
+	    }
 	}
 	
 	public boolean estaDisponible(int fila, int columna) {
-		
+	    
+		if (fila >= 0 && fila < sillas.length && columna >= 0 && columna < sillas[fila].length) {
+			return sillas[fila][columna];
+	    } else {
+	        return false; 
+	    }
 	}
 	
 

@@ -1,5 +1,5 @@
 package gestorAplicacion;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pelicula {
@@ -7,11 +7,12 @@ public class Pelicula {
 	private String genero;
 	private double calificacionPromedio;
 	private int numeroCalificaciones;
-	
+	private static ArrayList<Pelicula> totalPeliculas;
 
-	public pelicula(String titulo, String genero){
+	public Pelicula(String titulo, String genero){
 		this.titulo = titulo;
 		this.genero = genero;
+		Pelicula.totalPeliculas.add(this);
 	}
 	
 	
@@ -43,12 +44,16 @@ public class Pelicula {
 	
 	
 	public void actualizarCalificacion(double nuevaCalificacion) {
+		double a=this.getCalificacionPromedio();
+		int b=this.getNumeroCalificaciones();
+		this.setCalificacionPromedio((a+nuevaCalificacion)/(b+1));
+		this.setNumeroCalificaciones(b+1);
 		
 	}
 	
 	public static List<Pelicula> getListado(){
-		
-	}
+		return Pelicula.totalPeliculas;
+		}
 	
 	
 	

@@ -2,7 +2,7 @@ package gestorAplicacion;
 
 public class Funcion {
 	private Pelicula pelicula;
-	private String Horario;
+	private String horario;
 	private int tipo;
 	private Sala sala;
 	private Boleta boleta;
@@ -21,17 +21,17 @@ public class Funcion {
 		this.pelicula = pelicula;
 	}
 	public String getHorario() {
-		return Horario;
+		return horario;
 	}
 	public void setHorario(String horario) {
-		Horario = horario;
+		this.horario = horario;
 	}
 	public int getTipo() {
 		return tipo;
 	}
 
 	public void setBoleta(Boleta boleta) {
-		this.boleta = boleta
+		this.boleta = boleta;
 	}
 	public Boleta getBoleta() {
 		return boleta;

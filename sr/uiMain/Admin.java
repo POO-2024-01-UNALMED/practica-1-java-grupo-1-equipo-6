@@ -37,6 +37,10 @@ public class Admin{
 
     Cine[] cines = {cine1, cine2, cine3};
     Pelicula[] peliculas = {pelicula1, pelicula2, pelicula3};
+    
+    public static void error() {
+    	System.out.print("Error");
+    }
 
 
     public static void main(String[] args){

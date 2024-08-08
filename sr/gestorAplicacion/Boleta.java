@@ -4,13 +4,15 @@ public class Boleta {
 	private Funcion funcion;
 	private Cliente cliente;
 	private Sala sala;
+	private Pelicula pelicula;
 	private double precio;
 	
 
-	public Boleta(Funcion funcion, Cliente cliente, Sala sala){
+	public Boleta(Funcion funcion, Cliente cliente, Sala sala,Pelicula pelicula){
 		this.funcion = funcion;
 		this.cliente = cliente;
 		this.sala = sala;
+		this.setPelicula(pelicula);
 
 	}
 	
@@ -40,6 +42,20 @@ public class Boleta {
 	}
 	public void setPrecio(double precio) {
 		this.precio = precio;
+	}
+
+
+
+
+	public Pelicula getPelicula() {
+		return pelicula;
+	}
+
+
+
+
+	public void setPelicula(Pelicula pelicula) {
+		this.pelicula = pelicula;
 	}
 	
 	
