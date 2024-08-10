@@ -81,11 +81,11 @@ public class Cliente {
 	}
 
 	public boolean pagarConTarjeta(double monto, boolean usarPuntos) {
-		double saldoTarjeta = this.tarjeta.getSaldo();
+		double saldoTarjeta = tarjeta.getSaldo();
 		if (usarPuntos){
-			int puntosTarjeta = this.tarjeta.getPuntos();
+			int puntosTarjeta = tarjeta.getPuntos();
 			if (puntosTarjeta >= monto){
-				this.tarjeta.comprarConPuntos(monto);
+				tarjeta.comprarConPuntos(monto);
 				return true;
 			}
 			else {

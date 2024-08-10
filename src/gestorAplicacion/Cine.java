@@ -45,7 +45,7 @@ public class Cine {
 			int j = 0;
 			for(int i= 0; i<pelicula.length(); i++){
 				String palabraHallada;
-				if (String.valueOf(pelicula.charAt(i)) == " "){
+				if (String.valueOf(pelicula.charAt(i)) == " " || i == pelicula.length() - 1){
 					palabraHallada = pelicula.substring(j, i-1);
 					if(palabraHallada.length()>2){
 						palabrasClave.add(palabraHallada);
@@ -57,8 +57,8 @@ public class Cine {
 		ArrayList<Pelicula> peliculasCoincidentes = new ArrayList<Pelicula>();
 		for (int j=0; j<peliculas.size(); j++){
 			for(int y=0; y<palabrasClave.size();y++){
-				if(peliculas[j].getNombre().contains(palabrasClave.get(y))){
-					peliculasCoincidentes.add(peliculas[j]);	
+				if(peliculas.get(j).getTitulo().contains(palabrasClave.get(y))){
+					peliculasCoincidentes.add(peliculas.get(j));	
 				}
 			}
 		}
