@@ -59,145 +59,148 @@ public class Admin{
     public static void primeraOperacion(){
 
         String peliculaDeseada; 
-        Pelicula peliculaParaVer=null;
-        ArrayList<Cine> tienenPelicula = new ArrayList<Cine>();
-        ArrayList<Funcion> funcionesPelicula = new ArrayList<Funcion>();
-        System.out.println("Por favor ingrese el nombre de la pelìcula que desea ver: ");
+        Pelicula peliculaParaVer = null;
+        ArrayList<Cine> tienenPelicula = new ArrayList<>();
+        ArrayList<Funcion> funcionesPelicula = new ArrayList<>();
+        
+        Scanner entrada = new Scanner(System.in);  // Asegúrate de tener una instancia de Scanner
+
+        System.out.println("Por favor ingrese el nombre de la película que desea ver: ");
         peliculaDeseada = entrada.nextLine();
 
         ArrayList<Pelicula> peliculasEncontradas = cines[0].buscarPeliculaPorNombre(peliculaDeseada);
 
-        if(peliculasEncontradas.size()>0){
-            System.out.println("Estos son algunos resultados coincidentes");
-            for (int i = 0; i<peliculasEncontradas.size();i++){
-                System.out.println((i+1) + ". "+peliculasEncontradas.get(i).getTitulo());
+        if (peliculasEncontradas.size() > 0) {
+            System.out.println("Estos son algunos resultados coincidentes:");
+            for (int i = 0; i < peliculasEncontradas.size(); i++) {
+                System.out.println((i + 1) + ". " + peliculasEncontradas.get(i).getTitulo());
             }
+
             System.out.println("Selecciona la película que buscas o ingresa 0 si deseas salir");
-            int eleccion;
-            eleccion = entrada.nextInt();
-            if (eleccion != 0){
-                if(eleccion >= 1 && eleccion<=peliculasEncontradas.size()){
-                    peliculaParaVer = peliculasEncontradas.get(eleccion);
+            int eleccion = entrada.nextInt();
+            entrada.nextLine(); // Para consumir el salto de línea después de nextInt()
+
+            if (eleccion != 0) {
+                if (eleccion >= 1 && eleccion <= peliculasEncontradas.size()) {
+                    peliculaParaVer = peliculasEncontradas.get(eleccion - 1); // Ajuste del índice
+                } else {
+                    System.out.println("Opción no válida");
                 }
-                else{
-                    System.out.println("Opción no valida");
-                }
-            }else{  System.out.println("Regresando al menú");}
-        } else{
+            } else {
+                System.out.println("Regresando al menú");
+                return;  // Termina la operación si se elige salir
+            }
+        } else {
             System.out.println("No se han encontrado resultados. ¿Desea realizar otra búsqueda?");
+            return;  // Termina la operación si no se encuentra la película
         }
 
-        for (Cine cine: cines){
-            if(cine.hayPelicula(peliculaParaVer)){
+        for (Cine cine : cines) {
+            if (cine.hayPelicula(peliculaParaVer)) {
                 tienenPelicula.add(cine);
             }
         }
-        ArrayList<Funcion> opcionesPelicula;
+
         int opcion = 1;
-        if(tienenPelicula.size() > 0){
-            System.out.println("Estas son las funciones disponibles para ver la película");
+        if (tienenPelicula.size() > 0) {
+            System.out.println("Estas son las funciones disponibles para ver la película:");
             System.out.println("");
-            for (int i = 0; i<tienenPelicula.size();i++){
-                Cine cine = tienenPelicula.get(i);
-                System.out.println("Cine" + cine.getNombre()+":");
-                opcionesPelicula = cine.obtenerFunciones(peliculaParaVer);
-                for (int j=0; j<opcionesPelicula.size();j++){
-                    funcionesPelicula.add(opcionesPelicula.get(j));
-                    System.out.println(opcion+". "+opcionesPelicula.get(j).getSala().getNombre() + ", "+funcionesPelicula.get(j).getHorario()+".");
+
+            for (Cine cine : tienenPelicula) {
+                System.out.println("Cine " + cine.getNombre() + ":");
+                ArrayList<Funcion> opcionesPelicula = cine.obtenerFunciones(peliculaParaVer);
+                for (Funcion funcion : opcionesPelicula) {
+                    funcionesPelicula.add(funcion);
+                    System.out.println(opcion + ". " + funcion.getSala().getNombre() + ", " + funcion.getHorario() + ".");
+                    opcion++;
                 }
-            System.out.println("");
+                System.out.println("");
             }
-            opcion++;
-        }else{
-            System.out.println("Ninguno de nuestros cines tiene alguna función para la película "+peliculaParaVer.getTitulo());
+        } else {
+            System.out.println("Ninguno de nuestros cines tiene alguna función para la película " + peliculaParaVer.getTitulo());
+            return;  // Termina la operación si no hay funciones disponibles
         }
 
-        Funcion funcionEscogida;
-        String reserva;
-        int funcionNumero;
-        System.out.println("Desea hacer una reservación (S/N)");
-        reserva = entrada.nextLine();
-        int fila;
-        int columna;
-        Sala sala;
-        String pago;
-        Cine cineElegido;
+        System.out.println("¿Desea hacer una reservación (S/N)?");
+        String reserva = entrada.nextLine();
 
-        if(reserva.toUpperCase().equals("S")){
-            do{
+        if (reserva.equalsIgnoreCase("S")) {
+            int funcionNumero;
+            do {
                 System.out.println("Elige la función:");
                 funcionNumero = entrada.nextInt();
-            }while(funcionNumero>0 && funcionNumero < opcion);
+                entrada.nextLine(); // Consumir el salto de línea
+            } while (funcionNumero <= 0 || funcionNumero > funcionesPelicula.size());
 
-            funcionEscogida = funcionesPelicula.get(funcionNumero-1);
-            sala = funcionEscogida.getSala();
-            cineElegido = sala.getCine();
-            System.out.println("A continuación se muestran los asientos para dicha función");
+            Funcion funcionEscogida = funcionesPelicula.get(funcionNumero - 1);
+            Sala sala = funcionEscogida.getSala();
+            Cine cineElegido = sala.getCine();
+
+            System.out.println("A continuación se muestran los asientos para dicha función:");
             System.out.println("");
             System.out.println(sala.estadoSilleteria());
             System.out.println("");
 
-            System.out.println("Escriba la posición del asiento indicando su fila y columna:");
-
-            do{
-                System.out.println("Fila: ");
+            int fila, columna;
+            do {
+                System.out.println("Escriba la posición del asiento indicando su fila y columna:");
+                System.out.print("Fila: ");
                 fila = entrada.nextInt();
-                System.out.println("Columna");
+                System.out.print("Columna: ");
                 columna = entrada.nextInt();
-            }while(fila>0 && fila<sala.getSillas().length && columna>0 && columna<sala.getSillas()[0].length);
-            
-            if(sala.estaDisponible(fila-1, columna-1)){
-                System.out.println("El asiento está libre"); 
+                entrada.nextLine(); // Consumir el salto de línea
+
+            } while (fila <= 0 || fila > sala.getSillas().length || columna <= 0 || columna > sala.getSillas()[0].length);
+
+            if (sala.estaDisponible(fila - 1, columna - 1)) {
+                System.out.println("El asiento está libre");
                 System.out.println("");
                 System.out.println("Opciones de pago:");
                 System.out.println("1. Tarjeta de membresía");
                 System.out.println("2. Efectivo");
-                pago = entrada.nextLine();
-                if (pago.equals("1")){
-                    if(usuario.getTarjeta()!=null){
-                        System.out.println("Desea pagar con: "); 
+
+                String pago = entrada.nextLine();
+                if (pago.equals("1")) {
+                    if (usuario.getTarjeta() != null) {
+                        System.out.println("Desea pagar con: ");
                         System.out.println("1. Los puntos de tu tarjeta");
                         System.out.println("2. El saldo de tu tarjeta");
-                        int pagoTarjeta;
-                        pagoTarjeta = entrada.nextInt();
-                        if(pagoTarjeta == 1){
-                            if(usuario.pagarConTarjeta(funcionEscogida.getBoleta().getPrecio(), true)){
-                                sala.reservarSilla(fila-1, columna-1);
+                        int pagoTarjeta = entrada.nextInt();
+                        entrada.nextLine(); // Consumir el salto de línea
+                        if (pagoTarjeta == 1) {
+                            if (usuario.pagarConTarjeta(funcionEscogida.getBoleta().getPrecio(), true)) {
+                                sala.reservarSilla(fila - 1, columna - 1);
                                 usuario.getTarjeta().agregarPuntos();
                                 finalizarCompra(funcionEscogida, sala, peliculaParaVer, cineElegido);
-                            }else{
+                            } else {
                                 System.out.println("No se pudo llevar a cabo la compra con los puntos de la tarjeta");
                             }
-                        }else if(pagoTarjeta == 2){
-                            if(usuario.pagarConTarjeta(funcionEscogida.getBoleta().getPrecio(), false)){
-                                sala.reservarSilla(fila-1, columna-1);
+                        } else if (pagoTarjeta == 2) {
+                            if (usuario.pagarConTarjeta(funcionEscogida.getBoleta().getPrecio(), false)) {
+                                sala.reservarSilla(fila - 1, columna - 1);
                                 usuario.getTarjeta().agregarPuntos();
                                 finalizarCompra(funcionEscogida, sala, peliculaParaVer, cineElegido);
-                            }else{
-                                System.out.println("No se pudo llevar a cabo la compra con el saldo de la tarjeta"); 
-
+                            } else {
+                                System.out.println("No se pudo llevar a cabo la compra con el saldo de la tarjeta");
                             }
                         }
-                    } else{
-                        System.out.println("No cuenta con tarjeta para llevar a cabo el pago"); 
+                    } else {
+                        System.out.println("No cuenta con tarjeta para llevar a cabo el pago");
                     }
-                }else if (pago.equals("2")){
+                } else if (pago.equals("2")) {
                     double saldoAntes = usuario.getSaldo();
-                    usuario.pagarConSaldo(funcionEscogida.getBoleta().getPrecio();
-                    if(saldoAntes != usuario.getSaldo()){
+                    usuario.pagarConSaldo(funcionEscogida.getBoleta().getPrecio());
+                    if (saldoAntes != usuario.getSaldo()) {
+                        sala.reservarSilla(fila - 1, columna - 1);
                         finalizarCompra(funcionEscogida, sala, peliculaParaVer, cineElegido);
-                    }
-                    else{
+                    } else {
                         System.out.println("No se pudo llevar a cabo la compra con su saldo");
                     }
                 }
-
-            }else{
+            } else {
                 System.out.println("El asiento se encuentra ocupado");
             }
-            
         }
-        
     }
     public static void finalizarCompra(Funcion funcion, Sala sala, Pelicula pelicula, Cine cine){
         usuario.agregarBoleta(new Boleta(funcion, usuario, sala, pelicula));
