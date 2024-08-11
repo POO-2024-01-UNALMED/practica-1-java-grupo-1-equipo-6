@@ -42,6 +42,7 @@ public class Admin{
         cines[2] = cine3;
         
         cine1.agregarPeliculas();
+        cine2.agregarPeliculas();
         
         int opcion;
         boolean finalizar=false;
@@ -186,7 +187,6 @@ public class Admin{
     }
 
     public static void finalizarCompra(Funcion funcion, Sala sala, Pelicula pelicula, Cine cine){
-        usuario.agregarBoleta(new Boleta(funcion, usuario, sala, pelicula));
         System.out.println("Se ha finalizado la compra");
         System.out.println("Detalles: ");
         System.out.println("Boleto para la película " + pelicula.getTitulo() + ", que se proyectará a las " + funcion.getHorario() + ", en la sala " + sala.getNumero() +" del cine "+ cine.getNombre()+".");
