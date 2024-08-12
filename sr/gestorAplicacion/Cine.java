@@ -35,6 +35,29 @@ public class Cine {
 		return false;
 	}
 
+	public String enseñarFunciones(){
+		String mensaje = "Funciones:\n"; int posicion =1;
+		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
+		for (Funcion funcion:funciones){
+			if (!peliculas.contains(funcion.getPelicula())){
+				mensaje += posicion + " "+ funcion.getPelicula().getTitulo() + "\n";
+				peliculas.add(funcion.getPelicula());
+				posicion++;
+			}
+		}
+		return mensaje;
+	}
+
+	public ArrayList<Pelicula> peliculasActivas(){
+		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
+		for (Funcion funcion:funciones){
+			if (!peliculas.contains(funcion.getPelicula())){
+				peliculas.add(funcion.getPelicula());
+			}
+		}
+		return peliculas;
+	}	
+
 	public ArrayList<Pelicula> buscarPeliculaPorNombre(String nombrePelicula) {
         ArrayList<String> palabrasClave = new ArrayList<>();
         nombrePelicula = nombrePelicula.toLowerCase();  // Convertir a minúsculas
@@ -42,11 +65,15 @@ public class Cine {
         // Extraer palabras clave del nombre de la película
         String[] palabras = nombrePelicula.split("\\s+");  // Dividir por espacios
 
-        for (String palabra : palabras) {
-            if (palabra.length() > 2) {
-                palabrasClave.add(palabra);
-            }
-        }
+        if (palabras.length == 1){
+				palabrasClave.add(palabras[0]);
+		} else{
+				for (String palabra : palabras) {
+						if (palabra.length() > 2) {
+								palabrasClave.add(palabra);
+						}
+				}
+			}
 
         ArrayList<Pelicula> peliculasCoincidentes = new ArrayList<>();
 
