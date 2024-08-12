@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Cine {
 	private String nombre;
 	private ArrayList<Funcion> funciones=new ArrayList<>();;
-	public ArrayList<Pelicula> peliculas=new ArrayList<>();;
+	public static ArrayList<Pelicula> peliculas=new ArrayList<>();;
 
 	public Cine(String nombre, ArrayList<Funcion> funciones){
 		this.nombre = nombre;
