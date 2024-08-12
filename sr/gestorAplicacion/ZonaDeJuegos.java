@@ -54,6 +54,11 @@ public class ZonaDeJuegos extends Establecimiento {
 
         return informe.toString();
     }
+    public String moverMaquina(ZonaDeJuegos zonaDestino, int indiceMaquina) {
+        Maquina maquina = maquinas.remove(indiceMaquina);
+        zonaDestino.agregarMaquina(maquina);
+        return "La máquina " + maquina.getNombre() + " ha sido movida a " + zonaDestino.getNombre();
+    }
 
     public String recomendarMovimiento(ZonaDeJuegos zonaDestino, Maquina maquinaReparada) {
         if (this.getDineroRecaudado() > zonaDestino.getDineroRecaudado() && !zonaDestino.tieneMaquina(maquinaReparada.getNombre())) {

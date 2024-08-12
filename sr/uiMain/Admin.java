@@ -2,6 +2,7 @@ package uiMain;
 import gestorAplicacion.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Admin{
     static Cine[] cines=new Cine[3];
@@ -14,9 +15,11 @@ public class Admin{
     static Maquina basket = new Maquina("Basket",11,17);
 
     // Zonas de juegos
-    static ZonaDeJuegos zona1 = new ZonaDeJuegos(new Maquina[]{arcade, danceDance});
-    static ZonaDeJuegos zona2 = new ZonaDeJuegos(new Maquina[]{mesaDeDiscos, boxing});
-    static ZonaDeJuegos zona3 = new ZonaDeJuegos(new Maquina[]{basket});
+    static ZonaDeJuegos zona1 = new ZonaDeJuegos("Zona 1","08:00 AM - 07:00 PM");
+    static ZonaDeJuegos zona2 = new ZonaDeJuegos("Zona 2","09:00 AM - 08:00 PM");
+    static ZonaDeJuegos zona3 = new ZonaDeJuegos("Zona 3","08:00 AM - 08:00 PM");
+    
+    static Bodega bodega = new Bodega("Bodega Central", 100);
     
     static Pelicula pelicula1 = new Pelicula("Intensamente","Infantil");
     static Pelicula pelicula2 = new Pelicula("Spiderman","Acción");
@@ -245,7 +248,13 @@ public class Admin{
     
     public static void gestionarZonaDeJuegos() {
         Scanner entrada = new Scanner(System.in); // Crea una instancia de Scanner
-
+        
+        zona1.agregarMaquina(arcade);
+        zona1.agregarMaquina(danceDance);
+        zona2.agregarMaquina(boxing);
+        zona3.agregarMaquina(basket);
+        zona3.agregarMaquina(mesaDeDiscos);
+        
         // Simulación de uso de máquinas
         for (int i = 0; i < 50; i++) {
             arcade.usar();
@@ -261,7 +270,7 @@ public class Admin{
         System.out.println(zona2.informeMaquinas());
 
         // Selección de máquina para reparar
-        System.out.print("Seleccione el número de la máquina que desea reparar (0 para Zona A, 1 para Zona B): ");
+        System.out.print("Seleccione el número de la zona de la maquina que desea reparar (0 para Zona A, 1 para Zona B): ");
         int zonaSeleccionada = entrada.nextInt(); // Usa la instancia del Scanner
         ZonaDeJuegos zonaActual = (zonaSeleccionada == 0) ? zona1 : zona2;
 

@@ -37,6 +37,9 @@ public class Maquina {
             }
         }
     }
+    public void setPrecioUso(double precio) {
+    	precioUso=precio;
+    }
 
     public void reparar() {
         usos = 0;
