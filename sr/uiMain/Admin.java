@@ -7,16 +7,28 @@ public class Admin{
     static Cine[] cines=new Cine[3];
     static Cliente usuario = new Cliente("Juan Manuel",200000);
 
-    //Para probar la funcionalidad
+    static Maquina arcade = new Maquina("Arcade",10,20);
+    static Maquina danceDance = new Maquina("Dance Dance",12,20);
+    static Maquina mesaDeDiscos = new Maquina("Mesa de discos",12,18);
+    static Maquina boxing = new Maquina("Boxing",8,15);
+    static Maquina basket = new Maquina("Basket",11,17);
+
+    // Zonas de juegos
+    static ZonaDeJuegos zona1 = new ZonaDeJuegos(new Maquina[]{arcade, danceDance});
+    static ZonaDeJuegos zona2 = new ZonaDeJuegos(new Maquina[]{mesaDeDiscos, boxing});
+    static ZonaDeJuegos zona3 = new ZonaDeJuegos(new Maquina[]{basket});
+    
     static Pelicula pelicula1 = new Pelicula("Intensamente","Infantil");
     static Pelicula pelicula2 = new Pelicula("Spiderman","Acción");
     static Pelicula pelicula3 = new Pelicula("Jason Vorhees","Terror");
     static Pelicula pelicula4 = new Pelicula("Deadpool","+18");
     static Pelicula pelicula5 = new Pelicula("Oppenheimer","Drama");
     static Pelicula pelicula6 = new Pelicula("Los Minions","Infantil");
+    
     static Sala sala1 = new Sala(1,6,5);
     static Sala sala2 = new Sala(2,6,5);
     static Sala sala3 = new Sala(3,6, 5);
+    
     static Funcion funcion1 = new Funcion(pelicula1, "4:00pm", 3, sala1);
     static Funcion funcion2 = new Funcion(pelicula2, "6:00pm", 5, sala2);
     static Funcion funcion3 = new Funcion(pelicula3, "8:00pm", 2, sala3);
@@ -27,10 +39,11 @@ public class Admin{
     static ArrayList<Funcion> funcionesCine1 = new ArrayList<Funcion>();
     static ArrayList<Funcion> funcionesCine2 = new ArrayList<Funcion>();
     static ArrayList<Funcion> funcionesCine3 = new ArrayList<Funcion>();
-    static Cine cine1 = new Cine("Star Cine Medellín",funcionesCine1);
-    static Cine cine2 = new Cine("Cine Colombia Plaza", funcionesCine2);
-    static Cine cine3 = new Cine("Cinemark City Mall", funcionesCine3);
-
+    static Cine cine1 = new Cine("Star Cine Medellín",funcionesCine1,zona1);
+    static Cine cine2 = new Cine("Cine Colombia Plaza", funcionesCine2,zona2);
+    static Cine cine3 = new Cine("Cinemark City Mall", funcionesCine3,zona3);
+    
+   
 
 
     public static void main(String[] args){ 
@@ -59,7 +72,7 @@ public class Admin{
         while(!finalizar){
             System.out.println("-------Sistema para la compra de boletos de cine-----------");
             System.out.println("1.- Comprar boletos para un cine");
-            System.out.println("2.- Segunda operación");
+            System.out.println("2.- Gestionar Zona de Juegos");
             System.out.println("3.- Tercera operación");
             System.out.println("4.- Cuarta operaciòn");
             System.out.println("5.- Quinta operaciòn");
@@ -74,6 +87,9 @@ public class Admin{
 
                 case 1:
                    primeraOperacion();
+                    break;
+                case 2:
+                    gestionarZonaDeJuegos();
                     break;
 
                 default:
@@ -226,7 +242,131 @@ public class Admin{
             }//Hasta aquí llega el primer while
             return cineElegido;
         }
+    
+    public static void gestionarZonaDeJuegos() {
+        Scanner entrada = new Scanner(System.in); // Crea una instancia de Scanner
+
+        // Simulación de uso de máquinas
+        for (int i = 0; i < 50; i++) {
+            arcade.usar();
+            danceDance.usar();
+            boxing.usar();
+            basket.usar();
+            mesaDeDiscos.usar();
+        }
+
+        // Mostrar informe de máquinas dañadas en cada zona
+        System.out.println("Informe de máquinas dañadas:");
+        System.out.println(zona1.informeMaquinas());
+        System.out.println(zona2.informeMaquinas());
+
+        // Selección de máquina para reparar
+        System.out.print("Seleccione el número de la máquina que desea reparar (0 para Zona A, 1 para Zona B): ");
+        int zonaSeleccionada = entrada.nextInt(); // Usa la instancia del Scanner
+        ZonaDeJuegos zonaActual = (zonaSeleccionada == 0) ? zona1 : zona2;
+
+        List<Maquina> maquinasDañadas = zonaActual.getMaquinasDañadas();
+        if (maquinasDañadas.isEmpty()) {
+            System.out.println("No hay máquinas dañadas en la zona seleccionada.");
+            return;
+        }
+
+        System.out.println("Seleccione el número de la máquina que desea reparar:");
+        for (int i = 0; i < maquinasDañadas.size(); i++) {
+            System.out.println((i + 1) + ". " + maquinasDañadas.get(i).getNombre());
+        }
+        int seleccionMaquina = entrada.nextInt() - 1; // Usa la instancia del Scanner
+
+        // Realizar reparación
+        System.out.println(bodega.realizarMantenimiento(zonaActual, seleccionMaquina));
+
+        // Recomendación de movimiento
+        Maquina maquinaReparada = maquinasDañadas.get(seleccionMaquina);
+        ZonaDeJuegos zonaDestino = (zonaSeleccionada == 0) ? zona2 : zona1;
+        System.out.println(zonaActual.recomendarMovimiento(zonaDestino, maquinaReparada));
+
+        // Mover la máquina reparada
+        System.out.println("Seleccione la zona a la que desea mover la máquina:");
+        System.out.println("1. " + zona1.getNombre());
+        System.out.println("2. " + zona2.getNombre());
+        int seleccionZona = entrada.nextInt(); // Usa la instancia del Scanner
+        zonaDestino = (seleccionZona == 1) ? zona1 : zona2;
+
+        if (zonaActual != zonaDestino) {
+            System.out.println(zonaActual.moverMaquina(zonaDestino, seleccionMaquina));
+        } else {
+            System.out.println("La máquina permanecerá en " + zonaActual.getNombre());
+        }
+
+        // Aplicar incentivos
+        System.out.println("¿Desea aplicar algún incentivo en una zona de juegos?");
+        System.out.println("1. Sí");
+        System.out.println("2. No");
+        int opcionIncentivo = entrada.nextInt(); // Usa la instancia del Scanner
+
+        if (opcionIncentivo == 1) {
+            System.out.println("Seleccione el tipo de incentivo:");
+            System.out.println("1. Rebajar el precio de una máquina");
+            System.out.println("2. Regalar un bono de comida");
+            int tipoIncentivo = entrada.nextInt(); // Usa la instancia del Scanner
+
+            if (tipoIncentivo == 1) {
+                System.out.println("Seleccione la zona donde aplicar la rebaja:");
+                System.out.println("1. " + zona1.getNombre());
+                System.out.println("2. " + zona2.getNombre());
+                int seleccionZonaRebaja = entrada.nextInt(); // Usa la instancia del Scanner
+
+                ZonaDeJuegos zonaRebaja = (seleccionZonaRebaja == 1) ? zona1 : zona2;
+                System.out.println("Seleccione la máquina para rebajar su precio:");
+                List<Maquina> maquinasEnZona = zonaRebaja.getMaquinas();
+                for (int i = 0; i < maquinasEnZona.size(); i++) {
+                    System.out.println((i + 1) + ". " + maquinasEnZona.get(i).getNombre());
+                }
+                int seleccionMaquinaRebaja = entrada.nextInt() - 1; // Usa la instancia del Scanner
+
+                Maquina maquinaRebajada = maquinasEnZona.get(seleccionMaquinaRebaja);
+                System.out.println("Introduzca el nuevo precio para la máquina " + maquinaRebajada.getNombre() + ": ");
+                double nuevoPrecio = entrada.nextDouble(); // Usa la instancia del Scanner
+                maquinaRebajada.setPrecioUso(nuevoPrecio);
+
+                System.out.println("El precio de la máquina " + maquinaRebajada.getNombre() + " ha sido rebajado a " + nuevoPrecio);
+
+            } else if (tipoIncentivo == 2) {
+                System.out.println("Seleccione el tipo de cliente para el bono:");
+                System.out.println("1. Genérico");
+                System.out.println("2. Preferencial");
+                System.out.println("3. VIP");
+                int tipoCliente = entrada.nextInt(); // Usa la instancia del Scanner
+
+                String bono = "";
+                switch (tipoCliente) {
+                    case 1:
+                        bono = "Bono Genérico: 5% de descuento en comida";
+                        break;
+                    case 2:
+                        bono = "Bono Preferencial: 10% de descuento en comida";
+                        break;
+                    case 3:
+                        bono = "Bono VIP: 20% de descuento en comida";
+                        break;
+                }
+
+                System.out.println("El bono asignado es: " + bono);
+            }
+        } else {
+            System.out.println("No se aplicarán incentivos.");
+        }
+
+        // Actualización de dinero recaudado
+        zona1.actualizarDineroRecaudado();
+        zona2.actualizarDineroRecaudado();
+
+        System.out.println("Dinero recaudado por " + zona1.getNombre() + ": " + zona1.getDineroRecaudado());
+        System.out.println("Dinero recaudado por " + zona2.getNombre() + ": " + zona2.getDineroRecaudado());
     }
+}
+
+    
      
     
 
@@ -309,3 +449,4 @@ public class Admin{
 
     }
 */
+

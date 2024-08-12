@@ -5,10 +5,13 @@ public class Cine {
 	private String nombre;
 	private ArrayList<Funcion> funciones=new ArrayList<>();;
 	public static ArrayList<Pelicula> peliculas=new ArrayList<>();;
+	private ZonaDeJuegos zonaDeJuegos;
+	
 
-	public Cine(String nombre, ArrayList<Funcion> funciones){
+	public Cine(String nombre, ArrayList<Funcion> funciones,ZonaDeJuegos zonaDeJuegos){
 		this.nombre = nombre;
 		this.funciones = funciones;
+		this.zonaDeJuegos = zonaDeJuegos;
 	}
 	
 	
@@ -111,6 +114,16 @@ public class Cine {
 			
 		}
 		
+	}
+
+
+	public ZonaDeJuegos getZonaDeJuegos() {
+		return zonaDeJuegos;
+	}
+
+
+	public void setZonaDeJuegos(ZonaDeJuegos zonaDeJuegos) {
+		this.zonaDeJuegos = zonaDeJuegos;
 	}
 	
 
