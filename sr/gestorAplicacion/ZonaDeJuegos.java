@@ -9,15 +9,20 @@ import java.util.List;
 public class ZonaDeJuegos extends Establecimiento {
     private String horario;
     private List<Maquina> maquinas;
+    private Cine cine;
+    public static List<ZonaDeJuegos> zonasDeJuegos=new ArrayList<>(); 
 
     public ZonaDeJuegos(String nombre, String horario) {
         super(nombre);
         this.horario = horario;
         this.maquinas = new ArrayList<>();
+        ZonaDeJuegos.zonasDeJuegos.add(this);
+      
     }
 
     public void agregarMaquina(Maquina maquina) {
         maquinas.add(maquina);
+        maquina.setZonaDeJuegos(this);
         actualizarDineroRecaudado();
     }
 
@@ -45,7 +50,7 @@ public class ZonaDeJuegos extends Establecimiento {
 
     public String informeMaquinas() {
         StringBuilder informe = new StringBuilder();
-        informe.append("Informe de la Zona de Juegos: ").append(getNombre()).append("\n");
+        informe.append("Informe de la Zona de Juegos: ").append(getNombre()).append(" ").append(getCine().getNombre()).append("\n");
         informe.append("Horario: ").append(horario).append("\n");
 
         for (Maquina maquina : maquinas) {
@@ -60,21 +65,79 @@ public class ZonaDeJuegos extends Establecimiento {
         return "La máquina " + maquina.getNombre() + " ha sido movida a " + zonaDestino.getNombre();
     }
 
-    public String recomendarMovimiento(ZonaDeJuegos zonaDestino, Maquina maquinaReparada) {
-        if (this.getDineroRecaudado() > zonaDestino.getDineroRecaudado() && !zonaDestino.tieneMaquina(maquinaReparada.getNombre())) {
-            return "Se recomienda mover la máquina " + maquinaReparada.getNombre() + " a la zona " + zonaDestino.getNombre() + " ya que tiene menores ingresos y no cuenta con esta máquina.";
+    public String recomendarMovimiento(Maquina maquinaReparada) {
+        double porcentajeDependencia = (maquinaReparada.getDineroRecaudado() / this.getDineroRecaudado()) * 100;
+        
+        // Verificar si la máquina es crucial para la zona actual
+        if (porcentajeDependencia >= 70) {
+            return "No se recomienda mover la máquina " + maquinaReparada.getNombre() + 
+                   " ya que representa el " + String.format("%.2f", porcentajeDependencia) + "% de los ingresos de la zona actual.";
+        }
+
+        // Buscar zonas candidatas
+        List<ZonaDeJuegos> zonasCandidatas = new ArrayList<>();
+        for (ZonaDeJuegos zona : zonasDeJuegos) {
+            if (this != zona && zona.getDineroRecaudado() < this.getDineroRecaudado() &&
+                !zona.tieneMaquinaDelTipo(maquinaReparada.getTipo())) {
+                zonasCandidatas.add(zona);
+            }
+        }
+
+        // Elegir la mejor zona candidata (la que menos ha recaudado)
+        if (!zonasCandidatas.isEmpty()) {
+            ZonaDeJuegos mejorZonaDestino = zonasCandidatas.get(0);
+            for (ZonaDeJuegos zona : zonasCandidatas) {
+                if (zona.getDineroRecaudado() < mejorZonaDestino.getDineroRecaudado()) {
+                    mejorZonaDestino = zona;
+                }
+            }
+            return "Se recomienda mover la máquina " + maquinaReparada.getNombre() + 
+                   " a la zona " + mejorZonaDestino.getNombre() + 
+                   " ya que tiene menores ingresos y no cuenta con una máquina del tipo " + 
+                   maquinaReparada.getTipo() + ".";
         } else {
-            return "No se recomienda mover la máquina " + maquinaReparada.getNombre() + ", la zona actual tiene mejores ingresos o la zona destino ya tiene esta máquina.";
+            return "No se recomienda mover la máquina " + maquinaReparada.getNombre() + 
+                   ". La zona actual tiene mejores ingresos o todas las otras zonas ya tienen una máquina del mismo tipo.";
         }
     }
 
-    public boolean tieneMaquina(String nombreMaquina) {
-        for (Maquina maquina : maquinas) {
-            if (maquina.getNombre().equals(nombreMaquina)) {
+    // Método auxiliar para verificar si una zona tiene una máquina del mismo tipo
+    private boolean tieneMaquinaDelTipo(String tipo) {
+        for (Maquina maquina : this.getMaquinas()) {
+            if (maquina.getTipo().equals(tipo)) {
                 return true;
             }
         }
         return false;
     }
+
+    // Método auxiliar para obtener el promedio de ingresos de las máquinas en la zona actual
+    private double obtenerPromedioIngresosMaquinas() {
+        double totalDineroRecaudado = 0;
+        int numeroDeMaquinas = this.getMaquinas().size();
+
+        for (Maquina maquina : this.getMaquinas()) {
+            totalDineroRecaudado += maquina.getDineroRecaudado();
+        }
+
+        return numeroDeMaquinas > 0 ? totalDineroRecaudado / numeroDeMaquinas : 0;
+    }
+
+    public boolean tieneMaquina(String tipoMaquina) {
+        for (Maquina maquina : this.maquinas) {
+            if (maquina.getTipo().equals(tipoMaquina)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+	public Cine getCine() {
+		return cine;
+	}
+
+	public void setCine(Cine cine) {
+		this.cine = cine;
+	}
 }
 

@@ -5,19 +5,22 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Admin{
-    static Cine[] cines=new Cine[3];
+    static Cine[] cines=new Cine[4];
     static Cliente usuario = new Cliente("Juan Manuel",200000);
 
-    static Maquina arcade = new Maquina("Arcade",10,20);
-    static Maquina danceDance = new Maquina("Dance Dance",12,20);
-    static Maquina mesaDeDiscos = new Maquina("Mesa de discos",12,18);
-    static Maquina boxing = new Maquina("Boxing",8,15);
-    static Maquina basket = new Maquina("Basket",11,17);
+    static Maquina arcade1 = new Maquina("Arcade1","Arcade",10,20);
+    static Maquina arcade2 = new Maquina("Arcade2","Arcade",10,20);
+    static Maquina danceDance1 = new Maquina("Dance Dance1","Dance Dance",12,20);
+    static Maquina mesaDeDiscos1 = new Maquina("Mesa de discos1","Mesa de discos",12,20);
+    static Maquina mesaDeDiscos2 = new Maquina("Mesa de discos2","Mesa de discos",12,20);
+    static Maquina boxing1 = new Maquina("Boxing1","Boxing",8,20);
+    static Maquina basket1 = new Maquina("Basket1","Basket",11,20);
 
     // Zonas de juegos
     static ZonaDeJuegos zona1 = new ZonaDeJuegos("Zona 1","08:00 AM - 07:00 PM");
     static ZonaDeJuegos zona2 = new ZonaDeJuegos("Zona 2","09:00 AM - 08:00 PM");
     static ZonaDeJuegos zona3 = new ZonaDeJuegos("Zona 3","08:00 AM - 08:00 PM");
+    static ZonaDeJuegos zona4 = new ZonaDeJuegos("Zona 4","10:00 AM - 07:00 PM");
     
     static Bodega bodega = new Bodega("Bodega Central", 100);
     
@@ -42,18 +45,24 @@ public class Admin{
     static ArrayList<Funcion> funcionesCine1 = new ArrayList<Funcion>();
     static ArrayList<Funcion> funcionesCine2 = new ArrayList<Funcion>();
     static ArrayList<Funcion> funcionesCine3 = new ArrayList<Funcion>();
-    static Cine cine1 = new Cine("Star Cine Medellín",funcionesCine1,zona1);
-    static Cine cine2 = new Cine("Cine Colombia Plaza", funcionesCine2,zona2);
-    static Cine cine3 = new Cine("Cinemark City Mall", funcionesCine3,zona3);
+    static ArrayList<Funcion> funcionesCine4 = new ArrayList<Funcion>();
+    
+    static Cine cine1 = new Cine("Cinetica Medellín",funcionesCine1,zona1);
+    static Cine cine2 = new Cine("Cinetica Bogota", funcionesCine2,zona2);
+    static Cine cine3 = new Cine("Cinetica Cali", funcionesCine3,zona3);
+    static Cine cine4 = new Cine("Cinetica Pereira", funcionesCine4,zona4);
     
    
 
 
     public static void main(String[] args){ 
-        sala1.setCine(cine1);
+        
+    	 Scanner entrada = new Scanner(System.in);
+    	
+    	sala1.setCine(cine1);
         sala2.setCine(cine2);
         sala3.setCine(cine3);
-        Scanner entrada = new Scanner(System.in);
+       
 
         funcionesCine3.add(funcion4);
         funcionesCine3.add(funcion5);
@@ -61,13 +70,26 @@ public class Admin{
         funcionesCine1.add(funcion1);
         funcionesCine2.add(funcion2);
         funcionesCine3.add(funcion3);
+        funcionesCine4.add(funcion3);
+        funcionesCine4.add(funcion6);
+        
         cines[0] = cine1;
         cines[1] = cine2;
         cines[2] = cine3;
+        cines[3]=cine4;
 
         cine1.agregarPeliculas();
         cine2.agregarPeliculas();
         cine3.agregarPeliculas();
+        cine4.agregarPeliculas();
+        
+        zona1.agregarMaquina(arcade1);
+        zona1.agregarMaquina(danceDance1);
+        zona2.agregarMaquina(boxing1);
+        zona3.agregarMaquina(basket1);
+        zona3.agregarMaquina(mesaDeDiscos1);
+        zona4.agregarMaquina(arcade2);
+        zona4.agregarMaquina(mesaDeDiscos2);
 
         int opcion;
         boolean finalizar=false;
@@ -247,32 +269,71 @@ public class Admin{
         }
     
     public static void gestionarZonaDeJuegos() {
-        Scanner entrada = new Scanner(System.in); // Crea una instancia de Scanner
-        
-        zona1.agregarMaquina(arcade);
-        zona1.agregarMaquina(danceDance);
-        zona2.agregarMaquina(boxing);
-        zona3.agregarMaquina(basket);
-        zona3.agregarMaquina(mesaDeDiscos);
-        
+        Scanner entrada = new Scanner(System.in); 
+       
         // Simulación de uso de máquinas
-        for (int i = 0; i < 50; i++) {
-            arcade.usar();
-            danceDance.usar();
-            boxing.usar();
-            basket.usar();
-            mesaDeDiscos.usar();
+        for (int i = 0; i < 12; i++) {
+            arcade1.usar();
+            
         }
+        for (int i = 0; i < 10; i++) {
+            danceDance1.usar();
+            
+        }
+        for (int i = 0; i < 10; i++) {
+        	mesaDeDiscos1.usar();
+            
+        }
+        for (int i = 0; i < 5; i++) {
+        	basket1.usar();
+            
+        }
+        
+        for (int i = 0; i < 10; i++) {
+        	mesaDeDiscos2.usar();
+            
+        }
+        for (int i = 0; i < 3; i++) {
+        	arcade2.usar();
+            
+        }
+        
+        zona1.actualizarDineroRecaudado();
+        zona2.actualizarDineroRecaudado();
+        zona3.actualizarDineroRecaudado();
+        zona4.actualizarDineroRecaudado();
+        
+        
 
         // Mostrar informe de máquinas dañadas en cada zona
         System.out.println("Informe de máquinas dañadas:");
         System.out.println(zona1.informeMaquinas());
         System.out.println(zona2.informeMaquinas());
+        System.out.println(zona3.informeMaquinas());
+        System.out.println(zona4.informeMaquinas());
+        
 
         // Selección de máquina para reparar
-        System.out.print("Seleccione el número de la zona de la maquina que desea reparar (0 para Zona A, 1 para Zona B): ");
+        System.out.print("Seleccione el número de la zona de la maquina que desea reparar (0 para Zona A, 1 para Zona B, 2 para Zona C y 3 para Zona D): ");
         int zonaSeleccionada = entrada.nextInt(); // Usa la instancia del Scanner
-        ZonaDeJuegos zonaActual = (zonaSeleccionada == 0) ? zona1 : zona2;
+        ZonaDeJuegos zonaActual;
+        switch (zonaSeleccionada) {
+        case 0:
+            zonaActual = zona1;
+            break;
+        case 1:
+            zonaActual = zona2;
+            break;
+        case 2:
+            zonaActual = zona3;
+            break;
+        case 3:
+            zonaActual = zona4;
+            break;
+        default:
+            System.out.println("Selección inválida. Por favor, seleccione un número válido.");
+            return; // Salir del método si la selección es inválida
+    }
 
         List<Maquina> maquinasDañadas = zonaActual.getMaquinasDañadas();
         if (maquinasDañadas.isEmpty()) {
@@ -292,14 +353,34 @@ public class Admin{
         // Recomendación de movimiento
         Maquina maquinaReparada = maquinasDañadas.get(seleccionMaquina);
         ZonaDeJuegos zonaDestino = (zonaSeleccionada == 0) ? zona2 : zona1;
-        System.out.println(zonaActual.recomendarMovimiento(zonaDestino, maquinaReparada));
+        System.out.println(zonaActual.recomendarMovimiento( maquinaReparada));
 
         // Mover la máquina reparada
         System.out.println("Seleccione la zona a la que desea mover la máquina:");
-        System.out.println("1. " + zona1.getNombre());
-        System.out.println("2. " + zona2.getNombre());
+        System.out.println("0. " + zona1.getNombre());
+        System.out.println("1. " + zona2.getNombre());
+        System.out.println("2. " + zona3.getNombre());
+        System.out.println("3. " + zona4.getNombre());
+        
         int seleccionZona = entrada.nextInt(); // Usa la instancia del Scanner
-        zonaDestino = (seleccionZona == 1) ? zona1 : zona2;
+        
+        switch (seleccionZona) {
+        case 0:
+            zonaDestino = zona1;
+            break;
+        case 1:
+            zonaDestino = zona2;
+            break;
+        case 2:
+            zonaDestino = zona3;
+            break;
+        case 3:
+            zonaDestino = zona4;
+            break;
+        default:
+            System.out.println("Selección inválida. Por favor, seleccione un número válido.");
+            return; // Salir del método si la selección es inválida
+    }
 
         if (zonaActual != zonaDestino) {
             System.out.println(zonaActual.moverMaquina(zonaDestino, seleccionMaquina));
@@ -320,12 +401,44 @@ public class Admin{
             int tipoIncentivo = entrada.nextInt(); // Usa la instancia del Scanner
 
             if (tipoIncentivo == 1) {
-                System.out.println("Seleccione la zona donde aplicar la rebaja:");
-                System.out.println("1. " + zona1.getNombre());
-                System.out.println("2. " + zona2.getNombre());
-                int seleccionZonaRebaja = entrada.nextInt(); // Usa la instancia del Scanner
+            	
+            	List<Maquina> dosMenosVenden = Maquina.obtenerDosMaquinasMenosVenden();
 
-                ZonaDeJuegos zonaRebaja = (seleccionZonaRebaja == 1) ? zona1 : zona2;
+                // Imprimir la recomendación
+                if (dosMenosVenden.isEmpty()) {
+                    System.out.println("No hay máquinas disponibles para recomendar.");
+                } else {
+                    System.out.println("Recomendación de cambio de precio:");
+                    for (Maquina maquina : dosMenosVenden) {
+                        System.out.println(maquina);
+                    }
+                }
+                System.out.println("Seleccione la zona donde aplicar la rebaja:");
+                System.out.println("0. " + zona1.getNombre());
+                System.out.println("1. " + zona2.getNombre());
+                System.out.println("2. " + zona3.getNombre());
+                System.out.println("3. " + zona4.getNombre());
+                int seleccionZonaRebaja = entrada.nextInt(); // Usa la instancia del Scanner
+                
+                ZonaDeJuegos zonaRebaja;
+                switch (seleccionZonaRebaja) {
+                case 0:
+                    zonaRebaja = zona1;
+                    break;
+                case 1:
+                	zonaRebaja = zona2;
+                    break;
+                case 2:
+                	zonaRebaja = zona3;
+                    break;
+                case 3:
+                	zonaRebaja = zona4;
+                    break;
+                default:
+                    System.out.println("Selección inválida. Por favor, seleccione un número válido.");
+                    return; // Salir del método si la selección es inválida
+            }
+                
                 System.out.println("Seleccione la máquina para rebajar su precio:");
                 List<Maquina> maquinasEnZona = zonaRebaja.getMaquinas();
                 for (int i = 0; i < maquinasEnZona.size(); i++) {
@@ -369,9 +482,14 @@ public class Admin{
         // Actualización de dinero recaudado
         zona1.actualizarDineroRecaudado();
         zona2.actualizarDineroRecaudado();
-
+        zona3.actualizarDineroRecaudado();
+        zona4.actualizarDineroRecaudado();
+        
         System.out.println("Dinero recaudado por " + zona1.getNombre() + ": " + zona1.getDineroRecaudado());
         System.out.println("Dinero recaudado por " + zona2.getNombre() + ": " + zona2.getDineroRecaudado());
+        System.out.println("Dinero recaudado por " + zona3.getNombre() + ": " + zona3.getDineroRecaudado());
+        System.out.println("Dinero recaudado por " + zona4.getNombre() + ": " + zona4.getDineroRecaudado());
+        
     }
 }
 

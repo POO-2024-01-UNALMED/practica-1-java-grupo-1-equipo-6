@@ -12,6 +12,7 @@ public class Cine {
 		this.nombre = nombre;
 		this.funciones = funciones;
 		this.zonaDeJuegos = zonaDeJuegos;
+		this.zonaDeJuegos.setCine(this);
 	}
 	
 	
