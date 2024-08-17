@@ -2,18 +2,22 @@ package gestorAplicacion;
 import uiMain.Admin;
 import java.util.ArrayList;
 
-
 public class Cliente {
 	private String nombre;
+	private int identificacion;
 	private double saldo;
 	private String tipo;
+	public static ArrayList<Cliente> allClientes=new ArrayList<>();;
 
-	public Cliente(String nombre, double saldo,String tipo){
+	public Cliente(String nombre, double saldo,String tipo,int identificacion){
 		this.nombre = nombre;
 		this.saldo = saldo;
+		this.tipo=tipo;
+		this.identificacion= identificacion;
+		Cliente.allClientes.add(this);
 	}
-	public Cliente(String nombre, double saldo){
-		this(nombre,saldo,"Generico");
+	public Cliente(String nombre, double saldo,int identificacion){
+		this(nombre,saldo,"Generico",identificacion);
 	}
 	
 	
@@ -38,6 +42,14 @@ public class Cliente {
 		
 
 	}
+	public static Cliente buscarClientePorId(int id) {
+        for (Cliente cliente : allClientes) {
+            if ((cliente.getIdentificacion())==id) {
+                return cliente;
+            }
+        }
+        return null; // Si no existe
+    }
 	
 	public double utilizarCupon(int precio,int descuento) {
 		if (descuento>100 && descuento<0) {
@@ -78,6 +90,13 @@ public class Cliente {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	public int getIdentificacion() {
+		return identificacion;
+	}
+	
+	public String toString() {
+        return "Cliente: " + nombre + ", Saldo: " + saldo + ", Tipo: " + tipo;
+    }
 	
 	
 	

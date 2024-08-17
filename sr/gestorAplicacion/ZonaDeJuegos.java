@@ -139,5 +139,9 @@ public class ZonaDeJuegos extends Establecimiento {
 	public void setCine(Cine cine) {
 		this.cine = cine;
 	}
+	public String toString() {
+        return "ZonaDeJuegos: " + nombre + "Horario: " + horario + " Maquinas: " + maquinas.size();
+    }
 }
+
 

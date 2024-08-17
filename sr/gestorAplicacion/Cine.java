@@ -6,13 +6,21 @@ public class Cine {
 	private ArrayList<Funcion> funciones=new ArrayList<>();;
 	public static ArrayList<Pelicula> peliculas=new ArrayList<>();;
 	private ZonaDeJuegos zonaDeJuegos;
+	public static ArrayList<Cine> cines = new ArrayList<>();
 	
 
 	public Cine(String nombre, ArrayList<Funcion> funciones,ZonaDeJuegos zonaDeJuegos){
 		this.nombre = nombre;
-		this.funciones = funciones;
+		 this.funciones = funciones != null ? funciones : new ArrayList<>();
 		this.zonaDeJuegos = zonaDeJuegos;
+		if(zonaDeJuegos!=null) {
 		this.zonaDeJuegos.setCine(this);
+		cines.add(this);
+		}
+	}
+	
+	public Cine(String nombre){
+		this(nombre,null,null);
 	}
 	
 	
@@ -110,7 +118,7 @@ public class Cine {
 	}
 	public void agregarPeliculas() {		
 		for (Funcion funcion: this.funciones){
-			this.peliculas.add(funcion.getPelicula());
+			Cine.peliculas.add(funcion.getPelicula());
 				
 			
 		}
@@ -126,6 +134,13 @@ public class Cine {
 	public void setZonaDeJuegos(ZonaDeJuegos zonaDeJuegos) {
 		this.zonaDeJuegos = zonaDeJuegos;
 	}
+	
+	public String toString() {
+		
+        return "Cine: " + nombre + ", Funciones: " + funciones.size() + " Zona de juegos: " + zonaDeJuegos;
+		
+		
+    }
 	
 
 }

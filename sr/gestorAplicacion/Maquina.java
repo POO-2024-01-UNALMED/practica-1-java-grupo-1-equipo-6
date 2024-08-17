@@ -12,7 +12,8 @@ public class Maquina {
     private double precioUso;
     private String tipo;
     private ZonaDeJuegos zonaDeJuegos;
-    
+    private boolean bonoActivo;
+    public static ArrayList<Maquina> allMaquinas=new ArrayList<>();;
     public Maquina(String nombre,String tipo, int materialesNecesarios, double precioUso) {
         this.nombre = nombre;
         this.materialesNecesarios = materialesNecesarios;
@@ -20,6 +21,8 @@ public class Maquina {
         this.dineroRecaudado = 0;
         this.precioUso = precioUso;
         this.setTipo(tipo);
+        this.bonoActivo=false;
+        allMaquinas.add(this);
     }
 
     public String getNombre() {
@@ -45,6 +48,9 @@ public class Maquina {
     }
     public void setPrecioUso(double precio) {
     	precioUso=precio;
+    }
+    public double getPrecioUso() {
+    	return precioUso;
     }
 
     public void reparar() {
@@ -95,7 +101,9 @@ public class Maquina {
 
     @Override
     public String toString() {
-        return "Maquina: " + nombre + ", Zona: " + zonaDeJuegos.getNombre() + ", Recaudado: " + dineroRecaudado;
+    	
+        return "Maquina: " + nombre + " Tipo: "+tipo+", Recaudado: " + dineroRecaudado;
+    	
     }
 
 	public ZonaDeJuegos getZonaDeJuegos() {
@@ -105,5 +113,27 @@ public class Maquina {
 	public void setZonaDeJuegos(ZonaDeJuegos zonaDeJuegos) {
 		this.zonaDeJuegos = zonaDeJuegos;
 	}
+	
+	public void activarBono() {
+        this.bonoActivo = true;
+	}
+	
+	public String asignarBono(Cliente cliente) {
+        if (bonoActivo) {
+            switch (cliente.getTipo()) {
+                case "Generico":
+                    cliente.setSaldo(cliente.getSaldo()+5); // Ejemplo de bono para cliente genérico
+                    break;
+                case "Preferencial":
+                    cliente.setSaldo(cliente.getSaldo()+12); // Ejemplo de bono preferencial
+                    break;
+                case "VIP":
+                    cliente.setSaldo(cliente.getSaldo()+20); // Ejemplo de bono VIP
+                    break;
+            }
+            
+        }
+        return "Bono "+ cliente.getTipo()+ " asignado a " + cliente.getNombre();
+    }
 }
 

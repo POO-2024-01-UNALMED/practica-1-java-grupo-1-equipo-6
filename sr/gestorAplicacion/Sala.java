@@ -1,19 +1,23 @@
 package gestorAplicacion;
 
+import java.util.ArrayList;
 
 public class Sala {
 	private int numero;
 	private boolean[][] sillas;
 	private Cine cine;
-	
+	private int capacidad;
+	public static ArrayList<Sala> allSalas=new ArrayList<>();;
 	public Sala(int numero,int filas, int columnas) {
         this.numero=numero;
+        this.capacidad=filas*columnas;
 		this.sillas = new boolean[filas][columnas];
 		for (int i = 0; i<filas;i++){
 			for (int j = 0; j<columnas;j++){
 				sillas[i][j] = true;
 			}
 		}
+		allSalas.add(this);
     }
 	
 	
@@ -91,6 +95,10 @@ public class Sala {
 	        return false; 
 	    }
 	}
+	
+	public String toString() {
+        return "Sala: " + numero + ", Capacidad: " + capacidad  ;
+    }
 	
 
 }

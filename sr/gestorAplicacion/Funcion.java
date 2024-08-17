@@ -1,18 +1,25 @@
 package gestorAplicacion;
+import java.util.ArrayList;
+
 import gestorAplicacion.Cine;
 
 public class Funcion {
 	private Pelicula pelicula;
 	private String horario;
-	private int tipo;
+	private String tipo;
 	private Sala sala;
+	public static ArrayList<Funcion> allFunciones=new ArrayList<>();;
 	
-	
-	public Funcion(Pelicula pelicula, String horario, int tipo, Sala sala){
+	public Funcion(Pelicula pelicula, String horario, String tipo, Sala sala){
 		this.pelicula = pelicula;
 		this.horario = horario;
 		this.tipo = tipo;
 		this.sala = sala;
+		allFunciones.add(this);
+		
+	}
+	public Funcion(String horario,String tipo) {
+		this(null,horario,tipo,null);
 		
 	}
 	
@@ -28,11 +35,11 @@ public class Funcion {
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
-	public int getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(int tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 	public Sala getSala() {
@@ -42,6 +49,11 @@ public class Funcion {
 		this.sala = sala;
 	}
 	
+	public String toString() {
+		
+        return "Funcion: " + pelicula + ", Sala: " + sala + ", Horario: " + horario;
+		
+    }
 	
 	
 	

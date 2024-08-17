@@ -34,4 +34,7 @@ public class Bodega extends Establecimiento {
             return "No hay suficientes materiales para reparar la máquina " + maquinaSeleccionada.getNombre();
         }
     }
+    public String toString() {
+        return "Bodega: " + nombre + ", Materiales disponibles " + materialesDisponibles;
+    }
 }

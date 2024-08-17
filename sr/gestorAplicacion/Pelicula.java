@@ -7,7 +7,7 @@ public class Pelicula {
 	private String genero;
 	private double calificacionPromedio;
 	private int numeroCalificaciones;
-	private static ArrayList<Pelicula> totalPeliculas=new ArrayList<>();;
+	public static ArrayList<Pelicula> totalPeliculas=new ArrayList<>();;
 
 	public Pelicula(String titulo, String genero){
 		this.titulo = titulo;
@@ -54,6 +54,10 @@ public class Pelicula {
 	public static List<Pelicula> getListado(){
 		return Pelicula.totalPeliculas;
 		}
+	
+	 public String toString() {
+	        return "Pelicula: " + titulo + ", Género: " + genero + ", Calificacion: " + calificacionPromedio;
+	    }
 	
 	
 	
