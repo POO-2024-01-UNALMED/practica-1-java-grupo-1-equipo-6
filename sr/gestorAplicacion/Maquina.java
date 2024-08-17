@@ -34,7 +34,7 @@ public class Maquina {
     }
 
     public boolean necesitaMantenimiento() {
-        return usos >= 12;
+        return usos >= 2;
     }
 
     public void usar() {

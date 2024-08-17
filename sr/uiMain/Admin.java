@@ -124,6 +124,7 @@ public class Admin{
                     break;
                 case 8:
                 	asignacion();
+                	break;
 
                 default:
                     System.out.println("El número ingresado debe estar entre 1 y 8");
@@ -277,231 +278,164 @@ public class Admin{
         }
     
     public static void gestionarZonaDeJuegos() {
-        Scanner entrada = new Scanner(System.in); 
-       
-        // Simulación de uso de máquinas
-        for (int i = 0; i < 12; i++) {
+    	Scanner entrada = new Scanner(System.in);
+
+    	// Simulación de uso de máquinas
+    	for (int i = 0; i < 3; i++) {
             arcade1.usar();
             
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             danceDance1.usar();
             
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
         	mesaDeDiscos1.usar();
             
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i <1; i++) {
         	basket1.usar();
             
         }
         
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
         	mesaDeDiscos2.usar();
             
         }
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
         	arcade2.usar();
             
         }
-        
-        zona1.actualizarDineroRecaudado();
-        zona2.actualizarDineroRecaudado();
-        zona3.actualizarDineroRecaudado();
-        zona4.actualizarDineroRecaudado();
-        
-        
 
-        // Mostrar informe de máquinas dañadas en cada zona
-        System.out.println("Informe de máquinas dañadas:");
-        System.out.println(zona1.informeMaquinas());
-        System.out.println(zona2.informeMaquinas());
-        System.out.println(zona3.informeMaquinas());
-        System.out.println(zona4.informeMaquinas());
-        
 
-        // Selección de máquina para reparar
-        System.out.print("Seleccione el número de la zona de la maquina que desea reparar (1 para Zona A, 2 para Zona B, 3 para Zona C y 4 para Zona D): ");
-        int zonaSeleccionada = entrada.nextInt(); // Usa la instancia del Scanner
-        ZonaDeJuegos zonaActual;
-        switch (zonaSeleccionada) {
-        case 1:
-            zonaActual = zona1;
-            break;
-        case 2:
-            zonaActual = zona2;
-            break;
-        case 3:
-            zonaActual = zona3;
-            break;
-        case 4:
-            zonaActual = zona4;
-            break;
-        default:
-            System.out.println("Selección inválida. Por favor, seleccione un número válido.");
-            return; // Salir del método si la selección es inválida
-    }
+    	// Actualización de dinero recaudado en todas las zonas
+    	for (ZonaDeJuegos zona : ZonaDeJuegos.zonasDeJuegos) {
+    	    zona.actualizarDineroRecaudado();
+    	}
 
-        List<Maquina> maquinasDañadas = zonaActual.getMaquinasDañadas();
-        if (maquinasDañadas.isEmpty()) {
-            System.out.println("No hay máquinas dañadas en la zona seleccionada.");
-            return;
-        }
+    	// Mostrar informe de máquinas dañadas en cada zona
+    	System.out.println("Informe de máquinas dañadas:");
+    	for (ZonaDeJuegos zona : ZonaDeJuegos.zonasDeJuegos) {
+    	    System.out.println(zona.informeMaquinas());
+    	}
 
-        System.out.println("Seleccione el número de la máquina que desea reparar:");
-        for (int i = 0; i < maquinasDañadas.size(); i++) {
-            System.out.println((i + 1) + ". " + maquinasDañadas.get(i).getNombre());
-        }
-        int seleccionMaquina = entrada.nextInt() - 1; // Usa la instancia del Scanner
+    	// Selección de zona y máquina para reparar
+    	System.out.print("Seleccione el número de la zona de la máquina que desea reparar: ");
+    	for (int i = 0; i < ZonaDeJuegos.zonasDeJuegos.size(); i++) {
+    	    System.out.println((i + 1) + ". " + ZonaDeJuegos.zonasDeJuegos.get(i).getNombre());
+    	}
+    	int zonaSeleccionada = entrada.nextInt() - 1;
 
-        // Realizar reparación
-        System.out.println(bodega.realizarMantenimiento(zonaActual, seleccionMaquina));
+    	ZonaDeJuegos zonaActual = ZonaDeJuegos.zonasDeJuegos.get(zonaSeleccionada);
+    	List<Maquina> maquinasDañadas = zonaActual.getMaquinasDañadas();
+    	if (maquinasDañadas.isEmpty()) {
+    	    System.out.println("No hay máquinas dañadas en la zona seleccionada.");
+    	    return;
+    	}
 
-        // Recomendación de movimiento
-        Maquina maquinaReparada = maquinasDañadas.get(seleccionMaquina);
-        ZonaDeJuegos zonaDestino = (zonaSeleccionada == 0) ? zona2 : zona1;
-        System.out.println(zonaActual.recomendarMovimiento( maquinaReparada));
+    	System.out.println("Seleccione el número de la máquina que desea reparar:");
+    	for (int i = 0; i < maquinasDañadas.size(); i++) {
+    	    System.out.println((i + 1) + ". " + maquinasDañadas.get(i).getNombre());
+    	}
+    	int seleccionMaquina = entrada.nextInt() - 1;
 
-        // Mover la máquina reparada
-        System.out.println("Seleccione la zona a la que desea mover la máquina:");
-        System.out.println("1. " + zona1.getNombre());
-        System.out.println("2. " + zona2.getNombre());
-        System.out.println("3. " + zona3.getNombre());
-        System.out.println("4. " + zona4.getNombre());
-        
-        int seleccionZona = entrada.nextInt(); // Usa la instancia del Scanner
-        
-        switch (seleccionZona) {
-        case 1:
-            zonaDestino = zona1;
-            break;
-        case 2:
-            zonaDestino = zona2;
-            break;
-        case 3:
-            zonaDestino = zona3;
-            break;
-        case 4:
-            zonaDestino = zona4;
-            break;
-        default:
-            System.out.println("Selección inválida. Por favor, seleccione un número válido.");
-            return; // Salir del método si la selección es inválida
-    }
+    	// Realizar reparación
+    	System.out.println(bodega.realizarMantenimiento(zonaActual, seleccionMaquina));
 
-        if (zonaActual != zonaDestino) {
-            System.out.println(zonaActual.moverMaquina(zonaDestino, seleccionMaquina));
-        } else {
-            System.out.println("La máquina permanecerá en " + zonaActual.getNombre());
-        }
+    	// Recomendación de movimiento
+    	Maquina maquinaReparada = maquinasDañadas.get(seleccionMaquina);
+    	System.out.println(zonaActual.recomendarMovimiento(maquinaReparada));
 
-        // Aplicar incentivos
-        System.out.println("¿Desea aplicar algún incentivo en una zona de juegos?");
-        System.out.println("1. Sí");
-        System.out.println("2. No");
-        int opcionIncentivo = entrada.nextInt(); // Usa la instancia del Scanner
+    	// Selección de zona de destino para mover la máquina reparada
+    	System.out.println("Seleccione la zona a la que desea mover la máquina:");
+    	for (int i = 0; i < ZonaDeJuegos.zonasDeJuegos.size(); i++) {
+    	    System.out.println((i + 1) + ". " + ZonaDeJuegos.zonasDeJuegos.get(i).getNombre());
+    	}
+    	int seleccionZona = entrada.nextInt() - 1;
 
-        if (opcionIncentivo == 1) {
-            System.out.println("Seleccione el tipo de incentivo:");
-            System.out.println("1. Rebajar el precio de una máquina");
-            System.out.println("2. Regalar un bono por el uso de una maquina");
-            int tipoIncentivo = entrada.nextInt(); // Usa la instancia del Scanner
+    	ZonaDeJuegos zonaDestino = ZonaDeJuegos.zonasDeJuegos.get(seleccionZona);
+    	if (zonaActual != zonaDestino) {
+    	    System.out.println(zonaActual.moverMaquina(zonaDestino, seleccionMaquina));
+    	} else {
+    	    System.out.println("La máquina permanecerá en " + zonaActual.getNombre());
+    	}
 
-            if (tipoIncentivo == 1) {
-            	
-            	List<Maquina> dosMenosVenden = Maquina.obtenerDosMaquinasMenosVenden();
+    	// Aplicar incentivos
+    	System.out.println("¿Desea aplicar algún incentivo en una zona de juegos?");
+    	System.out.println("1. Sí");
+    	System.out.println("2. No");
+    	int opcionIncentivo = entrada.nextInt();
 
-                // Imprimir la recomendación
-                if (dosMenosVenden.isEmpty()) {
-                    System.out.println("No hay máquinas disponibles para recomendar.");
-                } else {
-                    System.out.println("Recomendación de cambio de precio:");
-                    for (Maquina maquina : dosMenosVenden) {
-                        System.out.println(maquina);
-                    }
-                }
-                System.out.println("Seleccione la zona donde aplicar la rebaja:");
-                System.out.println("1. " + zona1.getNombre());
-                System.out.println("2. " + zona2.getNombre());
-                System.out.println("3. " + zona3.getNombre());
-                System.out.println("4. " + zona4.getNombre());
-                int seleccionZonaRebaja = entrada.nextInt(); // Usa la instancia del Scanner
-                
-                ZonaDeJuegos zonaRebaja;
-                switch (seleccionZonaRebaja) {
-                case 1:
-                    zonaRebaja = zona1;
-                    break;
-                case 2:
-                	zonaRebaja = zona2;
-                    break;
-                case 3:
-                	zonaRebaja = zona3;
-                    break;
-                case 4:
-                	zonaRebaja = zona4;
-                    break;
-                default:
-                    System.out.println("Selección inválida. Por favor, seleccione un número válido.");
-                    return; // Salir del método si la selección es inválida
-            }
-                
-                
-                
-                System.out.println("Seleccione la máquina para rebajar su precio:");
-                List<Maquina> maquinasEnZona = zonaRebaja.getMaquinas();
-                for (int i = 0; i < maquinasEnZona.size(); i++) {
-                    System.out.println((i + 1) + ". " + maquinasEnZona.get(i).getNombre());
-                }
-                int seleccionMaquinaRebaja = entrada.nextInt() - 1; // Usa la instancia del Scanner
+    	if (opcionIncentivo == 1) {
+    	    System.out.println("Seleccione el tipo de incentivo:");
+    	    System.out.println("1. Rebajar el precio de una máquina");
+    	    System.out.println("2. Regalar un bono por el uso de una máquina");
+    	    int tipoIncentivo = entrada.nextInt();
 
-                Maquina maquinaRebajada = maquinasEnZona.get(seleccionMaquinaRebaja);
-                System.out.println("Introduzca el nuevo precio para la máquina " + maquinaRebajada.getNombre() + ": ");
-                double nuevoPrecio = entrada.nextDouble(); // Usa la instancia del Scanner
-                maquinaRebajada.setPrecioUso(nuevoPrecio);
+    	    if (tipoIncentivo == 1) {
+    	        List<Maquina> dosMenosVenden = Maquina.obtenerDosMaquinasMenosVenden();
 
-                System.out.println("El precio de la máquina " + maquinaRebajada.getNombre() + " ha sido rebajado a " + nuevoPrecio);
+    	        if (dosMenosVenden.isEmpty()) {
+    	            System.out.println("No hay máquinas disponibles para recomendar.");
+    	        } else {
+    	            System.out.println("Recomendación de cambio de precio:");
+    	            for (Maquina maquina : dosMenosVenden) {
+    	                System.out.println(maquina);
+    	            }
+    	        }
 
-            } else if (tipoIncentivo == 2) {
-            	
-            		Scanner scanner = new Scanner(System.in);
-            	    
-            	    // Listar zonas de juegos y seleccionar una
-            	    System.out.println("Seleccione la zona de juegos:");
-            	    for (int i = 0; i < ZonaDeJuegos.zonasDeJuegos.size(); i++) {
-            	        System.out.println((i + 1) + ". " + ZonaDeJuegos.zonasDeJuegos.get(i).getNombre());
-            	    }
-            	    int zonaSeleccionada1 = scanner.nextInt() - 1;
-            	    ZonaDeJuegos zona = ZonaDeJuegos.zonasDeJuegos.get(zonaSeleccionada1);
+    	        System.out.println("Seleccione la zona donde aplicar la rebaja:");
+    	        for (int i = 0; i < ZonaDeJuegos.zonasDeJuegos.size(); i++) {
+    	            System.out.println((i + 1) + ". " + ZonaDeJuegos.zonasDeJuegos.get(i).getNombre());
+    	        }
+    	        int seleccionZonaRebaja = entrada.nextInt() - 1;
 
-            	    // Listar máquinas de la zona y seleccionar una
-            	    System.out.println("Seleccione la máquina a la que desea aplicar el bono:");
-            	    for (int i = 0; i < zona.getMaquinas().size(); i++) {
-            	        System.out.println((i + 1) + ". " + zona.getMaquinas().get(i).getNombre());
-            	    }
-            	    int maquinaSeleccionada = scanner.nextInt() - 1;
-            	    Maquina maquina = zona.getMaquinas().get(maquinaSeleccionada);
+    	        ZonaDeJuegos zonaRebaja = ZonaDeJuegos.zonasDeJuegos.get(seleccionZonaRebaja);
 
-            	    // Activar el bono en la máquina seleccionada
-            	    maquina.activarBono();
-            	    System.out.println("El bono ha sido activado para la máquina " + maquina.getNombre());
-            	
-        } else {
-            System.out.println("No se aplicarán incentivos.");
-        }
-        }   
+    	        System.out.println("Seleccione la máquina para rebajar su precio:");
+    	        List<Maquina> maquinasEnZona = zonaRebaja.getMaquinas();
+    	        for (int i = 0; i < maquinasEnZona.size(); i++) {
+    	            System.out.println((i + 1) + ". " + maquinasEnZona.get(i).getNombre());
+    	        }
+    	        int seleccionMaquinaRebaja = entrada.nextInt() - 1;
 
-        // Actualización de dinero recaudado
-        zona1.actualizarDineroRecaudado();
-        zona2.actualizarDineroRecaudado();
-        zona3.actualizarDineroRecaudado();
-        zona4.actualizarDineroRecaudado();
-        
-        System.out.println("Dinero recaudado por " + zona1.getNombre() + ": " + zona1.getDineroRecaudado());
-        System.out.println("Dinero recaudado por " + zona2.getNombre() + ": " + zona2.getDineroRecaudado());
-        System.out.println("Dinero recaudado por " + zona3.getNombre() + ": " + zona3.getDineroRecaudado());
-        System.out.println("Dinero recaudado por " + zona4.getNombre() + ": " + zona4.getDineroRecaudado());
+    	        Maquina maquinaRebajada = maquinasEnZona.get(seleccionMaquinaRebaja);
+    	        System.out.println("Introduzca el nuevo precio para la máquina " + maquinaRebajada.getNombre() + ": ");
+    	        double nuevoPrecio = entrada.nextDouble();
+    	        maquinaRebajada.setPrecioUso(nuevoPrecio);
+
+    	        System.out.println("El precio de la máquina " + maquinaRebajada.getNombre() + " ha sido rebajado a " + nuevoPrecio);
+
+    	    } else if (tipoIncentivo == 2) {
+    	        System.out.println("Seleccione la zona de juegos:");
+    	        for (int i = 0; i < ZonaDeJuegos.zonasDeJuegos.size(); i++) {
+    	            System.out.println((i + 1) + ". " + ZonaDeJuegos.zonasDeJuegos.get(i).getNombre());
+    	        }
+    	        int zonaSeleccionada1 = entrada.nextInt() - 1;
+
+    	        ZonaDeJuegos zona = ZonaDeJuegos.zonasDeJuegos.get(zonaSeleccionada1);
+
+    	        System.out.println("Seleccione la máquina a la que desea aplicar el bono:");
+    	        for (int i = 0; i < zona.getMaquinas().size(); i++) {
+    	            System.out.println((i + 1) + ". " + zona.getMaquinas().get(i).getNombre());
+    	        }
+    	        int maquinaSeleccionada = entrada.nextInt() - 1;
+
+    	        Maquina maquina = zona.getMaquinas().get(maquinaSeleccionada);
+    	        maquina.activarBono();
+
+    	        System.out.println("El bono ha sido activado para la máquina " + maquina.getNombre());
+    	    }
+    	} else {
+    	    System.out.println("No se aplicarán incentivos.");
+    	}
+
+    	// Actualización final de dinero recaudado
+    	for (ZonaDeJuegos zona : ZonaDeJuegos.zonasDeJuegos) {
+    	    zona.actualizarDineroRecaudado();
+    	    System.out.println("Dinero recaudado por " + zona.getNombre() + ": " + zona.getDineroRecaudado());
+    	}
+
         
     }
     
@@ -518,32 +452,27 @@ public class Admin{
             System.out.println("Cliente no encontrado. ¿Desea crear uno nuevo? (1)Si/(2)No");
             int respuesta = scanner.nextInt();
             switch (respuesta) {
-            	case 1:
-            		 System.out.println("Ingresa tu nombre: ");
-            	        String nombre = scanner.nextLine();  // Lee la línea completa para el nombre
-            	        scanner.nextLine();
-            	        System.out.println("Ingresa tu saldo inicial: ");
-            	        double saldoInicial = scanner.nextDouble();  // Lee el saldo inicial (número)
+                case 1:
+                    System.out.println("Ingresa tu nombre: ");
+                    String nombre = scanner.nextLine();  // Lee la línea completa para el nombre
+                    scanner.nextLine();
+                    System.out.println("Ingresa tu saldo inicial: ");
+                    double saldoInicial = scanner.nextDouble();  // Lee el saldo inicial (número)
 
-            	        // Limpia el buffer de entrada para evitar problemas con nextLine()
-            	        scanner.nextLine();
-                cliente = new Cliente(nombre,saldoInicial,idCliente);
-                System.out.println("Cliente creado exitosamente.");
-                 break;
-            	case 2:
-            		return;
-               
+                    // Limpia el buffer de entrada para evitar problemas con nextLine()
+                    scanner.nextLine();
+                    cliente = new Cliente(nombre, saldoInicial, idCliente);
+                    System.out.println("Cliente creado exitosamente.");
+                    break;
+                case 2:
+                    return;
                 default:
                     System.out.println("Selección inválida. Por favor, seleccione un número válido.");
                     return; // Salir del método si la selección es inválida
             }
-            	
-            
-        
         }
-        
+
         System.out.println("Seleccione el cine:");
-       
         for (int i = 0; i < Cine.cines.size(); i++) {
             System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
         }
@@ -562,9 +491,16 @@ public class Admin{
         int maquinaSeleccionadaIndex = scanner.nextInt() - 1;
         Maquina maquinaSeleccionada = maquinasDisponibles.get(maquinaSeleccionadaIndex);
 
+        // Verificar si la máquina requiere mantenimiento
+        if (maquinaSeleccionada.necesitaMantenimiento()) {
+            System.out.println("La máquina " + maquinaSeleccionada.getNombre() + " no está disponible debido a que requiere mantenimiento.");
+            return;
+        }
+
         // Paso 4: Realizar la compra
         if (cliente.getSaldo() >= maquinaSeleccionada.getPrecioUso()) {
-            cliente.setSaldo(cliente.getSaldo()-maquinaSeleccionada.getPrecioUso());
+            cliente.setSaldo(cliente.getSaldo() - maquinaSeleccionada.getPrecioUso());
+            maquinaSeleccionada.usar();
             System.out.println("Compra realizada exitosamente.");
 
             // Paso 5: Asignar bono si está activo
@@ -852,7 +788,6 @@ public class Admin{
             scanner.nextLine(); // Limpiar el buffer
 
             switch (opcion) {
-
                 case 1:
                     // Asignar una zona de juegos a un cine
                     if (ZonaDeJuegos.zonasDeJuegos.isEmpty()) {
@@ -881,7 +816,6 @@ public class Admin{
                     Cine.cines.get(cineSeleccionado).setZonaDeJuegos(ZonaDeJuegos.zonasDeJuegos.get(zonaSeleccionada));
                     ZonaDeJuegos.zonasDeJuegos.get(zonaSeleccionada).setCine(Cine.cines.get(cineSeleccionado));
                     System.out.println("Zona de juegos asignada correctamente al cine " + Cine.cines.get(cineSeleccionado).getNombre());
-
                     break;
 
                 case 2:
@@ -897,8 +831,12 @@ public class Admin{
 
                     System.out.println("Selecciona la función a agregar:");
                     for (int i = 0; i < Funcion.allFunciones.size(); i++) {
-                        System.out.println(i + ". " + Funcion.allFunciones.get(i).getPelicula().getTitulo() + "  " +
-                                Funcion.allFunciones.get(i).getHorario() + "  " + Funcion.allFunciones.get(i).getTipo());
+                        Funcion funcion = Funcion.allFunciones.get(i);
+                        if (funcion.getPelicula() != null) {
+                            System.out.println(i + ". " + funcion.getPelicula().getTitulo() + "  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        } else {
+                            System.out.println(i + ". Función sin película asignada  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        }
                     }
                     int funcionSeleccionada = scanner.nextInt();
                     scanner.nextLine();
@@ -912,7 +850,6 @@ public class Admin{
 
                     Cine.cines.get(cineSeleccionado).getFunciones().add(Funcion.allFunciones.get(funcionSeleccionada));
                     System.out.println("Función agregada correctamente al cine " + Cine.cines.get(cineSeleccionado).getNombre());
-
                     break;
 
                 case 3:
@@ -942,7 +879,6 @@ public class Admin{
 
                     ZonaDeJuegos.zonasDeJuegos.get(zonaSeleccionada).getMaquinas().add(Maquina.allMaquinas.get(maquinaSeleccionada));
                     System.out.println("Máquina agregada correctamente a la zona de juegos " + ZonaDeJuegos.zonasDeJuegos.get(zonaSeleccionada).getNombre());
-
                     break;
 
                 case 4:
@@ -965,15 +901,18 @@ public class Admin{
 
                     System.out.println("Selecciona la función a la que deseas asignar la película:");
                     for (int i = 0; i < Funcion.allFunciones.size(); i++) {
-                        System.out.println(i + ". " + Funcion.allFunciones.get(i).getPelicula().getTitulo() + "  " +
-                                Funcion.allFunciones.get(i).getHorario() + "  " + Funcion.allFunciones.get(i).getTipo());
+                        Funcion funcion = Funcion.allFunciones.get(i);
+                        if (funcion.getPelicula() != null) {
+                            System.out.println(i + ". " + funcion.getPelicula().getTitulo() + "  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        } else {
+                            System.out.println(i + ". Función sin película asignada  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        }
                     }
                     funcionSeleccionada = scanner.nextInt();
                     scanner.nextLine();
 
                     Funcion.allFunciones.get(funcionSeleccionada).setPelicula(Pelicula.totalPeliculas.get(peliculaSeleccionada));
                     System.out.println("Película asignada correctamente a la función.");
-
                     break;
 
                 case 5:
@@ -996,21 +935,24 @@ public class Admin{
 
                     System.out.println("Selecciona la función a la que deseas asignar la sala:");
                     for (int i = 0; i < Funcion.allFunciones.size(); i++) {
-                        System.out.println(i + ". " + Funcion.allFunciones.get(i).getPelicula().getTitulo() + "  " +
-                                Funcion.allFunciones.get(i).getHorario() + "  " + Funcion.allFunciones.get(i).getTipo());
+                        Funcion funcion = Funcion.allFunciones.get(i);
+                        if (funcion.getPelicula() != null) {
+                            System.out.println(i + ". " + funcion.getPelicula().getTitulo() + "  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        } else {
+                            System.out.println(i + ". Función sin película asignada  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        }
                     }
                     funcionSeleccionada = scanner.nextInt();
                     scanner.nextLine();
 
                     Funcion.allFunciones.get(funcionSeleccionada).setSala(Sala.allSalas.get(salaSeleccionada));
                     System.out.println("Sala asignada correctamente a la función.");
-
                     break;
 
                 case 6:
                     continuar = false;
                     System.out.println("Saliendo del menú de asignaciones.");
-                    break;
+                    return;
 
                 default:
                     System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
@@ -1021,7 +963,6 @@ public class Admin{
             if (continuar) {
                 System.out.println("¿Desea hacer otra asignación? 1. Sí | 2. No");
                 int respuesta = scanner.nextInt();
-                scanner.nextLine(); // Limpiar el buffer
                 if (respuesta == 2) {
                     continuar = false;
                 } else if (respuesta < 1 || respuesta > 2) {
@@ -1030,6 +971,7 @@ public class Admin{
             }
         }
     }
+
 
     }
 

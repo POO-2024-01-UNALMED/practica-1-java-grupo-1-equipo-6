@@ -15,8 +15,8 @@ public class Cine {
 		this.zonaDeJuegos = zonaDeJuegos;
 		if(zonaDeJuegos!=null) {
 		this.zonaDeJuegos.setCine(this);
-		cines.add(this);
 		}
+		cines.add(this);
 	}
 	
 	public Cine(String nombre){

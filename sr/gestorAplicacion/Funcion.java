@@ -51,7 +51,7 @@ public class Funcion {
 	
 	public String toString() {
 		
-        return "Funcion: " + pelicula + ", Sala: " + sala + ", Horario: " + horario;
+        return "Funcion: "+tipo +" Pelicula: "+ pelicula + ", Sala: " + sala + ", Horario: " + horario;
 		
     }
 	
