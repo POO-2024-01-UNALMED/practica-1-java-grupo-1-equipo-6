@@ -1,5 +1,5 @@
 package gestorAplicacion;
-import uiMain.Admin;
+import uiMain.Interfaz;
 import java.util.ArrayList;
 
 public class Cliente {
@@ -71,7 +71,7 @@ public class Cliente {
 	
 	public void calificarPelicula(Pelicula pelicula, double calificacion) {
 		if (calificacion>5 && calificacion<0) {
-			Admin.error();
+			Interfaz.error();
 		}
 		pelicula.actualizarCalificacion(calificacion);
 		
@@ -88,7 +88,7 @@ public class Cliente {
 	
 	public double utilizarCupon(int precio,int descuento) {
 		if (descuento>100 && descuento<0) {
-			Admin.error();
+			Interfaz.error();
 		}
 		double a=precio;
 		double newPrecio=a-((a/100)*descuento);

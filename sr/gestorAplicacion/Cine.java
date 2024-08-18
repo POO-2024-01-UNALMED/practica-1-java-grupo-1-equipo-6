@@ -1,5 +1,6 @@
 package gestorAplicacion;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cine {
 	private String nombre;
@@ -264,6 +265,43 @@ public class Cine {
 						funcionSabado.setMomentoDelDia("pm");
 					}
 				}
+	}
+	
+	
+	
+	public List<String> obtenerCalificacionesPeliculas() {
+	    List<String> calificaciones = new ArrayList<>();
+	    for (Funcion funcion : lunes) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Lunes");
+	        }
+	    }
+	    for (Funcion funcion : martes) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Martes");
+	        }
+	    }
+	    for (Funcion funcion : jueves) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Jueves");
+	        }
+	    }
+	    for (Funcion funcion : viernes) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Viernes");
+	        }
+	    }
+	    for (Funcion funcion : sabado) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Sabado");
+	        }
+	    }
+	    return calificaciones;
 	}
 		
 	
