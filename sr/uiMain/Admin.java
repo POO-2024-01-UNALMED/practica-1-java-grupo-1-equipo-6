@@ -1,5 +1,7 @@
 package uiMain;
 import gestorAplicacion.*;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -23,34 +25,55 @@ public class Admin{
     
     static Bodega bodega = new Bodega("Bodega Central", 100);
     
-    static Pelicula pelicula1 = new Pelicula("Intensamente","Infantil");
-    static Pelicula pelicula2 = new Pelicula("Spiderman","Acción");
-    static Pelicula pelicula3 = new Pelicula("Jason Vorhees","Terror");
-    static Pelicula pelicula4 = new Pelicula("Deadpool","+18");
-    static Pelicula pelicula5 = new Pelicula("Oppenheimer","Drama");
-    static Pelicula pelicula6 = new Pelicula("Los Minions","Infantil");
+    static Pelicula pelicula1 = new Pelicula("Intensamente", "Infantil", LocalTime.of(1, 35));
+    static Pelicula pelicula2 = new Pelicula("Spiderman", "Acción", LocalTime.of(2, 10));     
+    static Pelicula pelicula3 = new Pelicula("Jason Vorhees", "Terror", LocalTime.of(1, 45)); 
+    static Pelicula pelicula4 = new Pelicula("Deadpool", "+18", LocalTime.of(1, 50));          
+    static Pelicula pelicula5 = new Pelicula("Oppenheimer", "Drama", LocalTime.of(3, 0));      
+    static Pelicula pelicula6 = new Pelicula("Los Minions", "Infantil", LocalTime.of(1, 30)); 
     
     static Sala sala1 = new Sala(1,6,5);
     static Sala sala2 = new Sala(2,6,5);
     static Sala sala3 = new Sala(3,6, 5);
     
-    static Funcion funcion1 = new Funcion(pelicula1, "4:00pm", "Normal", sala1);
-    static Funcion funcion2 = new Funcion(pelicula2, "6:00pm", "Normal", sala2);
-    static Funcion funcion3 = new Funcion(pelicula3, "8:00pm", "Normal", sala3);
-    static Funcion funcion4 = new Funcion(pelicula4, "8:00pm","Normal" , sala3);
-    static Funcion funcion5 = new Funcion(pelicula5, "7:00pm", "Normal", sala3);
-    static Funcion funcion6 = new Funcion(pelicula6, "2:00pm", "Normal", sala3);
+    static Funcion funcion1 = new Funcion(pelicula1, LocalTime.of(16, 0), "Normal", sala1);
+    static Funcion funcion2 = new Funcion(pelicula2, LocalTime.of(18, 0), "Normal", sala2);
+    static Funcion funcion3 = new Funcion(pelicula3, LocalTime.of(20, 0), "Normal", sala3);
+    static Funcion funcion4 = new Funcion(pelicula4, LocalTime.of(20, 0), "Normal", sala3);
+    static Funcion funcion5 = new Funcion(pelicula5, LocalTime.of(19, 0), "Normal", sala3);
+    static Funcion funcion6 = new Funcion(pelicula6, LocalTime.of(14, 0), "Normal", sala3);
 
-    static ArrayList<Funcion> funcionesCine1 = new ArrayList<Funcion>();
-    static ArrayList<Funcion> funcionesCine2 = new ArrayList<Funcion>();
-    static ArrayList<Funcion> funcionesCine3 = new ArrayList<Funcion>();
-    static ArrayList<Funcion> funcionesCine4 = new ArrayList<Funcion>();
+
+    // Crear listas de funciones para cada cine
+    static ArrayList<Funcion> lunes1 = new ArrayList<>();
+    static ArrayList<Funcion> martes1 = new ArrayList<>();
+    static ArrayList<Funcion> jueves1 = new ArrayList<>();
+    static ArrayList<Funcion> viernes1 = new ArrayList<>();
+    static ArrayList<Funcion> sabado1 = new ArrayList<>();
+
+    static ArrayList<Funcion> lunes2 = new ArrayList<>();
+    static ArrayList<Funcion> martes2 = new ArrayList<>();
+    static ArrayList<Funcion> jueves2 = new ArrayList<>();
+    static ArrayList<Funcion> viernes2 = new ArrayList<>();
+    static ArrayList<Funcion> sabado2 = new ArrayList<>();
+
+    static ArrayList<Funcion> lunes3 = new ArrayList<>();
+    static ArrayList<Funcion> martes3 = new ArrayList<>();
+    static ArrayList<Funcion> jueves3 = new ArrayList<>();
+    static ArrayList<Funcion> viernes3 = new ArrayList<>();
+    static ArrayList<Funcion> sabado3 = new ArrayList<>();
+
+    static ArrayList<Funcion> lunes4 = new ArrayList<>();
+    static ArrayList<Funcion> martes4 = new ArrayList<>();
+    static ArrayList<Funcion> jueves4 = new ArrayList<>();
+    static ArrayList<Funcion> viernes4 = new ArrayList<>();
+    static ArrayList<Funcion> sabado4 = new ArrayList<>();
     
-    static Cine cine1 = new Cine("Cinetica Medellín",funcionesCine1,zona1);
-    static Cine cine2 = new Cine("Cinetica Bogota", funcionesCine2,zona2);
-    static Cine cine3 = new Cine("Cinetica Cali", funcionesCine3,zona3);
-    static Cine cine4 = new Cine("Cinetica Pereira", funcionesCine4,zona4);
-    
+    static Cine cine1 = new Cine("Cine A", lunes1, martes1, jueves1, viernes1, sabado1, zona1);
+    static Cine cine2 = new Cine("Cine B", lunes2, martes2, jueves2, viernes2, sabado2, zona2);
+    static Cine cine3 = new Cine("Cine C", lunes3, martes3, jueves3, viernes3, sabado3, zona3);
+    static Cine cine4 = new Cine("Cine D", lunes4, martes4, jueves4, viernes4, sabado4, zona4);
+   
    
 
 
@@ -62,22 +85,34 @@ public class Admin{
         sala2.setCine(cine2);
         sala3.setCine(cine3);
        
+     // Cine 1
+        lunes1.add(funcion1);
+        martes1.add(funcion2);
+        jueves1.add(funcion3);
+        viernes1.add(funcion4);
+        sabado1.add(funcion5);
 
-        funcionesCine3.add(funcion4);
-        funcionesCine3.add(funcion5);
-        funcionesCine3.add(funcion6);
-        funcionesCine1.add(funcion1);
-        funcionesCine2.add(funcion2);
-        funcionesCine3.add(funcion3);
-        funcionesCine4.add(funcion3);
-        funcionesCine4.add(funcion6);
+        // Cine 2
+        lunes2.add(funcion2);
+        martes2.add(funcion3);
+        jueves2.add(funcion4);
+        viernes2.add(funcion5);
+        sabado2.add(funcion6);
+
+        // Cine 3
+        lunes3.add(funcion3);
+        martes3.add(funcion4);
+        jueves3.add(funcion5);
+        viernes3.add(funcion6);
+        sabado3.add(funcion1);
+
+        // Cine 4
+        lunes4.add(funcion4);
+        martes4.add(funcion5);
+        jueves4.add(funcion6);
+        viernes4.add(funcion1);
+        sabado4.add(funcion2);
         
-      
-
-        cine1.agregarPeliculas();
-        cine2.agregarPeliculas();
-        cine3.agregarPeliculas();
-        cine4.agregarPeliculas();
         
         zona1.agregarMaquina(arcade1);
         zona1.agregarMaquina(danceDance1);
@@ -314,6 +349,85 @@ public class Admin{
     }
     
     
+    
+    
+    
+    public static void gestionarPeliculas() {
+        Scanner scanner = new Scanner(System.in);
+
+        // Paso 1: Ver las calificaciones
+        System.out.println("Calificaciones de las películas en los cines:");
+        for (Cine cine : Cine.cines) {
+            System.out.println("Cine: " + cine.getNombre());
+            List<String> calificaciones = cine.obtenerCalificacionesPeliculas();
+            for (String calificacion : calificaciones) {
+                System.out.println(calificacion);
+            
+        }
+        }
+        
+     // Paso 2: Selección de película para intercambio
+        System.out.println("Seleccione el cine de la película que desea intercambiar:");
+        for (int i = 0; i < Cine.cines.size(); i++) {
+            System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
+        }
+        int cineSeleccionado = scanner.nextInt() - 1;
+        Cine cineOrigen = Cine.cines.get(cineSeleccionado);
+
+        // Mostrar películas en el cine seleccionado
+        System.out.println("Seleccione la película que desea intercambiar:");
+        List<Pelicula> peliculas = cineOrigen.obtenerPeliculas();
+        for (int i = 0; i < peliculas.size(); i++) {
+            System.out.println((i + 1) + ". " + peliculas.get(i).getTitulo());
+        }
+        int peliculaSeleccionada = scanner.nextInt() - 1;
+        Pelicula peliculaAIntercambiar = peliculas.get(peliculaSeleccionada);
+
+        // Obtener la mejor opción de intercambio
+        String peliculaRecomendada = Pelicula.recomendarIntercambio(peliculaAIntercambiar);
+
+        // Paso 3: Realizar el intercambio
+        Funcion.realizarIntercambio(peliculaAIntercambiar, peliculaRecomendada);
+        System.out.println("Intercambio realizado exitosamente.");
+
+        // Paso 4: Aplicar bonos
+        System.out.println("¿Desea aplicar algún incentivo para la nueva película?");
+        System.out.println("1. Rebajar el precio de la entrada");
+        System.out.println("2. Regalar un bono");
+        int tipoIncentivo = scanner.nextInt();
+
+        if (tipoIncentivo == 1) {
+            // Aplicar rebaja en el precio de la entrada
+            System.out.println("Introduzca el nuevo precio para la entrada:");
+            double nuevoPrecio = scanner.nextDouble();
+            nuevaPelicula.setPrecioEntrada(nuevoPrecio);
+            System.out.println("El precio de entrada ha sido rebajado a " + nuevoPrecio);
+        } else if (tipoIncentivo == 2) {
+            // Regalar un bono
+            System.out.println("Seleccione el tipo de bono:");
+            System.out.println("1. Bono para clientes Genéricos");
+            System.out.println("2. Bono para clientes Preferenciales");
+            System.out.println("3. Bono para clientes VIP");
+            int tipoBono = scanner.nextInt();
+
+            // Aplicar bono basado en el tipo de cliente
+            nuevaPelicula.activarBono(tipoBono);
+            System.out.println("El bono ha sido activado para la película " + nuevaPelicula.getTitulo());
+        } else {
+            System.out.println("No se aplicarán incentivos.");
+        }
+
+       
+    }
+
+        
+    
+    
+    
+    
+    
+   
+    
     public static void comprarBoletaJuegos() {
         Scanner scanner = new Scanner(System.in);
 
@@ -534,40 +648,54 @@ public class Admin{
                     break;
 
                 case 6:
-                    System.out.print("Ingresa el título de la Película: ");
-                    String tituloPelicula = scanner.nextLine();
-                    System.out.println("Ingresa el género de la Película: ");
-                    System.out.println("1.Accion");
-                    System.out.println("2.Infantil");
-                    System.out.println("3.Terror");
-                    System.out.println("4.+18");
-                    System.out.println("5.Drama");
-                    int generoPelicula = scanner.nextInt();
-                    
-                    String genero;
-                    switch (generoPelicula) {
-                    case 1:
-                        genero="Accion";
-                        break;
-                    case 2:
-                    	genero="Infantil";
-                        break;
-                    case 3:
-                    	genero="Terror";
-                        break;
-                    case 4:
-                    	genero="+18";
-                        break;
-                    case 5:
-                    	genero="Drama";
-                        break;
-                    default:
-                        error();
-                        return; // Salir del método si la selección es inválida
-                }
-                    
-                    Pelicula pelicula = new Pelicula(tituloPelicula, genero);
-                    System.out.println("Película creada: " + pelicula);
+                	System.out.print("Ingresa el título de la Película: ");
+                	String tituloPelicula = scanner.nextLine();
+
+                	System.out.println("Ingresa el género de la Película: ");
+                	System.out.println("1. Acción");
+                	System.out.println("2. Infantil");
+                	System.out.println("3. Terror");
+                	System.out.println("4. +18");
+                	System.out.println("5. Drama");
+                	int generoPelicula = scanner.nextInt();
+                	scanner.nextLine(); // Limpiar el buffer
+
+                	String genero;
+                	switch (generoPelicula) {
+                	    case 1:
+                	        genero = "Acción";
+                	        break;
+                	    case 2:
+                	        genero = "Infantil";
+                	        break;
+                	    case 3:
+                	        genero = "Terror";
+                	        break;
+                	    case 4:
+                	        genero = "+18";
+                	        break;
+                	    case 5:
+                	        genero = "Drama";
+                	        break;
+                	    default:
+                	        error();
+                	        return; // Salir del método si la selección es inválida
+                	}
+
+                	// Solicitar la duración de la película
+                	System.out.print("Ingresa la duración de la Película (en horas y minutos, formato HH:MM): ");
+                	String duracionInput = scanner.nextLine();
+                	LocalTime duracion;
+                	try {
+                	    duracion = LocalTime.parse(duracionInput);
+                	} catch (DateTimeParseException e) {
+                	    System.out.println("Formato de tiempo inválido. Usa el formato HH:MM.");
+                	    return; // Salir del método si el formato de la duración es inválido
+                	}
+
+                	// Crear la película con el título, género y duración
+                	Pelicula nuevaPelicula = new Pelicula(tituloPelicula, genero, duracion);
+                	System.out.println("Película creada exitosamente: " + nuevaPelicula.getTitulo() + ", Género: " + nuevaPelicula.getGenero() + ", Duración: " + nuevaPelicula.getDuracion());                    
                     System.out.println("¿Desea hacer otra creacion? 1.Si|2.No");
                     int respuesta6=scanner.nextInt();
                     if(respuesta6==2) {
@@ -598,38 +726,55 @@ public class Admin{
                     break;
 
                 case 8:
-                    System.out.print("Ingresa el horario de la Función: ");
-                    String horarioFuncion = scanner.nextLine();
-                    System.out.println("Ingresa el tipo de Función:");
-                    System.out.println("1.Normal");
-                    System.out.println("2.VIP");
-                    int eleccionTipo = scanner.nextInt();
-                    
-                    String tipoFuncion;
-                    switch (eleccionTipo) {
-                    case 1:
-                    	tipoFuncion="Normal";
-                        break;
-                    case 2:
-                    	tipoFuncion="VIP";
-                        break;
-                    
-                    default:
-                        error();
-                        return; // Salir del método si la selección es inválida
-                }
-                    
-                    Funcion funcion = new Funcion(horarioFuncion,tipoFuncion);
-                    System.out.println("Función creada: " + funcion);
-                    System.out.println("¿Desea hacer otra creacion? 1.Si|2.No");
-                    int respuesta8=scanner.nextInt();
-                    if(respuesta8==2) {
-                    	continuar=false;
-                    }
-                    else if(respuesta8>2&&respuesta8<1) {
-                    	error();
-                    }
-                    break;
+                	 LocalTime horarioFuncion = null;
+                	    boolean horarioValido = false;
+                	    
+                	    while (!horarioValido) {
+                	        System.out.print("Ingresa la hora de la Función (formato HH:mm): ");
+                	        String horarioFuncionStr = scanner.nextLine();
+                	        
+                	        try {
+                	            horarioFuncion = LocalTime.parse(horarioFuncionStr); // Convertir a LocalTime
+                	            horarioValido = true;
+                	        } catch (DateTimeParseException e) {
+                	            System.out.println("Formato de horario inválido. Por favor, ingrese el horario en formato HH:mm.");
+                	        }
+                	    }
+
+                	    // Solicitar el tipo de función
+                	    System.out.println("Ingresa el tipo de Función:");
+                	    System.out.println("1. Normal");
+                	    System.out.println("2. VIP");
+                	    
+                	    int eleccionTipo = scanner.nextInt();
+                	    scanner.nextLine();  // Limpiar el buffer
+                	    
+                	    String tipoFuncion;
+                	    switch (eleccionTipo) {
+                	        case 1:
+                	            tipoFuncion = "Normal";
+                	            break;
+                	        case 2:
+                	            tipoFuncion = "VIP";
+                	            break;
+                	        default:
+                	            System.out.println("Selección inválida. Operación cancelada.");
+                	            return;  // Salir del método si la selección es inválida
+                	    }
+
+                	    // Crear la función con el horario y tipo seleccionados
+                	    Funcion funcion = new Funcion(horarioFuncion, tipoFuncion);
+                	    System.out.println("Función creada: " + funcion);
+
+                	    // Verificar si se desea crear otra función
+                	    System.out.println("¿Desea hacer otra creación? 1. Sí | 2. No");
+                	    int respuesta8 = scanner.nextInt();
+                	    
+                	    if (respuesta8 == 2) {
+                	        System.out.println("Creación finalizada.");
+                	    } else if (respuesta8 < 1 || respuesta8 > 2) {
+                	        System.out.println("Selección inválida.");
+                	    }
 
                 case 9:
                     continuar = false;
@@ -645,6 +790,8 @@ public class Admin{
 
 
  
+   
+
     public static void asignacion() {
         boolean continuar = true;
         Scanner scanner = new Scanner(System.in);
@@ -722,8 +869,41 @@ public class Admin{
                     cineSeleccionado = scanner.nextInt();
                     scanner.nextLine();
 
-                    Cine.cines.get(cineSeleccionado).getFunciones().add(Funcion.allFunciones.get(funcionSeleccionada));
-                    System.out.println("Función agregada correctamente al cine " + Cine.cines.get(cineSeleccionado).getNombre());
+                    System.out.println("Selecciona el día de la semana para agregar la función:");
+                    System.out.println("1. Lunes");
+                    System.out.println("2. Martes");
+                    System.out.println("3. Jueves");
+                    System.out.println("4. Viernes");
+                    System.out.println("5. Sábado");
+                    int diaSeleccionado = scanner.nextInt();
+                    scanner.nextLine();
+
+                    ArrayList<Funcion> diaSeleccionadoLista = null;
+                    switch (diaSeleccionado) {
+                        case 1:
+                            diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getLunes();
+                            break;
+                        case 2:
+                            diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getMartes();
+                            break;
+                        case 3:
+                            diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getJueves();
+                            break;
+                        case 4:
+                            diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getViernes();
+                            break;
+                        case 5:
+                            diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getSabado();
+                            break;
+                        default:
+                            System.out.println("Día inválido.");
+                            break;
+                    }
+
+                    if (diaSeleccionadoLista != null) {
+                        diaSeleccionadoLista.add(Funcion.allFunciones.get(funcionSeleccionada));
+                        System.out.println("Función agregada correctamente al cine " + Cine.cines.get(cineSeleccionado).getNombre() + " en el día seleccionado.");
+                    }
                     break;
 
                 case 3:
@@ -782,10 +962,10 @@ public class Admin{
                             System.out.println(i + ". Función sin película asignada  " + funcion.getHorario() + "  " + funcion.getTipo());
                         }
                     }
-                    funcionSeleccionada = scanner.nextInt();
+                    int funcionSeleccionada1 = scanner.nextInt();
                     scanner.nextLine();
 
-                    Funcion.allFunciones.get(funcionSeleccionada).setPelicula(Pelicula.totalPeliculas.get(peliculaSeleccionada));
+                    Funcion.allFunciones.get(funcionSeleccionada1).setPelicula(Pelicula.totalPeliculas.get(peliculaSeleccionada));
                     System.out.println("Película asignada correctamente a la función.");
                     break;
 
@@ -816,10 +996,10 @@ public class Admin{
                             System.out.println(i + ". Función sin película asignada  " + funcion.getHorario() + "  " + funcion.getTipo());
                         }
                     }
-                    funcionSeleccionada = scanner.nextInt();
+                    funcionSeleccionada1 = scanner.nextInt();
                     scanner.nextLine();
 
-                    Funcion.allFunciones.get(funcionSeleccionada).setSala(Sala.allSalas.get(salaSeleccionada));
+                    Funcion.allFunciones.get(funcionSeleccionada1).setSala(Sala.allSalas.get(salaSeleccionada));
                     System.out.println("Sala asignada correctamente a la función.");
                     break;
 
@@ -845,9 +1025,16 @@ public class Admin{
             }
         }
     }
+}
+            
+        
+    
+
+    
 
 
-    }
+
+    
 
 
     

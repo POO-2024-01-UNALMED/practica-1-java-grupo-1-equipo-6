@@ -1,5 +1,6 @@
 package gestorAplicacion;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cine {
 	private String nombre;
@@ -13,19 +14,23 @@ public class Cine {
 	public static ArrayList<Cine> cines = new ArrayList<>();
 	
 
-	public Cine(String nombre, ArrayList<Funcion> lunes, ArrayList<Funcion> miercoles, ArrayList<Funcion> jueves, ArrayList<Funcion> viernes,ArrayList<Funcion> sabado, ZonaDeJuegos zonaDeJuegos){
-		this.nombre = nombre;
-		this.lunes = lunes;
-		this.martes = martes;
-		this.jueves = jueves;
-		this.viernes = viernes;
-		this.sabado = sabado;
-		this.zonaDeJuegos = zonaDeJuegos;
-		if(zonaDeJuegos!=null) {
-		this.zonaDeJuegos.setCine(this);
-		}
-		cines.add(this);
+	public Cine(String nombre, ArrayList<Funcion> lunes, ArrayList<Funcion> martes, ArrayList<Funcion> jueves, ArrayList<Funcion> viernes, ArrayList<Funcion> sabado, ZonaDeJuegos zonaDeJuegos) {
+	    this.nombre = nombre;
+	    // Si alguno de los ArrayList es null, se inicializa como un nuevo ArrayList vacío
+	    this.lunes = (lunes != null) ? lunes : new ArrayList<>();
+	    this.martes = (martes != null) ? martes : new ArrayList<>();
+	    this.jueves = (jueves != null) ? jueves : new ArrayList<>();
+	    this.viernes = (viernes != null) ? viernes : new ArrayList<>();
+	    this.sabado = (sabado != null) ? sabado : new ArrayList<>();
+	    this.zonaDeJuegos = zonaDeJuegos;
+
+	    if (zonaDeJuegos != null) {
+	        this.zonaDeJuegos.setCine(this);
+	    }
+
+	    cines.add(this);
 	}
+
 	
 	public Cine(String nombre){
 		this(nombre,null,null, null, null, null, null);
@@ -221,6 +226,61 @@ public class Cine {
 		this.zonaDeJuegos = zonaDeJuegos;
 	}
 	
+	public List<String> obtenerCalificacionesPeliculas() {
+	    List<String> calificaciones = new ArrayList<>();
+	    for (Funcion funcion : lunes) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Lunes");
+	        }
+	    }
+	    for (Funcion funcion : martes) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Martes");
+	        }
+	    }
+	    for (Funcion funcion : jueves) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Jueves");
+	        }
+	    }
+	    for (Funcion funcion : viernes) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Viernes");
+	        }
+	    }
+	    for (Funcion funcion : sabado) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Sabado");
+	        }
+	    }
+	    return calificaciones;
+	}
+	
+	public List<Pelicula> obtenerPeliculas() {
+	    List<Pelicula> peliculas = new ArrayList<>();
+	    
+	    // Función para agregar las películas de una lista de funciones
+	    agregarPeliculasDeLista(peliculas, lunes);
+	    agregarPeliculasDeLista(peliculas, martes);
+	    agregarPeliculasDeLista(peliculas, jueves);
+	    agregarPeliculasDeLista(peliculas, viernes);
+	    agregarPeliculasDeLista(peliculas, sabado);
+	    
+	    return peliculas;
+	}
+	private void agregarPeliculasDeLista(List<Pelicula> listaPeliculas, List<Funcion> listaFunciones) {
+	    for (Funcion funcion : listaFunciones) {
+	        Pelicula pelicula = funcion.getPelicula();
+	        if (pelicula != null) {
+	            listaPeliculas.add(pelicula);
+	        }
+	    }
+	}
 	public String toString() {
         return "Cine: " + nombre + ", Funciones: " + (lunes.size() + martes.size() + jueves.size() + viernes.size() + sabado.size()) + " Zona de juegos: " + zonaDeJuegos;
     }
