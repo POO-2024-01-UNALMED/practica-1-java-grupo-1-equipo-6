@@ -11,12 +11,12 @@ public class Sala {
 	public Sala(int numero,int filas, int columnas) {
         this.numero=numero;
         this.capacidad=filas*columnas;
-		this.sillas = new boolean[filas][columnas];
-		for (int i = 0; i<filas;i++){
-			for (int j = 0; j<columnas;j++){
-				sillas[i][j] = true;
-			}
-		}
+				this.sillas = new boolean[filas][columnas];
+				for (int i = 0; i<filas;i++){
+					for (int j = 0; j<columnas;j++){
+						sillas[i][j] = true;
+					}
+				}
 		allSalas.add(this);
     }
 	
@@ -41,6 +41,16 @@ public class Sala {
 		this.sillas = sillas;
 	}
 
+	public boolean hayAsientosLibres(){
+		for (int i = 0; i<sillas.length ; i++){
+			for (int j = 0; j<sillas[0].length; j++){
+				if(sillas[i][j]){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	public String estadoSilleteria(){
 		String sala = "";

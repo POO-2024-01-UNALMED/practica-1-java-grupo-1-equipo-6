@@ -5,88 +5,7 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Admin{
-    static Cliente usuario = new Cliente("Juan Manuel",200000,123);
-
-    static Maquina arcade1 = new Maquina("Arcade1","Arcade",10,20);
-    static Maquina arcade2 = new Maquina("Arcade2","Arcade",10,20);
-    static Maquina danceDance1 = new Maquina("Dance Dance1","Dance Dance",12,20);
-    static Maquina mesaDeDiscos1 = new Maquina("Mesa de discos1","Mesa de discos",12,20);
-    static Maquina mesaDeDiscos2 = new Maquina("Mesa de discos2","Mesa de discos",12,20);
-    static Maquina boxing1 = new Maquina("Boxing1","Boxing",8,20);
-    static Maquina basket1 = new Maquina("Basket1","Basket",11,20);
-
-    // Zonas de juegos
-    static ZonaDeJuegos zona1 = new ZonaDeJuegos("Zona 1","08:00 AM - 07:00 PM");
-    static ZonaDeJuegos zona2 = new ZonaDeJuegos("Zona 2","09:00 AM - 08:00 PM");
-    static ZonaDeJuegos zona3 = new ZonaDeJuegos("Zona 3","08:00 AM - 08:00 PM");
-    static ZonaDeJuegos zona4 = new ZonaDeJuegos("Zona 4","10:00 AM - 07:00 PM");
-    
-    static Bodega bodega = new Bodega("Bodega Central", 100);
-    
-    static Pelicula pelicula1 = new Pelicula("Intensamente","Infantil");
-    static Pelicula pelicula2 = new Pelicula("Spiderman","Acción");
-    static Pelicula pelicula3 = new Pelicula("Jason Vorhees","Terror");
-    static Pelicula pelicula4 = new Pelicula("Deadpool","+18");
-    static Pelicula pelicula5 = new Pelicula("Oppenheimer","Drama");
-    static Pelicula pelicula6 = new Pelicula("Los Minions","Infantil");
-    
-    static Sala sala1 = new Sala(1,6,5);
-    static Sala sala2 = new Sala(2,6,5);
-    static Sala sala3 = new Sala(3,6, 5);
-    
-    static Funcion funcion1 = new Funcion(pelicula1, "4:00pm", "Normal", sala1);
-    static Funcion funcion2 = new Funcion(pelicula2, "6:00pm", "Normal", sala2);
-    static Funcion funcion3 = new Funcion(pelicula3, "8:00pm", "Normal", sala3);
-    static Funcion funcion4 = new Funcion(pelicula4, "8:00pm","Normal" , sala3);
-    static Funcion funcion5 = new Funcion(pelicula5, "7:00pm", "Normal", sala3);
-    static Funcion funcion6 = new Funcion(pelicula6, "2:00pm", "Normal", sala3);
-
-    static ArrayList<Funcion> funcionesCine1 = new ArrayList<Funcion>();
-    static ArrayList<Funcion> funcionesCine2 = new ArrayList<Funcion>();
-    static ArrayList<Funcion> funcionesCine3 = new ArrayList<Funcion>();
-    static ArrayList<Funcion> funcionesCine4 = new ArrayList<Funcion>();
-    
-    static Cine cine1 = new Cine("Cinetica Medellín",funcionesCine1,zona1);
-    static Cine cine2 = new Cine("Cinetica Bogota", funcionesCine2,zona2);
-    static Cine cine3 = new Cine("Cinetica Cali", funcionesCine3,zona3);
-    static Cine cine4 = new Cine("Cinetica Pereira", funcionesCine4,zona4);
-    
-   
-
-
-    public static void main(String[] args){ 
-        
-    	 Scanner entrada = new Scanner(System.in);
-    	
-    	sala1.setCine(cine1);
-        sala2.setCine(cine2);
-        sala3.setCine(cine3);
-       
-
-        funcionesCine3.add(funcion4);
-        funcionesCine3.add(funcion5);
-        funcionesCine3.add(funcion6);
-        funcionesCine1.add(funcion1);
-        funcionesCine2.add(funcion2);
-        funcionesCine3.add(funcion3);
-        funcionesCine4.add(funcion3);
-        funcionesCine4.add(funcion6);
-        
-      
-
-        cine1.agregarPeliculas();
-        cine2.agregarPeliculas();
-        cine3.agregarPeliculas();
-        cine4.agregarPeliculas();
-        
-        zona1.agregarMaquina(arcade1);
-        zona1.agregarMaquina(danceDance1);
-        zona2.agregarMaquina(boxing1);
-        zona3.agregarMaquina(basket1);
-        zona3.agregarMaquina(mesaDeDiscos1);
-        zona4.agregarMaquina(arcade2);
-        zona4.agregarMaquina(mesaDeDiscos2);
-
+        Interfaz.crearObjetos();
         int opcion;
         boolean finalizar=false;
 
@@ -104,14 +23,12 @@ public class Admin{
             System.out.println("9.- Terminar");
             System.out.println("Por favor elija la operación que desea hacer");
 
-
-
             opcion = entrada.nextInt();
 
             switch(opcion){
 
                 case 1:
-                   primeraOperacion();
+                   Interfaz.primeraOperacion();
                     break;
                 case 2:
                     gestionarZonaDeJuegos();
@@ -138,18 +55,6 @@ public class Admin{
 
 
     }
-    public static void error(){System.out.println("Error");}
-
-    public static void limpiarConsola(){
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
-    }
-
-    public static void primeraOperacion() {
-        limpiarConsola();
-       
-    }
-
     
     public static void gestionarZonaDeJuegos() {
     	Scanner entrada = new Scanner(System.in);

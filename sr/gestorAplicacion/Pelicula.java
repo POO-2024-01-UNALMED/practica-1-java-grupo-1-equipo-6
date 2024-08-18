@@ -32,6 +32,7 @@ public class Pelicula {
 	public double getCalificacionPromedio() {
 		return calificacionPromedio;
 	}
+	
 	public void setCalificacionPromedio(double calificacionPromedio) {
 		this.calificacionPromedio = calificacionPromedio;
 	}
