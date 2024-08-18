@@ -3,15 +3,23 @@ import java.util.ArrayList;
 
 public class Cine {
 	private String nombre;
-	private ArrayList<Funcion> funciones=new ArrayList<>();;
-	public static ArrayList<Pelicula> peliculas=new ArrayList<>();;
+	private ArrayList<Funcion> lunes =new ArrayList<>();
+	private ArrayList<Funcion> martes =new ArrayList<>();
+	private ArrayList<Funcion> jueves =new ArrayList<>();
+	private ArrayList<Funcion> viernes =new ArrayList<>();
+	private ArrayList<Funcion> sabado =new ArrayList<>();
+	public static ArrayList<Pelicula> peliculas=new ArrayList<>();
 	private ZonaDeJuegos zonaDeJuegos;
 	public static ArrayList<Cine> cines = new ArrayList<>();
 	
 
-	public Cine(String nombre, ArrayList<Funcion> funciones,ZonaDeJuegos zonaDeJuegos){
+	public Cine(String nombre, ArrayList<Funcion> lunes, ArrayList<Funcion> miercoles, ArrayList<Funcion> jueves, ArrayList<Funcion> viernes,ArrayList<Funcion> sabado, ZonaDeJuegos zonaDeJuegos){
 		this.nombre = nombre;
-		 this.funciones = funciones != null ? funciones : new ArrayList<>();
+		this.lunes = lunes;
+		this.martes = martes;
+		this.jueves = jueves;
+		this.viernes = viernes;
+		this.sabado = sabado;
 		this.zonaDeJuegos = zonaDeJuegos;
 		if(zonaDeJuegos!=null) {
 		this.zonaDeJuegos.setCine(this);
@@ -20,7 +28,7 @@ public class Cine {
 	}
 	
 	public Cine(String nombre){
-		this(nombre,null,null);
+		this(nombre,null,null, null, null, null, null);
 	}
 	
 	
@@ -30,17 +38,70 @@ public class Cine {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public ArrayList<Funcion> getFunciones() {
-		return funciones;
+
+	public ArrayList<Funcion> getLunes(){
+		return this.lunes;
 	}
-	public void setFunciones(ArrayList<Funcion> funciones) {
-		this.funciones = funciones;
+
+	public void setLunes(ArrayList<Funcion> lunes){
+		this.lunes = lunes;
+	}
+
+	public ArrayList<Funcion> getMartes(){
+		return this.martes;
+	}
+
+	public void setMartes(ArrayList<Funcion> martes){
+		this.martes = martes;
+	}
+
+	public ArrayList<Funcion> getJueves(){
+		return this.jueves;
+	}
+
+	public void setJueves(ArrayList<Funcion> jueves){
+		this.jueves = jueves;
 	}
 	
+	public ArrayList<Funcion> getViernes(){
+		return this.viernes;
+	}
+
+	public void setViernes(ArrayList<Funcion> viernes){
+		this.viernes = viernes;
+	}
+
+	public ArrayList<Funcion> getSabado(){
+		return this.sabado;
+	}
+
+	public void setSabado(ArrayList<Funcion> sabado){
+		this.sabado = sabado;
+	}
 	
 	public boolean hayPelicula(Pelicula pelicula) {		
-		for (Funcion funcion: this.funciones){
-			if (funcion.getPelicula().getTitulo().toLowerCase().equals(pelicula.getTitulo().toLowerCase())  && this.obtenerFunciones(pelicula).size()> 0 ){
+		for (Funcion funcionLunes: this.lunes){
+			if (funcionLunes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+				return true;
+			}
+		}
+		for (Funcion funcionMartes: this.martes){
+			if (funcionMartes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+				return true;
+			}
+		}
+		for (Funcion funcionJueves: this.jueves){
+			if (funcionJueves.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+				return true;
+			}
+		}
+		for (Funcion funcionViernes: this.viernes){
+			if (funcionViernes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+				return true;
+			}
+		}
+		for (Funcion funcionSabado: this.sabado){
+			if (funcionSabado.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
 				return true;
 			}
 		}
@@ -48,66 +109,100 @@ public class Cine {
 	}
 
 	public String enseñarFunciones(){
-		String mensaje = "Funciones:\n"; int posicion =1;
-		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
-		for (Funcion funcion:funciones){
-			if (!peliculas.contains(funcion.getPelicula())){
-				mensaje += posicion + " "+ funcion.getPelicula().getTitulo() + "\n";
-				peliculas.add(funcion.getPelicula());
-				posicion++;
+		String lunes = "Lunes: \n", martes = "Martes:\n", jueves = "Jueves\n", viernes = "Viernes:\n", sabado = "Sábado:\n";
+		ArrayList<Pelicula> peliculasMostradas = new ArrayList<Pelicula>();
+		for (Funcion funcionLunes: this.lunes){
+			if (!peliculasMostradas.contains(funcionLunes.getPelicula())){
+				lunes = lunes.concat(funcionLunes.getPelicula().getTitulo() + "\n");
+				peliculasMostradas.add(funcionLunes.getPelicula());
 			}
 		}
-		return mensaje;
+		lunes += "\n"; peliculasMostradas.clear();
+		for (Funcion funcionMartes: this.martes){
+			if (!peliculasMostradas.contains(funcionMartes.getPelicula())){
+				martes = martes.concat(funcionMartes.getPelicula().getTitulo() + "\n");
+				peliculasMostradas.add(funcionMartes.getPelicula());
+			}
+		}
+		martes += "\n"; peliculasMostradas.clear();
+		for (Funcion funcionJueves: this.jueves){
+			if (!peliculasMostradas.contains(funcionJueves.getPelicula())){
+				jueves = jueves.concat(funcionJueves.getPelicula().getTitulo() + "\n");
+				peliculasMostradas.add(funcionJueves.getPelicula());
+			}
+		}
+		jueves += "\n"; peliculasMostradas.clear();
+		for (Funcion funcionViernes: this.viernes){
+			if (!peliculasMostradas.contains(funcionViernes.getPelicula())){
+				viernes = viernes.concat(funcionViernes.getPelicula().getTitulo() + "\n");
+				peliculasMostradas.add(funcionViernes.getPelicula());
+			}
+		}
+		viernes += "\n"; peliculasMostradas.clear();
+		for (Funcion funcionSabado: this.sabado){
+			if (!peliculasMostradas.contains(funcionSabado.getPelicula())){
+				sabado = sabado.concat(funcionSabado.getPelicula().getTitulo() + "\n");
+				peliculasMostradas.add(funcionSabado.getPelicula());
+			}
+		}
+		return lunes + martes + jueves + viernes + sabado;
 	}
 
 	public ArrayList<Pelicula> peliculasActivas(){
 		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
-		for (Funcion funcion:funciones){
-			if (!peliculas.contains(funcion.getPelicula())){
-				peliculas.add(funcion.getPelicula());
+		for (Funcion funcionLunes:this.lunes){
+			if (!peliculas.contains(funcionLunes.getPelicula())){
+				peliculas.add(funcionLunes.getPelicula());
+			}
+		}
+		for (Funcion funcionMartes:this.martes){
+			if (!peliculas.contains(funcionMartes.getPelicula())){
+				peliculas.add(funcionMartes.getPelicula());
+			}
+		}
+		for (Funcion funcionJueves:this.jueves){
+			if (!peliculas.contains(funcionJueves.getPelicula())){
+				peliculas.add(funcionJueves.getPelicula());
+			}
+		}
+		for (Funcion funcionViernes:this.viernes){
+			if (!peliculas.contains(funcionViernes.getPelicula())){
+				peliculas.add(funcionViernes.getPelicula());
+			}
+		}
+		for (Funcion funcionSabado:this.sabado){
+			if (!peliculas.contains(funcionSabado.getPelicula())){
+				peliculas.add(funcionSabado.getPelicula());
 			}
 		}
 		return peliculas;
 	}	
 
-	public ArrayList<Pelicula> buscarPeliculaPorNombre(String nombrePelicula) {
-        ArrayList<String> palabrasClave = new ArrayList<>();
-        nombrePelicula = nombrePelicula.toLowerCase();  // Convertir a minúsculas
-
-        // Extraer palabras clave del nombre de la película
-        String[] palabras = nombrePelicula.split("\\s+");  // Dividir por espacios
-
-        if (palabras.length == 1){
-				palabrasClave.add(palabras[0]);
-		} else{
-				for (String palabra : palabras) {
-						if (palabra.length() > 2) {
-								palabrasClave.add(palabra);
-						}
-				}
-			}
-
-        ArrayList<Pelicula> peliculasCoincidentes = new ArrayList<>();
-
-        // Buscar coincidencias en la lista de películas
-        for (Pelicula pelicula : peliculas) {
-            String titulo = pelicula.getTitulo().toLowerCase();
-            for (String palabraClave : palabrasClave) {
-                if (titulo.contains(palabraClave)) {
-                    peliculasCoincidentes.add(pelicula);
-                    break;  // Si ya encontramos una coincidencia, no es necesario seguir buscando en esta película
-                }
-            }
-        }
-
-        return peliculasCoincidentes;
-    }
-	
 	public ArrayList<Funcion> obtenerFunciones(Pelicula pelicula){
 		ArrayList<Funcion> posibilidades = new ArrayList<Funcion>();
-		for( Funcion funcion: this.funciones){
-			if (funcion.getPelicula().getTitulo().toLowerCase().equals(pelicula.getTitulo().toLowerCase())){
-				posibilidades.add(funcion);
+		for( Funcion funcionLunes: this.lunes){
+			if (funcionLunes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo())){
+				posibilidades.add(funcionLunes);
+			}
+		}
+		for( Funcion funcionMartes: this.martes){
+			if (funcionMartes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo())){
+				posibilidades.add(funcionMartes);
+			}
+		}
+		for( Funcion funcionJueves: this.jueves){
+			if (funcionJueves.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo())){
+				posibilidades.add(funcionJueves);
+			}
+		}
+		for( Funcion funcionViernes: this.viernes){
+			if (funcionViernes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo())){
+				posibilidades.add(funcionViernes);
+			}
+		}
+		for( Funcion funcionSabado: this.sabado){
+			if (funcionSabado.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo())){
+				posibilidades.add(funcionSabado);
 			}
 		}
 		return posibilidades;
@@ -116,16 +211,7 @@ public class Cine {
 	public void ajustarFunciones() {
 		
 	}
-	public void agregarPeliculas() {		
-		for (Funcion funcion: this.funciones){
-			Cine.peliculas.add(funcion.getPelicula());
-				
-			
-		}
-		
-	}
-
-
+	
 	public ZonaDeJuegos getZonaDeJuegos() {
 		return zonaDeJuegos;
 	}
@@ -136,12 +222,7 @@ public class Cine {
 	}
 	
 	public String toString() {
-		
-        return "Cine: " + nombre + ", Funciones: " + funciones.size() + " Zona de juegos: " + zonaDeJuegos;
-		
-		
+        return "Cine: " + nombre + ", Funciones: " + (lunes.size() + martes.size() + jueves.size() + viernes.size() + sabado.size()) + " Zona de juegos: " + zonaDeJuegos;
     }
-	
-
 }
 

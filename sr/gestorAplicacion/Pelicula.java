@@ -13,6 +13,7 @@ public class Pelicula {
 		this.titulo = titulo;
 		this.genero = genero;
 		Pelicula.totalPeliculas.add(this);
+		Cine.peliculas.add(this);
 	}
 	
 	

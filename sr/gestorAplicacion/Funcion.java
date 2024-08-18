@@ -1,16 +1,18 @@
 package gestorAplicacion;
 import java.util.ArrayList;
+import java.time.LocalTime; //Para el manejo de los horarios de las funciones
+
 
 import gestorAplicacion.Cine;
 
 public class Funcion {
 	private Pelicula pelicula;
-	private String horario;
+	private LocalTime horario;
 	private String tipo;
 	private Sala sala;
 	public static ArrayList<Funcion> allFunciones=new ArrayList<>();;
 	
-	public Funcion(Pelicula pelicula, String horario, String tipo, Sala sala){
+	public Funcion(Pelicula pelicula, LocalTime horario, String tipo, Sala sala){
 		this.pelicula = pelicula;
 		this.horario = horario;
 		this.tipo = tipo;
@@ -18,7 +20,7 @@ public class Funcion {
 		allFunciones.add(this);
 		
 	}
-	public Funcion(String horario,String tipo) {
+	public Funcion(LocalTime horario,String tipo) {
 		this(null,horario,tipo,null);
 		
 	}
@@ -29,10 +31,10 @@ public class Funcion {
 	public void setPelicula(Pelicula pelicula) {
 		this.pelicula = pelicula;
 	}
-	public String getHorario() {
+	public LocalTime getHorario() {
 		return horario;
 	}
-	public void setHorario(String horario) {
+	public void setHorario(LocalTime horario) {
 		this.horario = horario;
 	}
 	public String getTipo() {
