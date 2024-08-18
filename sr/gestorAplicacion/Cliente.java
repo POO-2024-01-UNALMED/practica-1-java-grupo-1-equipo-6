@@ -7,7 +7,11 @@ public class Cliente {
 	private int identificacion;
 	private double saldo;
 	private String tipo;
-	public static ArrayList<Cliente> allClientes=new ArrayList<>();;
+	private boolean tarjeta;
+	private int puntosTarjeta;
+	private int saldoTarjeta;
+	private String tipoTarjeta;
+	public static ArrayList<Cliente> allClientes=new ArrayList<>();
 
 	public Cliente(String nombre, double saldo,String tipo,int identificacion){
 		this.nombre = nombre;
@@ -32,6 +36,37 @@ public class Cliente {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public boolean getTarjeta(){
+		return this.tarjeta;
+	}
+
+	public void setTarjeta(boolean tarjeta){
+		this.tarjeta = tarjeta;
+	}
+
+	public int getPuntosTarjeta(){
+		return this.puntosTarjeta;
+	}
+	public void setPuntosTarjeta(int puntos){
+		this.puntosTarjeta = puntos;
+	}
+
+	public int getSaldoTarjeta(){
+		return this.saldoTarjeta;
+	}
+
+	public void setSaldoTarjeta(int saldo){
+		this.saldoTarjeta = saldo;
+	}
+
+	public String getTipoTarjeta(){
+		return this.tipoTarjeta;
+	}
+
+	public void setTipoTarjeta(String tarjeta){
+		this.tipoTarjeta = tarjeta;
 	}
 	
 	public void calificarPelicula(Pelicula pelicula, double calificacion) {
@@ -70,17 +105,47 @@ public class Cliente {
 		}
 	}
 
-	public void pagarConSaldo(double monto) {
+	public boolean pagarConSaldo(double monto) {
 
 		if (this.saldo >= monto){
 			this.saldo -= monto;
+			return true;
 		}
-		else {
-			Admin.error();
-		}
-		
+		return false;
 	}
 
+	public boolean pagarSaldoTarjeta(double costo){
+		if (this.saldoTarjeta >= costo){
+			this.saldoTarjeta -= costo;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean pagarPuntosTarjeta(double costo){
+		int costoPuntos = (int)costo/100;
+		if (this.puntosTarjeta >= costoPuntos){
+			this.puntosTarjeta -= costoPuntos;
+			return true;
+		}
+		return false;
+	}
+
+
+	public int agregarPuntos(){
+		int aumento = 0;
+		if (this.tipoTarjeta.equalsIgnoreCase("Platino")){
+			aumento = 200;
+			this.puntosTarjeta += aumento;
+		}else if (this.tipoTarjeta.equalsIgnoreCase("Oro")){
+			aumento = 150;
+			this.puntosTarjeta += aumento;
+		} else if(this.tipoTarjeta.equalsIgnoreCase("Bronce")){
+			aumento = 100;
+			this.puntosTarjeta += aumento;
+		}
+		return aumento;
+	}
 
 	public String getTipo() {
 		return tipo;
@@ -97,7 +162,5 @@ public class Cliente {
 	public String toString() {
         return "Cliente: " + nombre + ", Saldo: " + saldo + ", Tipo: " + tipo;
     }
-	
-	
-	
+
 }
