@@ -833,7 +833,53 @@ public static void gestionarPeliculas() {
 }
 
 
+public static void comprarTarjeta() {
+	
+	System.out.print("Hola, a continuacion vas a proceder con la compra de tu Tarjeta, Ingrese su número de identificación: ");
+	//Identificamos el cliente
+	int idCliente = (int) scanner.nextDouble();
+    Cliente cliente = Cliente.buscarClientePorId(idCliente);
 
+    if (cliente == null) {
+        System.out.println("Cliente no encontrado. ¿Desea crear uno nuevo? (1)Si/(2)No");
+        int respuesta = scanner.nextInt();
+        switch (respuesta) {
+            case 1:
+                System.out.println("Ingresa tu nombre: ");
+                String nombre = scanner.nextLine();  // Lee la línea completa para el nombre
+                scanner.nextLine();
+                System.out.println("Ingresa tu saldo inicial: ");
+                double saldoInicial = scanner.nextDouble();  // Lee el saldo inicial (número)
+
+                scanner.nextLine();
+                cliente = new Cliente(nombre, saldoInicial, idCliente);
+                System.out.println("Cliente creado exitosamente.");
+                break;
+            case 2:
+                return;
+            default:
+                System.out.println("Selección inválida. Por favor, seleccione un número válido.");
+                return; // Salir del método si la selección es inválida
+        }else {
+         if(cliente.tarjeta == false) {
+        	 System.out.println("1) Tipos de tarjeta \n 2) Precios \n 3)Comprar")
+        	 scanner.nextLine();
+        	 int respuesta = scanner.nextInt();
+        	 switch (respuesta) {
+        	     scanner.nextLine();
+        		 System.out.println("Seleccione que tipo de tarjeta le interesa para saber mas informacion");
+        		 System.out.println("1)Tarjeta bronce");
+        		 System.out.println("2)Tarjeta plata");
+        		 System.out.println("3)Tarjeta oro");
+        		 int respuesta = scanner.nextInt();
+ 	        	 
+        	 }
+        	 int servicio = scanner.nextInt()
+        	 System.out.println(¿"Que servicio de tarjeta desea comprar?");
+        	 scanner.nextLine();
+        	 int servicio = scanner.nextInt();
+         }
+        }
 
 
 
