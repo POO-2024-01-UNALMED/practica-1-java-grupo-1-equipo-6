@@ -12,7 +12,7 @@ public class Funcion {
 	private double precio;
 	private String dia;
 	private String momentoDelDia;
-	private int indexEnDia;
+	
 	
 	public static ArrayList<Funcion> allFunciones=new ArrayList<>();;
 	
@@ -129,15 +129,7 @@ public class Funcion {
 	   
 	}
 	
-	public int getPosicionEnDia() {
-		   
-	    // Verificar que el índice está dentro de los límites esperados
-	    if (this.indexEnDia >= 0 && this.indexEnDia < 7) {
-	        return this.indexEnDia;
-	    } else {
-	        return 0;
-	    }	
-	}
+	
 	
 	public static int obtenerIndiceEnDia(Funcion funcionBuscada) {
 	    // Recorre todos los cines
@@ -203,6 +195,75 @@ public class Funcion {
 	}
 		return respuesta;
 	}
+	
+	
+	public static Cine encontrarCine(Funcion funcion) {
+        for (Cine cine : Cine.cines) {
+            for (Funcion f : cine.getLunes()) {
+                    if (f != null && f.equals(funcion)) {
+                        return cine;
+                    }
+                }
+            for (Funcion f : cine.getMartes()) {
+                if (f != null && f.equals(funcion)) {
+                    return cine;
+                }
+            }
+            for (Funcion f : cine.getJueves()) {
+                if (f != null && f.equals(funcion)) {
+                    return cine;
+                }
+            }
+            for (Funcion f : cine.getViernes()) {
+                if (f != null && f.equals(funcion)) {
+                    return cine;
+                }
+            }
+            for (Funcion f : cine.getSabado()) {
+                if (f != null && f.equals(funcion)) {
+                    return cine;
+                }
+            }
+            }
+        
+        return null; // Si no se encuentra el cine
+    }
+
+    // Método para encontrar el día en que está programada una función
+    public static String encontrarDia(Funcion funcion, Cine cine) {
+        for (int i = 0; i < cine.getLunes().length; i++) {
+            Funcion funcionesDelDia = cine.getLunes()[i];
+                if (funcionesDelDia != null && funcionesDelDia.equals(funcion)) {
+                    return "Lunes"; // Devuelve el nombre del día
+                }
+            }
+        for (int i = 0; i < cine.getMartes().length; i++) {
+            Funcion funcionesDelDia = cine.getMartes()[i];
+                if (funcionesDelDia != null && funcionesDelDia.equals(funcion)) {
+                    return "Martes"; // Devuelve el nombre del día
+                }
+            }
+        for (int i = 0; i < cine.getJueves().length; i++) {
+            Funcion funcionesDelDia = cine.getJueves()[i];
+                if (funcionesDelDia != null && funcionesDelDia.equals(funcion)) {
+                    return "Jueves"; // Devuelve el nombre del día
+                }
+            }
+        for (int i = 0; i < cine.getViernes().length; i++) {
+            Funcion funcionesDelDia = cine.getViernes()[i];
+                if (funcionesDelDia != null && funcionesDelDia.equals(funcion)) {
+                    return "Viernes"; // Devuelve el nombre del día
+                }
+            }
+        for (int i = 0; i < cine.getSabado().length; i++) {
+            Funcion funcionesDelDia = cine.getSabado()[i];
+                if (funcionesDelDia != null && funcionesDelDia.equals(funcion)) {
+                    return "Sabado"; // Devuelve el nombre del día
+                }
+            }
+        
+        return "Día no encontrado"; // Si no se encuentra el día
+    }
 }
 	
 	

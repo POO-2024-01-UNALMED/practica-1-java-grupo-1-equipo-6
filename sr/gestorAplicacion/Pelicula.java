@@ -83,14 +83,14 @@ public class Pelicula {
 	
 	
 	 public static String recomendarIntercambio(Pelicula peliculaSeleccionada) {
-		    List<Pelicula> peliculasPosibles = new ArrayList<>();
+		    List<Funcion> funcionesPosibles = new ArrayList<>();
 		    
 		    // Obtener la lista de funciones de la película seleccionada
 		    List<Funcion> funcionesSeleccionadas = peliculaSeleccionada.getFunciones();
 
 		    for (Funcion funcionSeleccionada : funcionesSeleccionadas) {
 		        // Obtener la posición de la función seleccionada en el día
-		        int posicionSeleccionadaEnDia = funcionSeleccionada.getPosicionEnDia();
+		        int posicionSeleccionadaEnDia = Funcion.obtenerIndiceEnDia(funcionSeleccionada);
 		        
 		        for (Funcion funcionIntercambio : Funcion.allFunciones) {
 		            Pelicula peliculaIntercambio = funcionIntercambio.getPelicula();
@@ -104,56 +104,63 @@ public class Pelicula {
 		            }
 
 		            // Obtener la posición de la función de intercambio en el día
-		            int posicionIntercambioEnDia = funcionIntercambio.getPosicionEnDia();
+		            int posicionIntercambioEnDia = Funcion.obtenerIndiceEnDia(funcionIntercambio);
 
 		            // Verificar que las posiciones no sean iguales (no puede intercambiarse con sí misma)
 		            if (posicionSeleccionadaEnDia == posicionIntercambioEnDia) {
 		                continue;
 		            }
 
-		            // Verificar los criterios de horario según el género
+		            // Verificar los criterios de horario según el género en la función de intercambio
 		            boolean cumpleCriteriosHorario = cumpleCriteriosHorario(peliculaIntercambio, posicionIntercambioEnDia);
 		            if (!cumpleCriteriosHorario) {
 		                continue;
 		            }
 
-		            // No es necesario verificar solapamiento de horarios ya que las funciones están en días y cines diferentes
-		            boolean horariosNoSolapados = true; // Simplificación para diferentes días/cines
-
-		            // La compatibilidad de duración no es necesaria ya que todas las funciones duran 2 horas
-		            boolean duracionCompatible = true;
-
-		            if (horariosNoSolapados && duracionCompatible) {
-		                peliculasPosibles.add(peliculaIntercambio);
+		            // Verificar los criterios de horario para la película de intercambio en la función de destino
+		            boolean cumpleCriteriosHorarioDestino = cumpleCriteriosHorario(peliculaIntercambio, posicionSeleccionadaEnDia);
+		            if (!cumpleCriteriosHorarioDestino) {
+		                continue; // Descartar si no es adecuado para el nuevo horario
 		            }
+
+		            // Si cumple ambos criterios de horario, agregar la función a las posibles
+		            funcionesPosibles.add(funcionIntercambio);
 		        }
 		    }
 
-		    if (peliculasPosibles.isEmpty()) {
+		    if (funcionesPosibles.isEmpty()) {
 		        return "No se encontró ninguna película adecuada para el intercambio. Razones posibles:\n" +
 		               "- Todas las películas disponibles son del mismo género que la película seleccionada.\n" +
-		               "- No hay funciones en horarios compatibles para la película seleccionada.\n" +
+		               "- No hay funciones en horarios compatibles para la película seleccionada o para el destino de intercambio.\n" +
 		               "- Las posiciones de las funciones para el intercambio no cumplen con los criterios.";
 		    }
 
-		    // Encontrar la mejor opción basándose en la calificación
-		    Pelicula mejorOpcion = null;
+		    // Encontrar la mejor opción basándose en la calificación de la película
+		    Funcion mejorFuncion = null;
 		    double mejorCalificacion = -1;
 
-		    for (Pelicula p : peliculasPosibles) {
+		    for (Funcion f : funcionesPosibles) {
+		        Pelicula p = f.getPelicula();
 		        if (p.getCalificacionPromedio() > mejorCalificacion) {
 		            mejorCalificacion = p.getCalificacionPromedio();
-		            mejorOpcion = p;
+		            mejorFuncion = f;
 		        }
 		    }
 
-		    return "Se recomienda intercambiar la película seleccionada con: " + mejorOpcion.getTitulo() + 
-		           " (Calificación: " + mejorOpcion.getCalificacionPromedio() + ")";
+		    // Obtener información detallada sobre la función recomendada
+		    Pelicula mejorPelicula = mejorFuncion.getPelicula();
+		    Cine cine = Funcion.encontrarCine(mejorFuncion);
+		    String dia = Funcion.encontrarDia(mejorFuncion,cine);
+		    String horario = mejorFuncion.getHoraInicio();
+
+		    return "Se recomienda intercambiar la película seleccionada con: " + mejorPelicula.getTitulo() +
+		           " (Calificación: " + mejorPelicula.getCalificacionPromedio() + ").\n" +
+		           "Esta película se proyecta en el cine: " + cine.getNombre() + ", el día: " + dia +
+		           " a las: " + horario + ".";
 		}
 
-
 		// Método auxiliar para verificar los criterios de horario
-		private static boolean cumpleCriteriosHorario(Pelicula pelicula, int posicionEnDia) {
+		public static boolean cumpleCriteriosHorario(Pelicula pelicula, int posicionEnDia) {
 		    switch (pelicula.getGenero()) {
 		        case "Infantil":
 		            return posicionEnDia <= 3; // No puede estar en las últimas 3 posiciones

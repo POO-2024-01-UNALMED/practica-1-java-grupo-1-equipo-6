@@ -2,6 +2,8 @@ package gestorAplicacion;
 import java.util.ArrayList;
 import java.util.List;
 
+import uiMain.Interfaz;
+
 public class Cine {
 	private String nombre;
 	private Funcion[] lunes = new Funcion[7];
@@ -428,6 +430,63 @@ public class Cine {
 
 	public void setZonaDeJuegos(ZonaDeJuegos zonaDeJuegos) {
 		this.zonaDeJuegos = zonaDeJuegos;
+	}
+	
+	public void agregarFuncion(Funcion nuevaFuncion, Funcion[] funciones) {
+	    Pelicula nuevaPelicula = nuevaFuncion.getPelicula();
+	    int posicionApropiada = encontrarPosicionApropiada(nuevaPelicula, funciones);
+
+	    if (posicionApropiada == -1) {
+	        // No hay posiciones adecuadas disponibles
+	        Interfaz.error();
+	        return;
+	    }
+
+	    // Verificar si hay una función ya ocupando la posición
+	    if (funciones[posicionApropiada] != null) {
+	        // Reorganizar las funciones para hacer espacio
+	        if (!reorganizarFunciones(funciones, posicionApropiada)) {
+	            // Si no es posible reorganizar las funciones, no se puede agregar la nueva
+	            Interfaz.error();
+	            return;
+	        }
+	    }
+
+	    // Agregar la nueva función a la posición adecuada
+	    funciones[posicionApropiada] = nuevaFuncion;
+	}
+
+	private int encontrarPosicionApropiada(Pelicula pelicula, Funcion[] funciones) {
+	    // Buscar una posición apropiada según el género de la película
+	    for (int i = 0; i < funciones.length; i++) {
+	        if (Pelicula.cumpleCriteriosHorario(pelicula, i) && funciones[i] == null) {
+	            return i;
+	        }
+	    }
+	    return -1; // No hay posiciones adecuadas disponibles
+	}
+
+	private boolean reorganizarFunciones(Funcion[] funciones, int posicionDeseada) {
+	    // Intentar reorganizar las funciones para liberar la posición deseada
+	    for (int i = 0; i < funciones.length; i++) {
+	        Funcion funcionActual = funciones[i];
+	        if (funcionActual == null || Pelicula.cumpleCriteriosHorario(funcionActual.getPelicula(), i)) {
+	            continue; // La función está en una posición adecuada o está vacía
+	        }
+
+	        // Intentar mover la función actual a otra posición adecuada
+	        for (int j = 0; j < funciones.length; j++) {
+	            if (Pelicula.cumpleCriteriosHorario(funcionActual.getPelicula(), j) && funciones[j] == null) {
+	                // Mover la función a la nueva posición
+	                funciones[j] = funcionActual;
+	                funciones[i] = null; // Liberar la posición original
+	                break;
+	            }
+	        }
+	    }
+
+	    // Verificar si la posición deseada está libre
+	    return funciones[posicionDeseada] == null;
 	}
 	
 	public String toString() {

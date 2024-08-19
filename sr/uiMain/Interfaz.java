@@ -428,7 +428,7 @@ public class Interfaz{
         sala2.setCine(cine2);
         sala3.setCine(cine3);
        
-     // Cine 1
+    
         
         
         
@@ -443,43 +443,46 @@ public class Interfaz{
         sala2.setCine(cine2);
         sala3.setCine(cine3);
 
-        cine1.getLunes()[0] = funcion1;  // Infantil: "Intensamente"
-        cine1.getLunes()[1] = funcion6;  // Infantil: "Los Minions"
-        cine1.getLunes()[2] = funcion7;  // Infantil: "Toy Story"
-        cine1.getLunes()[3] = funcion2;  // Acción: "Spiderman" (a las 8 am)
+        cine1.agregarFuncion(funcion1, cine1.getLunes());  // Infantil: "Intensamente"
+        cine1.agregarFuncion(funcion6, cine1.getLunes());  // Infantil: "Los Minions"
+        cine1.agregarFuncion(funcion7, cine1.getLunes());  // Infantil: "Toy Story"
+        cine1.agregarFuncion(funcion2, cine1.getLunes());  // Acción: "Spiderman" (a las 8 am)
 
-        cine1.getMartes()[5] = funcion4;  // +18: "Deadpool" (a las 8 am)
-        cine1.getMartes()[4] = funcion5;  // Drama: "Oppenheimer" (a las 10 am)
+        cine1.agregarFuncion(funcion4, cine1.getMartes()); // +18: "Deadpool" (a las 8 am)
+        cine1.agregarFuncion(funcion5, cine1.getMartes()); // Drama: "Oppenheimer" (a las 10 am)
 
-        cine1.getJueves()[6] = funcion3;  // Terror: "Jason Vorhees" (a las 8 am)
-        cine1.getViernes()[6] = funcion8;  // Terror: "El Conjuro" (a las 8 am)
-        
-        cine2.getLunes()[0] = funcion10; // Infantil: "Intensamente" (a las 8 am)
-        cine2.getLunes()[1] = funcion12; // Infantil: "Toy Story" (a las 10 am)
-        cine2.getLunes()[5] = funcion8;  // Terror: "El Conjuro" (a las 12 pm)
+        cine1.agregarFuncion(funcion3, cine1.getJueves());  // Terror: "Jason Vorhees" (a las 8 am)
+        cine1.agregarFuncion(funcion8, cine1.getViernes());  // Terror: "El Conjuro" (a las 8 am)
 
-        cine2.getMartes()[6] = funcion11; // Terror: "Jason Vorhees" (a las 8 am)
+        // Asignaciones para Cine 2
+        cine2.agregarFuncion(funcion10, cine2.getLunes()); // Infantil: "Intensamente" (a las 8 am)
+        cine2.agregarFuncion(funcion12, cine2.getLunes()); // Infantil: "Toy Story" (a las 10 am)
+        cine2.agregarFuncion(funcion8, cine2.getLunes());  // Terror: "El Conjuro" (a las 12 pm)
 
-        cine2.getJueves()[4] = funcion9;  // Acción: "Inception" (a las 8 am)
-        cine2.getViernes()[5] = funcion13; // +18: "Deadpool" (a las 8 am)
-        cine2.getViernes()[3] = funcion5; // Drama: "Oppenheimer" (a las 10 am)
-        
-        cine3.getLunes()[0] = funcion18; // Infantil: "Los Minions" (a las 8 am)
-        cine3.getLunes()[1] = funcion19; // Infantil: "Toy Story" (a las 10 am)
+        cine2.agregarFuncion(funcion11, cine2.getMartes()); // Terror: "Jason Vorhees" (a las 8 am)
 
-        cine3.getMartes()[0] = funcion14; // Acción: "Spiderman" (a las 8 am)
-        cine3.getJueves()[3] = funcion15; // Drama: "Oppenheimer" (a las 8 am)
-        cine3.getViernes()[4] = funcion17; // Acción: "Inception" (a las 8 am)
-        cine3.getSabado()[6] = funcion16; // Terror: "El Conjuro" (a las 8 am)
-        
-        cine4.getLunes()[0] = funcion21; // Infantil: "Los Minions" (a las 8 am)
-        cine4.getLunes()[1] = funcion22; // Infantil: "Toy Story" (a las 10 am)
+        cine2.agregarFuncion(funcion9, cine2.getJueves());  // Acción: "Inception" (a las 8 am)
+        cine2.agregarFuncion(funcion13, cine2.getViernes()); // +18: "Deadpool" (a las 8 am)
+        cine2.agregarFuncion(funcion5, cine2.getViernes());  // Drama: "Oppenheimer" (a las 10 am)
 
-        cine4.getMartes()[4] = funcion20; // Acción: "Spiderman" (a las 8 am)
+        // Asignaciones para Cine 3
+        cine3.agregarFuncion(funcion18, cine3.getLunes()); // Infantil: "Los Minions" (a las 8 am)
+        cine3.agregarFuncion(funcion19, cine3.getLunes()); // Infantil: "Toy Story" (a las 10 am)
 
-        cine4.getJueves()[6] = funcion23; // Terror: "Jason Vorhees" (a las 8 am)
-        cine4.getViernes()[5] = funcion24; // +18: "Deadpool" (a las 8 am)
-        cine4.getSabado()[4] = funcion25; // Drama: "Oppenheimer" (a las 8 am)
+        cine3.agregarFuncion(funcion14, cine3.getMartes()); // Acción: "Spiderman" (a las 8 am)
+        cine3.agregarFuncion(funcion15, cine3.getJueves()); // Drama: "Oppenheimer" (a las 8 am)
+        cine3.agregarFuncion(funcion17, cine3.getViernes()); // Acción: "Inception" (a las 8 am)
+        cine3.agregarFuncion(funcion16, cine3.getSabado()); // Terror: "El Conjuro" (a las 8 am)
+
+        // Asignaciones para Cine 4
+        cine4.agregarFuncion(funcion21, cine4.getLunes()); // Infantil: "Los Minions" (a las 8 am)
+        cine4.agregarFuncion(funcion22, cine4.getLunes()); // Infantil: "Toy Story" (a las 10 am)
+
+        cine4.agregarFuncion(funcion20, cine4.getMartes()); // Acción: "Spiderman" (a las 8 am)
+
+        cine4.agregarFuncion(funcion23, cine4.getJueves()); // Terror: "Jason Vorhees" (a las 8 am)
+        cine4.agregarFuncion(funcion24, cine4.getViernes()); // +18: "Deadpool" (a las 8 am)
+        cine4.agregarFuncion(funcion25, cine4.getSabado()); // Drama: "Oppenheimer" (a las 8 am)
         
         
 
@@ -732,19 +735,27 @@ public static void gestionarPeliculas() {
     Pelicula peliculaAIntercambiar = peliculas.get(peliculaSeleccionada);
     
     // Paso 3: Recomendar una película para intercambio basada en la selección
-     	System.out.println(Pelicula.recomendarIntercambio(peliculaAIntercambiar));
-    
-    
+    System.out.println(Pelicula.recomendarIntercambio(peliculaAIntercambiar));
 
-    // Paso 4: Selección de la película para el intercambio
-    System.out.println("Seleccione la película con la que desea intercambiar o 0 para cancelar:");
-    List<Pelicula> peliculasDisponibles = cineOrigen.peliculasActivas();
-    for (int i = 0; i < peliculasDisponibles.size(); i++) {
-        if (!peliculasDisponibles.get(i).equals(peliculaAIntercambiar)) {
-            System.out.println((i + 1) + ". " + peliculasDisponibles.get(i).getTitulo());
+    // Paso 4: Selección del nuevo cine para el intercambio
+    System.out.println("Seleccione el nuevo cine (omitido el cine actual):");
+    for (int i = 0; i < Cine.cines.size(); i++) {
+        if (i != cineSeleccionado) {
+            System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
         }
     }
-    System.out.println("0. No intercambiar");
+    int nuevoCineSeleccionado = scanner.nextInt() - 1;
+    if (nuevoCineSeleccionado >= cineSeleccionado) {
+        nuevoCineSeleccionado++; // Ajustar el índice si el cine seleccionado es mayor
+    }
+    Cine nuevoCine = Cine.cines.get(nuevoCineSeleccionado);
+
+    // Mostrar películas en el nuevo cine seleccionado
+    System.out.println("Seleccione la película con la que desea intercambiar:");
+    List<Pelicula> peliculasNuevoCine = nuevoCine.peliculasActivas();
+    for (int i = 0; i < peliculasNuevoCine.size(); i++) {
+        System.out.println((i + 1) + ". " + peliculasNuevoCine.get(i).getTitulo());
+    }
     int peliculaIntercambioSeleccionada = scanner.nextInt() - 1;
     
     // Manejar la opción de no intercambiar
@@ -753,7 +764,7 @@ public static void gestionarPeliculas() {
         return;
     }
     
-    Pelicula peliculaIntercambio = peliculasDisponibles.get(peliculaIntercambioSeleccionada);
+    Pelicula peliculaIntercambio = peliculasNuevoCine.get(peliculaIntercambioSeleccionada);
     
     // Confirmar el intercambio
     System.out.println("¿Desea realizar el intercambio entre " + peliculaAIntercambiar.getTitulo() + " y " + peliculaIntercambio.getTitulo() + "? (1. Sí / 2. No)");
@@ -820,6 +831,7 @@ public static void gestionarPeliculas() {
         System.out.println("Opción no válida.");
     }
 }
+
 
 
 
