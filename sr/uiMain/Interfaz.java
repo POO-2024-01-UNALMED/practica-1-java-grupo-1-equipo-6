@@ -1,5 +1,6 @@
 package uiMain;
 import gestorAplicacion.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -27,53 +28,81 @@ public class Interfaz{
     static Bodega bodega = new Bodega("Bodega Central", 100);
 
     static Pelicula pelicula1 = new Pelicula("Intensamente", "Infantil", LocalTime.of(1, 35));
-    static Pelicula pelicula2 = new Pelicula("Spiderman", "Acción", LocalTime.of(2, 10));     
-    static Pelicula pelicula3 = new Pelicula("Jason Vorhees", "Terror", LocalTime.of(1, 45)); 
-    static Pelicula pelicula4 = new Pelicula("Deadpool", "+18", LocalTime.of(1, 50));          
-    static Pelicula pelicula5 = new Pelicula("Oppenheimer", "Drama", LocalTime.of(3, 0));      
-    static Pelicula pelicula6 = new Pelicula("Los Minions", "Infantil", LocalTime.of(1, 30)); 
+    static Pelicula pelicula2 = new Pelicula("Spiderman", "Acción", LocalTime.of(2, 10));
+    static Pelicula pelicula3 = new Pelicula("Jason Vorhees", "Terror", LocalTime.of(1, 45));
+    static Pelicula pelicula4 = new Pelicula("Deadpool", "+18", LocalTime.of(1, 50));
+    static Pelicula pelicula5 = new Pelicula("Oppenheimer", "Drama", LocalTime.of(3, 0));
+    static Pelicula pelicula6 = new Pelicula("Los Minions", "Infantil", LocalTime.of(1, 30));
+    static Pelicula pelicula7 = new Pelicula("Toy Story", "Infantil", LocalTime.of(1, 40));
+    static Pelicula pelicula8 = new Pelicula("El Conjuro", "Terror", LocalTime.of(1, 52));
+    static Pelicula pelicula9 = new Pelicula("Inception", "Acción", LocalTime.of(2, 28));
+    
+    static Sala sala1 = new Sala(1, 6, 5);  // Sala 1, 6 filas y 5 columnas
+    static Sala sala2 = new Sala(2, 8, 6);  // Sala 2, 8 filas y 6 columnas
+    static Sala sala3 = new Sala(3, 10, 8); // Sala 3, 10 filas y 8 columnas
+    static Sala sala4 = new Sala(4, 7, 6);  // Sala 4, 7 filas y 6 columnas
+    static Sala sala5 = new Sala(5, 9, 7);  // Sala 5, 9 filas y 7 columnas
+    static Sala sala6 = new Sala(6, 5, 5);  // Sala 6, 5 filas y 5 columnas
+    static Sala sala7 = new Sala(7, 8, 5);  // Sala 7, 8 filas y 5 columnas
+    static Sala sala8 = new Sala(8, 10, 10); // Sala 8, 10 filas y 10 columnas
+    static Sala sala9 = new Sala(9, 7, 8);  // Sala 9, 7 filas y 8 columnas
+    static Sala sala10 = new Sala(10, 9, 8); // Sala 10, 9 filas y 8 columnas
+    static Sala sala11 = new Sala(11, 6, 6); // Sala 11, 6 filas y 6 columnas
+    static Sala sala12 = new Sala(12, 8, 7); // Sala 12, 8 filas y 7 columnas
+    static Sala sala13 = new Sala(13, 10, 10); // Sala 13, 10 filas y 10 columnas
+    static Sala sala14 = new Sala(14, 7, 7); // Sala 14, 7 filas y 7 columnas
+    static Sala sala15 = new Sala(15, 9, 9); // Sala 15, 9 filas y 9 columnas
+    static Sala sala16 = new Sala(16, 10, 8); // Sala 16, 10 filas y 8 columnas
+    static Sala sala17 = new Sala(17, 8, 6); // Sala 17, 8 filas y 6 columnas
+    static Sala sala18 = new Sala(18, 5, 5); // Sala 18, 5 filas y 5 columnas
+    static Sala sala19 = new Sala(19, 7, 6); // Sala 19, 7 filas y 6 columnas
+    static Sala sala20 = new Sala(20, 8, 8); // Sala 20, 8 filas y 8 columnas
+    static Sala sala21 = new Sala(21, 6, 6); // Sala 21, 6 filas y 6 columnas
+    static Sala sala22 = new Sala(22, 8, 7); // Sala 22, 8 filas y 7 columnas
+    static Sala sala23 = new Sala(23, 10, 9); // Sala 23, 10 filas y 9 columnas
+    static Sala sala24 = new Sala(24, 9, 8); // Sala 24, 9 filas y 8 columnas
+    static Sala sala25 = new Sala(25, 10, 10); // Sala 25, 10 filas y 10 columnas
 
-     static Sala sala1 = new Sala(1,6,5);
-     static Sala sala2 = new Sala(2,6,5);
-     static Sala sala3 = new Sala(3,6, 5);
+     static Funcion funcion1 = new Funcion(pelicula1, "Normal", sala1, 200);
+     static Funcion funcion2 = new Funcion(pelicula2, "Normal", sala2, 250);
+     static Funcion funcion3 = new Funcion(pelicula3, "Normal", sala3, 300);
+     static Funcion funcion4 = new Funcion(pelicula4, "Normal", sala4, 400);
+     static Funcion funcion5 = new Funcion(pelicula5, "Normal", sala5, 500);
+     static Funcion funcion6 = new Funcion(pelicula6, "Normal", sala6, 120);
+     static Funcion funcion7 = new Funcion(pelicula7, "Normal", sala7, 220);
 
-     static Funcion funcion1 = new Funcion(pelicula1, LocalTime.of(16, 0), "Normal", sala1,200);
-     static Funcion funcion2 = new Funcion(pelicula2, LocalTime.of(18, 0), "Normal", sala2,250);
-     static Funcion funcion3 = new Funcion(pelicula3, LocalTime.of(20, 0), "Normal", sala3,300);
-     static Funcion funcion4 = new Funcion(pelicula4, LocalTime.of(20, 0), "Normal", sala3,400);
-     static Funcion funcion5 = new Funcion(pelicula5, LocalTime.of(19, 0), "Normal", sala3,500);
-     static Funcion funcion6 = new Funcion(pelicula6, LocalTime.of(14, 0), "Normal", sala3,120);
+     // Cine 2
+     static Funcion funcion8 = new Funcion(pelicula8, "Normal", sala8, 280);
+     static Funcion funcion9 = new Funcion(pelicula9, "Normal", sala9, 350);
+     static Funcion funcion10 = new Funcion(pelicula1, "Normal", sala10, 190);
+     static Funcion funcion11 = new Funcion(pelicula3, "Normal", sala11, 270);
+     static Funcion funcion12 = new Funcion(pelicula7, "Normal", sala12, 230);
+     static Funcion funcion13 = new Funcion(pelicula4, "Normal", sala13, 410);
+
+     // Cine 3
+     static Funcion funcion14 = new Funcion(pelicula2, "Normal", sala14, 260);
+     static Funcion funcion15 = new Funcion(pelicula5, "Normal", sala15, 500);
+     static Funcion funcion16 = new Funcion(pelicula8, "Normal", sala16, 300);
+     static Funcion funcion17 = new Funcion(pelicula9, "Normal", sala17, 340);
+     static Funcion funcion18 = new Funcion(pelicula6, "Normal", sala18, 130);
+     static Funcion funcion19 = new Funcion(pelicula7, "Normal", sala19, 200);
+
+     // Cine 4
+     static Funcion funcion20 = new Funcion(pelicula9, "Normal", sala20, 330);
+     static Funcion funcion21 = new Funcion(pelicula6, "Normal", sala21, 140);
+     static Funcion funcion22 = new Funcion(pelicula7, "Normal", sala22, 210);
+     static Funcion funcion23 = new Funcion(pelicula3, "Normal", sala23, 300);
+     static Funcion funcion24 = new Funcion(pelicula4, "Normal", sala24, 420);
+     static Funcion funcion25 = new Funcion(pelicula5, "Normal", sala25, 480);
 
 
      // Crear listas de funciones para cada cine
-     static ArrayList<Funcion> lunes1 = new ArrayList<>();
-     static ArrayList<Funcion> martes1 = new ArrayList<>();
-     static ArrayList<Funcion> jueves1 = new ArrayList<>();
-     static ArrayList<Funcion> viernes1 = new ArrayList<>();
-     static ArrayList<Funcion> sabado1 = new ArrayList<>();
-
-     static ArrayList<Funcion> lunes2 = new ArrayList<>();
-     static ArrayList<Funcion> martes2 = new ArrayList<>();
-     static ArrayList<Funcion> jueves2 = new ArrayList<>();
-     static ArrayList<Funcion> viernes2 = new ArrayList<>();
-     static ArrayList<Funcion> sabado2 = new ArrayList<>();
-
-     static ArrayList<Funcion> lunes3 = new ArrayList<>();
-     static ArrayList<Funcion> martes3 = new ArrayList<>();
-     static ArrayList<Funcion> jueves3 = new ArrayList<>();
-     static ArrayList<Funcion> viernes3 = new ArrayList<>();
-     static ArrayList<Funcion> sabado3 = new ArrayList<>();
-
-     static ArrayList<Funcion> lunes4 = new ArrayList<>();
-     static ArrayList<Funcion> martes4 = new ArrayList<>();
-     static ArrayList<Funcion> jueves4 = new ArrayList<>();
-     static ArrayList<Funcion> viernes4 = new ArrayList<>();
-     static ArrayList<Funcion> sabado4 = new ArrayList<>();
      
-     static Cine cine1 = new Cine("Cine A", lunes1, martes1, jueves1, viernes1, sabado1, zona1);
-     static Cine cine2 = new Cine("Cine B", lunes2, martes2, jueves2, viernes2, sabado2, zona2);
-     static Cine cine3 = new Cine("Cine C", lunes3, martes3, jueves3, viernes3, sabado3, zona3);
-     static Cine cine4 = new Cine("Cine D", lunes4, martes4, jueves4, viernes4, sabado4, zona4);
+     
+     static Cine cine1 = new Cine("Cine A",zona1);
+     static Cine cine2 = new Cine("Cine B", zona2);
+     static Cine cine3 = new Cine("Cine C", zona3);
+     static Cine cine4 = new Cine("Cine D",zona4);
     
 
     public static void limpiarConsola(){
@@ -400,32 +429,7 @@ public class Interfaz{
         sala3.setCine(cine3);
        
      // Cine 1
-        lunes1.add(funcion1);
-        martes1.add(funcion2);
-        jueves1.add(funcion3);
-        viernes1.add(funcion4);
-        sabado1.add(funcion5);
-
-        // Cine 2
-        lunes2.add(funcion2);
-        martes2.add(funcion3);
-        jueves2.add(funcion4);
-        viernes2.add(funcion5);
-        sabado2.add(funcion6);
-
-        // Cine 3
-        lunes3.add(funcion3);
-        martes3.add(funcion4);
-        jueves3.add(funcion5);
-        viernes3.add(funcion6);
-        sabado3.add(funcion1);
-
-        // Cine 4
-        lunes4.add(funcion4);
-        martes4.add(funcion5);
-        jueves4.add(funcion6);
-        viernes4.add(funcion1);
-        sabado4.add(funcion2);
+        
         
         
         zona1.agregarMaquina(arcade1);
@@ -439,12 +443,45 @@ public class Interfaz{
         sala2.setCine(cine2);
         sala3.setCine(cine3);
 
-       
+        cine1.getLunes()[0] = funcion1;  // Infantil: "Intensamente"
+        cine1.getLunes()[1] = funcion6;  // Infantil: "Los Minions"
+        cine1.getLunes()[2] = funcion7;  // Infantil: "Toy Story"
+        cine1.getLunes()[3] = funcion2;  // Acción: "Spiderman" (a las 8 am)
+
+        cine1.getMartes()[5] = funcion4;  // +18: "Deadpool" (a las 8 am)
+        cine1.getMartes()[4] = funcion5;  // Drama: "Oppenheimer" (a las 10 am)
+
+        cine1.getJueves()[6] = funcion3;  // Terror: "Jason Vorhees" (a las 8 am)
+        cine1.getViernes()[6] = funcion8;  // Terror: "El Conjuro" (a las 8 am)
         
-        cine1.ajustarFunciones();
-        cine2.ajustarFunciones();
-        cine3.ajustarFunciones();
-        cine4.ajustarFunciones();
+        cine2.getLunes()[0] = funcion10; // Infantil: "Intensamente" (a las 8 am)
+        cine2.getLunes()[1] = funcion12; // Infantil: "Toy Story" (a las 10 am)
+        cine2.getLunes()[5] = funcion8;  // Terror: "El Conjuro" (a las 12 pm)
+
+        cine2.getMartes()[6] = funcion11; // Terror: "Jason Vorhees" (a las 8 am)
+
+        cine2.getJueves()[4] = funcion9;  // Acción: "Inception" (a las 8 am)
+        cine2.getViernes()[5] = funcion13; // +18: "Deadpool" (a las 8 am)
+        cine2.getViernes()[3] = funcion5; // Drama: "Oppenheimer" (a las 10 am)
+        
+        cine3.getLunes()[0] = funcion18; // Infantil: "Los Minions" (a las 8 am)
+        cine3.getLunes()[1] = funcion19; // Infantil: "Toy Story" (a las 10 am)
+
+        cine3.getMartes()[0] = funcion14; // Acción: "Spiderman" (a las 8 am)
+        cine3.getJueves()[3] = funcion15; // Drama: "Oppenheimer" (a las 8 am)
+        cine3.getViernes()[4] = funcion17; // Acción: "Inception" (a las 8 am)
+        cine3.getSabado()[6] = funcion16; // Terror: "El Conjuro" (a las 8 am)
+        
+        cine4.getLunes()[0] = funcion21; // Infantil: "Los Minions" (a las 8 am)
+        cine4.getLunes()[1] = funcion22; // Infantil: "Toy Story" (a las 10 am)
+
+        cine4.getMartes()[4] = funcion20; // Acción: "Spiderman" (a las 8 am)
+
+        cine4.getJueves()[6] = funcion23; // Terror: "Jason Vorhees" (a las 8 am)
+        cine4.getViernes()[5] = funcion24; // +18: "Deadpool" (a las 8 am)
+        cine4.getSabado()[4] = funcion25; // Drama: "Oppenheimer" (a las 8 am)
+        
+        
 
         zona1.agregarMaquina(arcade1);
         zona1.agregarMaquina(danceDance1);
@@ -458,6 +495,32 @@ public class Interfaz{
         usuario.setTipoTarjeta("Oro");
         usuario.setSaldoTarjeta(56000);
         usuario.setPuntosTarjeta(400);
+        
+        funcion1.getPelicula().setCalificacionPromedio(4.0);
+        funcion2.getPelicula().setCalificacionPromedio(3.0);
+        funcion3.getPelicula().setCalificacionPromedio(2.0);
+        funcion4.getPelicula().setCalificacionPromedio(1.5);
+        funcion5.getPelicula().setCalificacionPromedio(4.5);
+        funcion6.getPelicula().setCalificacionPromedio(5.0);
+        funcion7.getPelicula().setCalificacionPromedio(3.5);
+        funcion8.getPelicula().setCalificacionPromedio(2.5);
+        funcion9.getPelicula().setCalificacionPromedio(4.0);
+        funcion10.getPelicula().setCalificacionPromedio(3.0);
+        funcion11.getPelicula().setCalificacionPromedio(2.8);
+        funcion12.getPelicula().setCalificacionPromedio(3.9);
+        funcion13.getPelicula().setCalificacionPromedio(1.8);
+        funcion14.getPelicula().setCalificacionPromedio(3.4);
+        funcion15.getPelicula().setCalificacionPromedio(4.2);
+        funcion16.getPelicula().setCalificacionPromedio(2.9);
+        funcion17.getPelicula().setCalificacionPromedio(4.1);
+        funcion18.getPelicula().setCalificacionPromedio(4.3);
+        funcion19.getPelicula().setCalificacionPromedio(3.8);
+        funcion20.getPelicula().setCalificacionPromedio(3.1);
+        funcion21.getPelicula().setCalificacionPromedio(4.4);
+        funcion22.getPelicula().setCalificacionPromedio(4.6);
+        funcion23.getPelicula().setCalificacionPromedio(2.7);
+        funcion24.getPelicula().setCalificacionPromedio(2.6);
+        funcion25.getPelicula().setCalificacionPromedio(4.5);
     }
 
     
@@ -648,11 +711,10 @@ public static void gestionarPeliculas() {
         List<String> calificaciones = cine.obtenerCalificacionesPeliculas();
         for (String calificacion : calificaciones) {
             System.out.println(calificacion);
-        
+        }
     }
-    }
-    
- // Paso 2: Selección de película para intercambio
+
+    // Paso 2: Selección de cine y película por parte del usuario
     System.out.println("Seleccione el cine de la película que desea intercambiar:");
     for (int i = 0; i < Cine.cines.size(); i++) {
         System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
@@ -668,45 +730,97 @@ public static void gestionarPeliculas() {
     }
     int peliculaSeleccionada = scanner.nextInt() - 1;
     Pelicula peliculaAIntercambiar = peliculas.get(peliculaSeleccionada);
+    
+    // Paso 3: Recomendar una película para intercambio basada en la selección
+     	System.out.println(Pelicula.recomendarIntercambio(peliculaAIntercambiar));
+    
+    
 
-    // Obtener la mejor opción de intercambio
-    String peliculaRecomendada = Pelicula.recomendarIntercambio(peliculaAIntercambiar);
+    // Paso 4: Selección de la película para el intercambio
+    System.out.println("Seleccione la película con la que desea intercambiar o 0 para cancelar:");
+    List<Pelicula> peliculasDisponibles = cineOrigen.peliculasActivas();
+    for (int i = 0; i < peliculasDisponibles.size(); i++) {
+        if (!peliculasDisponibles.get(i).equals(peliculaAIntercambiar)) {
+            System.out.println((i + 1) + ". " + peliculasDisponibles.get(i).getTitulo());
+        }
+    }
+    System.out.println("0. No intercambiar");
+    int peliculaIntercambioSeleccionada = scanner.nextInt() - 1;
+    
+    // Manejar la opción de no intercambiar
+    if (peliculaIntercambioSeleccionada == -1) {
+        System.out.println("No se realizará el intercambio.");
+        return;
+    }
+    
+    Pelicula peliculaIntercambio = peliculasDisponibles.get(peliculaIntercambioSeleccionada);
+    
+    // Confirmar el intercambio
+    System.out.println("¿Desea realizar el intercambio entre " + peliculaAIntercambiar.getTitulo() + " y " + peliculaIntercambio.getTitulo() + "? (1. Sí / 2. No)");
+    int realizarIntercambio = scanner.nextInt();
 
-    // Paso 3: Realizar el intercambio
-    Funcion.realizarIntercambio(peliculaAIntercambiar, peliculaRecomendada);
-    System.out.println("Intercambio realizado exitosamente.");
+    if (realizarIntercambio == 1 && peliculaAIntercambiar != null && peliculaIntercambio != null && !peliculaAIntercambiar.equals(peliculaIntercambio)) {
+        String resultadoIntercambio = Funcion.realizarIntercambio(peliculaAIntercambiar, peliculaIntercambio);
+        System.out.println(resultadoIntercambio);
+    } else {
+        System.out.println("No se realizó el intercambio.");
+    }
 
-    // Paso 4: Aplicar bonos
+    // Paso 5: Aplicar bonos o descuentos
     System.out.println("¿Desea aplicar algún incentivo para la nueva película?");
     System.out.println("1. Rebajar el precio de la entrada");
     System.out.println("2. Regalar un bono");
+    System.out.println("3. No aplicar incentivos");
     int tipoIncentivo = scanner.nextInt();
 
     if (tipoIncentivo == 1) {
         // Aplicar rebaja en el precio de la entrada
-        System.out.println("Introduzca el nuevo precio para la entrada:");
-        double nuevoPrecio = scanner.nextDouble();
-        nuevaPelicula.setPrecioEntrada(nuevoPrecio);
-        System.out.println("El precio de entrada ha sido rebajado a " + nuevoPrecio);
+        System.out.println("Seleccione la función para la película a la que desea aplicar el nuevo precio:");
+        List<Funcion> funciones = peliculaIntercambio.getFunciones();
+        for (int i = 0; i < funciones.size(); i++) {
+            System.out.println((i + 1) + ". " + funciones.get(i).toString()); // Suponiendo que toString() de Funcion imprime información relevante
+        }
+        int funcionSeleccionada = scanner.nextInt() - 1;
+
+        if (funcionSeleccionada >= 0 && funcionSeleccionada < funciones.size()) {
+            Funcion funcion = funciones.get(funcionSeleccionada);
+            System.out.println("Introduzca el nuevo precio para la entrada:");
+            double nuevoPrecio = scanner.nextDouble();
+            funcion.setPrecio(nuevoPrecio);
+            System.out.println("El precio de entrada ha sido rebajado a " + nuevoPrecio);
+        } else {
+            System.out.println("Selección de función inválida.");
+        }
+
     } else if (tipoIncentivo == 2) {
-        // Regalar un bono
-        System.out.println("Seleccione el tipo de bono:");
-        System.out.println("1. Bono para clientes Genéricos");
-        System.out.println("2. Bono para clientes Preferenciales");
-        System.out.println("3. Bono para clientes VIP");
-        int tipoBono = scanner.nextInt();
+        // Aplicar bono
+        System.out.println("Seleccione el cine para aplicar el bono:");
+        for (int i = 0; i < Cine.cines.size(); i++) {
+            System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
+        }
+        int cineSeleccionado1 = scanner.nextInt() - 1;
+        Cine cine = Cine.cines.get(cineSeleccionado1);
 
-        // Aplicar bono basado en el tipo de cliente
-        nuevaPelicula.activarBono(tipoBono);
-        System.out.println("El bono ha sido activado para la película " + nuevaPelicula.getTitulo());
-    } else {
+        // Seleccionar la película en la que se desea aplicar el bono
+        System.out.println("Seleccione la película a la que desea aplicar el bono:");
+        List<Pelicula> peliculas1 = cine.peliculasActivas();
+        for (int i = 0; i < peliculas1.size(); i++) {
+            System.out.println((i + 1) + ". " + peliculas1.get(i).getTitulo());
+        }
+        int peliculaSeleccionada1 = scanner.nextInt() - 1;
+        Pelicula pelicula = peliculas1.get(peliculaSeleccionada1);
+
+        // Activar el bono en la película seleccionada
+        pelicula.activarBono();
+
+        System.out.println("El bono ha sido activado para la película " + pelicula.getTitulo());
+    } else if (tipoIncentivo == 3) {
         System.out.println("No se aplicarán incentivos.");
+    } else {
+        System.out.println("Opción no válida.");
     }
-
-   
 }
 
-    
 
 
 
@@ -1012,56 +1126,40 @@ public static void creacion() {
                 break;
 
             case 8:
-            	 LocalTime horarioFuncion = null;
-            	    boolean horarioValido = false;
-            	    
-            	    while (!horarioValido) {
-            	        System.out.print("Ingresa la hora de la Función (formato HH:mm): ");
-            	        String horarioFuncionStr = scanner.nextLine();
-            	        
-            	        try {
-            	            horarioFuncion = LocalTime.parse(horarioFuncionStr); // Convertir a LocalTime
-            	            horarioValido = true;
-            	        } catch (DateTimeParseException e) {
-            	            System.out.println("Formato de horario inválido. Por favor, ingrese el horario en formato HH:mm.");
-            	        }
-            	    }
+            	System.out.println("Ingresa el tipo de Función:");
+                System.out.println("1. Normal");
+                System.out.println("2. VIP");
 
-            	    // Solicitar el tipo de función
-            	    System.out.println("Ingresa el tipo de Función:");
-            	    System.out.println("1. Normal");
-            	    System.out.println("2. VIP");
-            	    
-            	    int eleccionTipo = scanner.nextInt();
-            	    scanner.nextLine();  // Limpiar el buffer
-            	    
-            	    String tipoFuncion;
-            	    switch (eleccionTipo) {
-            	        case 1:
-            	            tipoFuncion = "Normal";
-            	            break;
-            	        case 2:
-            	            tipoFuncion = "VIP";
-            	            break;
-            	        default:
-            	            System.out.println("Selección inválida. Operación cancelada.");
-            	            return;  // Salir del método si la selección es inválida
-            	    }
+                int eleccionTipo = scanner.nextInt();
+                scanner.nextLine();  // Limpiar el buffer
 
-            	    // Crear la función con el horario y tipo seleccionados
-            	    Funcion funcion = new Funcion(horarioFuncion, tipoFuncion);
-            	    System.out.println("Función creada: " + funcion);
+                String tipoFuncion;
+                switch (eleccionTipo) {
+                    case 1:
+                        tipoFuncion = "Normal";
+                        break;
+                    case 2:
+                        tipoFuncion = "VIP";
+                        break;
+                    default:
+                        System.out.println("Selección inválida. Operación cancelada.");
+                        return;  // Salir del método si la selección es inválida
+                }
 
-            	    // Verificar si se desea crear otra función
-            	    System.out.println("¿Desea hacer otra creación? 1. Sí | 2. No");
-            	    int respuesta8 = scanner.nextInt();
-            	    
-            	    if (respuesta8 == 2) {
-            	        System.out.println("Creación finalizada.");
-            	    } else if (respuesta8 < 1 || respuesta8 > 2) {
-            	        System.out.println("Selección inválida.");
-            	    }
+                // Crear la función con el tipo seleccionado
+                Funcion funcion = new Funcion(tipoFuncion);
+                System.out.println("Función creada: " + funcion);
 
+                // Verificar si se desea crear otra función
+                System.out.println("¿Desea hacer otra creación? 1. Sí | 2. No");
+                int respuesta1 = scanner.nextInt();
+                scanner.nextLine();  // Limpiar el buffer
+
+                if (respuesta1 == 2) {
+                    System.out.println("Creación finalizada.");
+                } else if (respuesta1 < 1 || respuesta1 > 2) {
+                    System.out.println("Selección inválida.");
+                }
             case 9:
                 continuar = false;
                 System.out.println("Saliendo del menú de creación.");
@@ -1073,9 +1171,6 @@ public static void creacion() {
         }
     }
 }
-
-
-
 
 
 public static void asignacion() {
@@ -1126,7 +1221,7 @@ public static void asignacion() {
                 break;
 
             case 2:
-                // Agregar una función a un cine
+                // Reemplazar una función en un cine
                 if (Funcion.allFunciones.isEmpty()) {
                     System.out.println("No hay funciones disponibles.");
                     break;
@@ -1136,26 +1231,29 @@ public static void asignacion() {
                     break;
                 }
 
-                System.out.println("Selecciona la función a agregar:");
+                // Seleccionar la función que se desea agregar
+                System.out.println("Selecciona la función para reemplazar en un cine:");
                 for (int i = 0; i < Funcion.allFunciones.size(); i++) {
                     Funcion funcion = Funcion.allFunciones.get(i);
                     if (funcion.getPelicula() != null) {
-                        System.out.println(i + ". " + funcion.getPelicula().getTitulo() + "  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        System.out.println(i + ". " + funcion.getPelicula().getTitulo() + "  " + funcion.getHoraInicio() + "  " + funcion.getTipo());
                     } else {
-                        System.out.println(i + ". Función sin película asignada  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        System.out.println(i + ". Función sin película asignada  " + funcion.getHoraInicio() + "  " + funcion.getTipo());
                     }
                 }
                 int funcionSeleccionada = scanner.nextInt();
                 scanner.nextLine();
 
-                System.out.println("Selecciona el cine al que deseas agregar la función:");
+                // Seleccionar el cine
+                System.out.println("Selecciona el cine donde deseas reemplazar la función:");
                 for (int i = 0; i < Cine.cines.size(); i++) {
                     System.out.println(i + ". " + Cine.cines.get(i).getNombre());
                 }
-                cineSeleccionado = scanner.nextInt();
+                int cineSeleccionado1 = scanner.nextInt();
                 scanner.nextLine();
 
-                System.out.println("Selecciona el día de la semana para agregar la función:");
+                // Seleccionar el día de la semana
+                System.out.println("Selecciona el día de la semana para reemplazar la función:");
                 System.out.println("1. Lunes");
                 System.out.println("2. Martes");
                 System.out.println("3. Jueves");
@@ -1164,22 +1262,22 @@ public static void asignacion() {
                 int diaSeleccionado = scanner.nextInt();
                 scanner.nextLine();
 
-                ArrayList<Funcion> diaSeleccionadoLista = null;
+                Funcion[] diaSeleccionadoLista = null;
                 switch (diaSeleccionado) {
                     case 1:
-                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getLunes();
+                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado1).getLunes();
                         break;
                     case 2:
-                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getMartes();
+                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado1).getMartes();
                         break;
                     case 3:
-                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getJueves();
+                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado1).getJueves();
                         break;
                     case 4:
-                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getViernes();
+                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado1).getViernes();
                         break;
                     case 5:
-                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado).getSabado();
+                        diaSeleccionadoLista = Cine.cines.get(cineSeleccionado1).getSabado();
                         break;
                     default:
                         System.out.println("Día inválido.");
@@ -1187,11 +1285,28 @@ public static void asignacion() {
                 }
 
                 if (diaSeleccionadoLista != null) {
-                    diaSeleccionadoLista.add(Funcion.allFunciones.get(funcionSeleccionada));
-                    System.out.println("Función agregada correctamente al cine " + Cine.cines.get(cineSeleccionado).getNombre() + " en el día seleccionado.");
+                    // Mostrar las funciones actuales en ese día
+                    System.out.println("Selecciona la posición de la función que deseas reemplazar:");
+                    for (int i = 0; i < diaSeleccionadoLista.length; i++) {
+                        if (diaSeleccionadoLista[i] != null && diaSeleccionadoLista[i].getPelicula() != null) {
+                            System.out.println(i + ". " + diaSeleccionadoLista[i].getPelicula().getTitulo() + "  " + diaSeleccionadoLista[i].getHoraInicio());
+                        } else {
+                            System.out.println(i + ". Función vacía");
+                        }
+                    }
+
+                    int posicionSeleccionada = scanner.nextInt();
+                    scanner.nextLine();
+
+                    // Reemplazar la función en la posición seleccionada
+                    if (posicionSeleccionada >= 0 && posicionSeleccionada < diaSeleccionadoLista.length) {
+                        diaSeleccionadoLista[posicionSeleccionada] = Funcion.allFunciones.get(funcionSeleccionada);
+                        System.out.println("Función reemplazada correctamente en el cine " + Cine.cines.get(cineSeleccionado1).getNombre() + " en el día seleccionado.");
+                    } else {
+                        System.out.println("Posición inválida.");
+                    }
                 }
                 break;
-
             case 3:
                 // Agregar una máquina a una zona de juegos
                 if (Maquina.allMaquinas.isEmpty()) {
@@ -1243,9 +1358,9 @@ public static void asignacion() {
                 for (int i = 0; i < Funcion.allFunciones.size(); i++) {
                     Funcion funcion = Funcion.allFunciones.get(i);
                     if (funcion.getPelicula() != null) {
-                        System.out.println(i + ". " + funcion.getPelicula().getTitulo() + "  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        System.out.println(i + ". " + funcion.getPelicula().getTitulo() + "  " + funcion.getHoraInicio() + "  " + funcion.getTipo());
                     } else {
-                        System.out.println(i + ". Función sin película asignada  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        System.out.println(i + ". Función sin película asignada  " + funcion.getHoraInicio() + "  " + funcion.getTipo());
                     }
                 }
                 int funcionSeleccionada1 = scanner.nextInt();
@@ -1268,7 +1383,7 @@ public static void asignacion() {
 
                 System.out.println("Selecciona la sala a asignar:");
                 for (int i = 0; i < Sala.allSalas.size(); i++) {
-                    System.out.println(i + ". Sala número: " + Sala.allSalas.get(i).getNumero());
+                    System.out.println(i + ". " + Sala.allSalas.get(i).getNumero());
                 }
                 int salaSeleccionada = scanner.nextInt();
                 scanner.nextLine();
@@ -1276,40 +1391,36 @@ public static void asignacion() {
                 System.out.println("Selecciona la función a la que deseas asignar la sala:");
                 for (int i = 0; i < Funcion.allFunciones.size(); i++) {
                     Funcion funcion = Funcion.allFunciones.get(i);
-                    if (funcion.getPelicula() != null) {
-                        System.out.println(i + ". " + funcion.getPelicula().getTitulo() + "  " + funcion.getHorario() + "  " + funcion.getTipo());
+                    if (funcion.getSala() != null) {
+                        System.out.println(i + ". " + funcion.getSala().getNumero() + "  " + funcion.getHoraInicio() + "  " + funcion.getTipo());
                     } else {
-                        System.out.println(i + ". Función sin película asignada  " + funcion.getHorario() + "  " + funcion.getTipo());
+                        System.out.println(i + ". Función sin sala asignada  " + funcion.getHoraInicio() + "  " + funcion.getTipo());
                     }
                 }
-                funcionSeleccionada1 = scanner.nextInt();
+                int funcionSeleccionada2 = scanner.nextInt();
                 scanner.nextLine();
 
-                Funcion.allFunciones.get(funcionSeleccionada1).setSala(Sala.allSalas.get(salaSeleccionada));
+                Funcion.allFunciones.get(funcionSeleccionada2).setSala(Sala.allSalas.get(salaSeleccionada));
                 System.out.println("Sala asignada correctamente a la función.");
                 break;
 
             case 6:
                 continuar = false;
                 System.out.println("Saliendo del menú de asignaciones.");
-                return;
+                break;
 
             default:
-                System.out.println("Opción inválida. Por favor, selecciona una opción válida.");
+                System.out.println("Opción inválida. Inténtalo de nuevo.");
                 break;
-        }
-
-        // Pregunta si el usuario desea hacer otra asignación
-        if (continuar) {
-            System.out.println("¿Desea hacer otra asignación? 1. Sí | 2. No");
-            int respuesta = scanner.nextInt();
-            if (respuesta == 2) {
-                continuar = false;
-            } else if (respuesta < 1 || respuesta > 2) {
-                System.out.println("Opción inválida. Regresando al menú de asignaciones.");
-            }
         }
     }
 }
+
+
+
+
+
+    
 }
+
     

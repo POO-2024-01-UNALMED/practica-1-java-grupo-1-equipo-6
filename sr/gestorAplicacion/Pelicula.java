@@ -1,7 +1,10 @@
 package gestorAplicacion;
 import java.time.LocalTime;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+
+import uiMain.Interfaz;
 
 public class Pelicula {
 	private String titulo;
@@ -10,7 +13,9 @@ public class Pelicula {
 	private int numeroCalificaciones;
 	public static ArrayList<Pelicula> totalPeliculas=new ArrayList<>();;
 	private LocalTime duracion;
-	private Funcion funcion;
+	public ArrayList<Funcion> funciones=new ArrayList<>();;
+	private boolean bonoActivo;
+	
 
 	public Pelicula(String titulo, String genero,LocalTime duracion){
 		this.titulo = titulo;
@@ -18,6 +23,7 @@ public class Pelicula {
 		this.duracion=duracion;
 		Pelicula.totalPeliculas.add(this);
 		Cine.peliculas.add(this);
+		this.bonoActivo=false;
 	}
 	
 	public LocalTime getDuracion() {
@@ -74,61 +80,131 @@ public class Pelicula {
 	        return "Pelicula: " + titulo + ", Género: " + genero + ", Calificacion: " + calificacionPromedio;
 	    }
 
-	public Funcion getFuncion() {
-		return funcion;
+	
+	
+	 public static String recomendarIntercambio(Pelicula peliculaSeleccionada) {
+		    List<Pelicula> peliculasPosibles = new ArrayList<>();
+		    
+		    // Obtener la lista de funciones de la película seleccionada
+		    List<Funcion> funcionesSeleccionadas = peliculaSeleccionada.getFunciones();
+
+		    for (Funcion funcionSeleccionada : funcionesSeleccionadas) {
+		        // Obtener la posición de la función seleccionada en el día
+		        int posicionSeleccionadaEnDia = funcionSeleccionada.getPosicionEnDia();
+		        
+		        for (Funcion funcionIntercambio : Funcion.allFunciones) {
+		            Pelicula peliculaIntercambio = funcionIntercambio.getPelicula();
+		            if (peliculaIntercambio == null) {
+		                continue; // Si no hay película asociada, ignorar la función
+		            }
+
+		            // Verificar que la película no sea del mismo género
+		            if (peliculaIntercambio.getGenero().equals(peliculaSeleccionada.getGenero())) {
+		                continue;
+		            }
+
+		            // Obtener la posición de la función de intercambio en el día
+		            int posicionIntercambioEnDia = funcionIntercambio.getPosicionEnDia();
+
+		            // Verificar que las posiciones no sean iguales (no puede intercambiarse con sí misma)
+		            if (posicionSeleccionadaEnDia == posicionIntercambioEnDia) {
+		                continue;
+		            }
+
+		            // Verificar los criterios de horario según el género
+		            boolean cumpleCriteriosHorario = cumpleCriteriosHorario(peliculaIntercambio, posicionIntercambioEnDia);
+		            if (!cumpleCriteriosHorario) {
+		                continue;
+		            }
+
+		            // No es necesario verificar solapamiento de horarios ya que las funciones están en días y cines diferentes
+		            boolean horariosNoSolapados = true; // Simplificación para diferentes días/cines
+
+		            // La compatibilidad de duración no es necesaria ya que todas las funciones duran 2 horas
+		            boolean duracionCompatible = true;
+
+		            if (horariosNoSolapados && duracionCompatible) {
+		                peliculasPosibles.add(peliculaIntercambio);
+		            }
+		        }
+		    }
+
+		    if (peliculasPosibles.isEmpty()) {
+		        return "No se encontró ninguna película adecuada para el intercambio. Razones posibles:\n" +
+		               "- Todas las películas disponibles son del mismo género que la película seleccionada.\n" +
+		               "- No hay funciones en horarios compatibles para la película seleccionada.\n" +
+		               "- Las posiciones de las funciones para el intercambio no cumplen con los criterios.";
+		    }
+
+		    // Encontrar la mejor opción basándose en la calificación
+		    Pelicula mejorOpcion = null;
+		    double mejorCalificacion = -1;
+
+		    for (Pelicula p : peliculasPosibles) {
+		        if (p.getCalificacionPromedio() > mejorCalificacion) {
+		            mejorCalificacion = p.getCalificacionPromedio();
+		            mejorOpcion = p;
+		        }
+		    }
+
+		    return "Se recomienda intercambiar la película seleccionada con: " + mejorOpcion.getTitulo() + 
+		           " (Calificación: " + mejorOpcion.getCalificacionPromedio() + ")";
+		}
+
+
+		// Método auxiliar para verificar los criterios de horario
+		private static boolean cumpleCriteriosHorario(Pelicula pelicula, int posicionEnDia) {
+		    switch (pelicula.getGenero()) {
+		        case "Infantil":
+		            return posicionEnDia <= 3; // No puede estar en las últimas 3 posiciones
+		        case "Terror":
+		            return posicionEnDia >= 4; // Debe estar entre las 3 últimas posiciones
+		        case "Acción":
+		        case "Drama":
+		            return true; // Puede estar en cualquier hora
+		        case "+18":
+		            return posicionEnDia >= 3; // Solo puede estar en las últimas 4 posiciones
+		        default:
+		            return false; // No se especifica para otros géneros
+		    }
+		}
+		
+	   
+
+	       
+	public boolean isBonoActivo() {
+		return bonoActivo;
 	}
 
-	public void setFuncion(Funcion funcion) {
-		this.funcion = funcion;
+	public void activarBono() {
+        this.bonoActivo = true;
 	}
 	
-	public static String recomendarIntercambio(Pelicula peliculaBajaCalificacion) {
-        // Obtener el horario y duración de la película actual
-        LocalTime inicioActual = Funcion.allFunciones.get(0).getHorario();
-        LocalTime finActual = inicioActual.plusHours(peliculaBajaCalificacion.getDuracion().getHour())
-                                         .plusMinutes(peliculaBajaCalificacion.getDuracion().getMinute());
+	public  ArrayList<Funcion> getFunciones() {
+        return funciones;
+    }
 
-        // Lista para almacenar películas posibles para el intercambio
-        List<Pelicula> peliculasPosibles = new ArrayList<>();
-
-        // Iterar sobre todas las películas
-        for (Pelicula p : Pelicula.totalPeliculas) {
-            // Verificar que no sea del mismo género
-            if (!p.getGenero().equals(peliculaBajaCalificacion.getGenero())) {
-                // Iterar sobre las funciones posibles de intercambio
-                for (Funcion f : Funcion.allFunciones) {
-                    LocalTime inicioIntercambio = f.getHorario();
-                    LocalTime finIntercambio = inicioIntercambio.plusHours(p.getDuracion().getHour())
-                                                                 .plusMinutes(p.getDuracion().getMinute());
-
-                    // Verificar que la nueva película encaje en el horario
-                    if (inicioIntercambio.isBefore(finActual) && finIntercambio.isAfter(inicioActual) 
-                        && p.getDuracion().equals(peliculaBajaCalificacion.getDuracion())) {
-
-                        // Añadir a la lista de posibles opciones
-                        peliculasPosibles.add(p);
-                        break;
-                    }
-                }
+    // Setter para el atributo estático
+    public  void setFunciones(ArrayList<Funcion> nuevasFunciones) {
+        funciones = nuevasFunciones;
+    }
+	
+	public String asignarBono(Cliente cliente) {
+        if (bonoActivo) {
+            switch (cliente.getTipo()) {
+                case "Generico":
+                    cliente.setSaldo(cliente.getSaldo()+5); // Ejemplo de bono para cliente genérico
+                    break;
+                case "Preferencial":
+                    cliente.setSaldo(cliente.getSaldo()+12); // Ejemplo de bono preferencial
+                    break;
+                case "VIP":
+                    cliente.setSaldo(cliente.getSaldo()+20); // Ejemplo de bono VIP
+                    break;
             }
+            
         }
-
-        // Buscar la película con la mejor calificación
-        if (peliculasPosibles.isEmpty()) {
-            return "No se encontró una película adecuada para el intercambio.";
-        }
-
-        Pelicula mejorOpcion = null;
-        double mejorCalificacion = -1;
-
-        for (Pelicula p : peliculasPosibles) {
-            if (p.getCalificacionPromedio() > mejorCalificacion) {
-                mejorCalificacion = p.getCalificacionPromedio();
-                mejorOpcion = p;
-            }
-        }
-
-        return "Recomendación de intercambio: " + (mejorOpcion != null ? mejorOpcion.toString() : "No hay opción adecuada.");
+        return "Bono "+ cliente.getTipo()+ " asignado a " + cliente.getNombre();
     }
 	
 	

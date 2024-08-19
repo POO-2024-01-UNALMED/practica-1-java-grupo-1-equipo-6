@@ -4,23 +4,18 @@ import java.util.List;
 
 public class Cine {
 	private String nombre;
-	private ArrayList<Funcion> lunes =new ArrayList<>();
-	private ArrayList<Funcion> martes =new ArrayList<>();
-	private ArrayList<Funcion> jueves =new ArrayList<>();
-	private ArrayList<Funcion> viernes =new ArrayList<>();
-	private ArrayList<Funcion> sabado =new ArrayList<>();
+	private Funcion[] lunes = new Funcion[7];
+	private Funcion[] martes = new Funcion[7];
+	private Funcion[] jueves = new Funcion[7];
+	private Funcion[] viernes = new Funcion[7];
+	private Funcion[] sabado = new Funcion[7];
 	public static ArrayList<Pelicula> peliculas=new ArrayList<>();
 	private ZonaDeJuegos zonaDeJuegos;
 	public static ArrayList<Cine> cines = new ArrayList<>();
 	
 
-	public Cine(String nombre, ArrayList<Funcion> lunes, ArrayList<Funcion> martes, ArrayList<Funcion> jueves, ArrayList<Funcion> viernes,ArrayList<Funcion> sabado, ZonaDeJuegos zonaDeJuegos){
+	public Cine(String nombre, ZonaDeJuegos zonaDeJuegos){
 		this.nombre = nombre;
-		this.lunes = lunes;
-		this.martes = martes;
-		this.jueves = jueves;
-		this.viernes = viernes;
-		this.sabado = sabado;
 		this.zonaDeJuegos = zonaDeJuegos;
 		if(zonaDeJuegos!=null) {
 		this.zonaDeJuegos.setCine(this);
@@ -29,7 +24,7 @@ public class Cine {
 	}
 	
 	public Cine(String nombre){
-		this(nombre,null,null, null, null, null, null);
+		this(nombre,null);
 	}
 	
 	
@@ -39,46 +34,78 @@ public class Cine {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public ArrayList<Funcion> getLunes(){
-		return this.lunes;
-	}
-
-	public void setLunes(ArrayList<Funcion> lunes){
-		this.lunes = lunes;
-	}
-
-	public ArrayList<Funcion> getMartes(){
-		return this.martes;
-	}
-
-	public void setMartes(ArrayList<Funcion> martes){
-		this.martes = martes;
-	}
-
-	public ArrayList<Funcion> getJueves(){
-		return this.jueves;
-	}
-
-	public void setJueves(ArrayList<Funcion> jueves){
-		this.jueves = jueves;
-	}
 	
-	public ArrayList<Funcion> getViernes(){
-		return this.viernes;
-	}
+	public Funcion[] getLunes() {
+        return lunes;
+    }
 
-	public void setViernes(ArrayList<Funcion> viernes){
-		this.viernes = viernes;
-	}
+    // Setter para lunes
+    public void setLunes(Funcion[] lunes) {
+        if (lunes.length == 7) {
+            this.lunes = lunes;
+        } else {
+            throw new IllegalArgumentException("El arreglo debe tener exactamente 7 elementos.");
+        }
+    }
 
-	public ArrayList<Funcion> getSabado(){
-		return this.sabado;
-	}
+    // Getter para martes
+    public Funcion[] getMartes() {
+        return martes;
+    }
 
-	public void setSabado(ArrayList<Funcion> sabado){
-		this.sabado = sabado;
-	}
+    // Setter para martes
+    public void setMartes(Funcion[] martes) {
+        if (martes.length == 7) {
+            this.martes = martes;
+        } else {
+            throw new IllegalArgumentException("El arreglo debe tener exactamente 7 elementos.");
+        }
+    }
+
+    
+    public Funcion[] getJueves() {
+        return jueves;
+    }
+
+   
+    public void setJueves(Funcion[] jueves) {
+        if (jueves.length == 7) {
+            this.jueves = jueves;
+        } else {
+            throw new IllegalArgumentException("El arreglo debe tener exactamente 7 elementos.");
+        }
+    }
+
+  
+    public Funcion[] getViernes() {
+        return viernes;
+    }
+
+    
+    public void setViernes(Funcion[] viernes) {
+        if (viernes.length == 7) {
+            this.viernes = viernes;
+        } else {
+            throw new IllegalArgumentException("El arreglo debe tener exactamente 7 elementos.");
+        }
+    }
+
+    
+    public Funcion[] getSabado() {
+        return sabado;
+    }
+
+    
+    public void setSabado(Funcion[] sabado) {
+        if (sabado.length == 7) {
+            this.sabado = sabado;
+        } else {
+            throw new IllegalArgumentException("El arreglo debe tener exactamente 7 elementos.");
+        }
+    }
+
+
+	
 	
 	public boolean hayPelicula(Pelicula pelicula) {		
 		for (Funcion funcionLunes: this.lunes){
@@ -109,75 +136,132 @@ public class Cine {
 		return false;
 	}
 
-	public String enseñarFunciones(){
-		String lunes = "Lunes: \n", martes = "Martes:\n", jueves = "Jueves\n", viernes = "Viernes:\n", sabado = "Sábado:\n";
-		ArrayList<Pelicula> peliculasMostradas = new ArrayList<Pelicula>();
-		for (Funcion funcionLunes: this.lunes){
-			if (!peliculasMostradas.contains(funcionLunes.getPelicula())){
-				lunes = lunes.concat(funcionLunes.getPelicula().getTitulo() + "\n");
-				peliculasMostradas.add(funcionLunes.getPelicula());
-			}
-		}
-		lunes += "\n"; peliculasMostradas.clear();
-		for (Funcion funcionMartes: this.martes){
-			if (!peliculasMostradas.contains(funcionMartes.getPelicula())){
-				martes = martes.concat(funcionMartes.getPelicula().getTitulo() + "\n");
-				peliculasMostradas.add(funcionMartes.getPelicula());
-			}
-		}
-		martes += "\n"; peliculasMostradas.clear();
-		for (Funcion funcionJueves: this.jueves){
-			if (!peliculasMostradas.contains(funcionJueves.getPelicula())){
-				jueves = jueves.concat(funcionJueves.getPelicula().getTitulo() + "\n");
-				peliculasMostradas.add(funcionJueves.getPelicula());
-			}
-		}
-		jueves += "\n"; peliculasMostradas.clear();
-		for (Funcion funcionViernes: this.viernes){
-			if (!peliculasMostradas.contains(funcionViernes.getPelicula())){
-				viernes = viernes.concat(funcionViernes.getPelicula().getTitulo() + "\n");
-				peliculasMostradas.add(funcionViernes.getPelicula());
-			}
-		}
-		viernes += "\n"; peliculasMostradas.clear();
-		for (Funcion funcionSabado: this.sabado){
-			if (!peliculasMostradas.contains(funcionSabado.getPelicula())){
-				sabado = sabado.concat(funcionSabado.getPelicula().getTitulo() + "\n");
-				peliculasMostradas.add(funcionSabado.getPelicula());
-			}
-		}
-		return lunes + martes + jueves + viernes + sabado;
+	public String enseñarFunciones() {
+	    String lunes = "Lunes: \n", martes = "Martes:\n", jueves = "Jueves\n", viernes = "Viernes:\n", sabado = "Sábado:\n";
+	    ArrayList<Pelicula> peliculasMostradas = new ArrayList<>();
+
+	    // Procesar funciones del lunes
+	    for (Funcion funcionLunes : this.lunes) {
+	        if (funcionLunes != null && funcionLunes.getPelicula() != null) {
+	            Pelicula pelicula = funcionLunes.getPelicula();
+	            if (!peliculasMostradas.contains(pelicula)) {
+	                lunes = lunes.concat(pelicula.getTitulo() + "\n");
+	                peliculasMostradas.add(pelicula);
+	            }
+	        }
+	    }
+	    lunes += "\n";
+	    peliculasMostradas.clear();
+
+	    // Procesar funciones del martes
+	    for (Funcion funcionMartes : this.martes) {
+	        if (funcionMartes != null && funcionMartes.getPelicula() != null) {
+	            Pelicula pelicula = funcionMartes.getPelicula();
+	            if (!peliculasMostradas.contains(pelicula)) {
+	                martes = martes.concat(pelicula.getTitulo() + "\n");
+	                peliculasMostradas.add(pelicula);
+	            }
+	        }
+	    }
+	    martes += "\n";
+	    peliculasMostradas.clear();
+
+	    // Procesar funciones del jueves
+	    for (Funcion funcionJueves : this.jueves) {
+	        if (funcionJueves != null && funcionJueves.getPelicula() != null) {
+	            Pelicula pelicula = funcionJueves.getPelicula();
+	            if (!peliculasMostradas.contains(pelicula)) {
+	                jueves = jueves.concat(pelicula.getTitulo() + "\n");
+	                peliculasMostradas.add(pelicula);
+	            }
+	        }
+	    }
+	    jueves += "\n";
+	    peliculasMostradas.clear();
+
+	    // Procesar funciones del viernes
+	    for (Funcion funcionViernes : this.viernes) {
+	        if (funcionViernes != null && funcionViernes.getPelicula() != null) {
+	            Pelicula pelicula = funcionViernes.getPelicula();
+	            if (!peliculasMostradas.contains(pelicula)) {
+	                viernes = viernes.concat(pelicula.getTitulo() + "\n");
+	                peliculasMostradas.add(pelicula);
+	            }
+	        }
+	    }
+	    viernes += "\n";
+	    peliculasMostradas.clear();
+
+	    // Procesar funciones del sábado
+	    for (Funcion funcionSabado : this.sabado) {
+	        if (funcionSabado != null && funcionSabado.getPelicula() != null) {
+	            Pelicula pelicula = funcionSabado.getPelicula();
+	            if (!peliculasMostradas.contains(pelicula)) {
+	                sabado = sabado.concat(pelicula.getTitulo() + "\n");
+	                peliculasMostradas.add(pelicula);
+	            }
+	        }
+	    }
+
+	    return lunes + martes + jueves + viernes + sabado;
 	}
 
-	public ArrayList<Pelicula> peliculasActivas(){
-		ArrayList<Pelicula> peliculas = new ArrayList<Pelicula>();
-		for (Funcion funcionLunes:this.lunes){
-			if (!peliculas.contains(funcionLunes.getPelicula())){
-				peliculas.add(funcionLunes.getPelicula());
-			}
-		}
-		for (Funcion funcionMartes:this.martes){
-			if (!peliculas.contains(funcionMartes.getPelicula())){
-				peliculas.add(funcionMartes.getPelicula());
-			}
-		}
-		for (Funcion funcionJueves:this.jueves){
-			if (!peliculas.contains(funcionJueves.getPelicula())){
-				peliculas.add(funcionJueves.getPelicula());
-			}
-		}
-		for (Funcion funcionViernes:this.viernes){
-			if (!peliculas.contains(funcionViernes.getPelicula())){
-				peliculas.add(funcionViernes.getPelicula());
-			}
-		}
-		for (Funcion funcionSabado:this.sabado){
-			if (!peliculas.contains(funcionSabado.getPelicula())){
-				peliculas.add(funcionSabado.getPelicula());
-			}
-		}
-		return peliculas;
-	}	
+	public ArrayList<Pelicula> peliculasActivas() {
+	    ArrayList<Pelicula> peliculas = new ArrayList<>();
+
+	    // Procesar funciones del lunes
+	    for (Funcion funcionLunes : this.lunes) {
+	        if (funcionLunes != null) {
+	            Pelicula pelicula = funcionLunes.getPelicula();
+	            if (pelicula != null && !peliculas.contains(pelicula)) {
+	                peliculas.add(pelicula);
+	            }
+	        }
+	    }
+
+	    // Procesar funciones del martes
+	    for (Funcion funcionMartes : this.martes) {
+	        if (funcionMartes != null) {
+	            Pelicula pelicula = funcionMartes.getPelicula();
+	            if (pelicula != null && !peliculas.contains(pelicula)) {
+	                peliculas.add(pelicula);
+	            }
+	        }
+	    }
+
+	    // Procesar funciones del jueves
+	    for (Funcion funcionJueves : this.jueves) {
+	        if (funcionJueves != null) {
+	            Pelicula pelicula = funcionJueves.getPelicula();
+	            if (pelicula != null && !peliculas.contains(pelicula)) {
+	                peliculas.add(pelicula);
+	            }
+	        }
+	    }
+
+	    // Procesar funciones del viernes
+	    for (Funcion funcionViernes : this.viernes) {
+	        if (funcionViernes != null) {
+	            Pelicula pelicula = funcionViernes.getPelicula();
+	            if (pelicula != null && !peliculas.contains(pelicula)) {
+	                peliculas.add(pelicula);
+	            }
+	        }
+	    }
+
+	    // Procesar funciones del sábado
+	    for (Funcion funcionSabado : this.sabado) {
+	        if (funcionSabado != null) {
+	            Pelicula pelicula = funcionSabado.getPelicula();
+	            if (pelicula != null && !peliculas.contains(pelicula)) {
+	                peliculas.add(pelicula);
+	            }
+	        }
+	    }
+
+	    return peliculas;
+	}
+
 
 	public ArrayList<Funcion> obtenerFunciones(Pelicula pelicula){
 		ArrayList<Funcion> posibilidades = new ArrayList<Funcion>();
@@ -271,36 +355,67 @@ public class Cine {
 	
 	public List<String> obtenerCalificacionesPeliculas() {
 	    List<String> calificaciones = new ArrayList<>();
+
+	    // Procesar funciones del lunes
 	    for (Funcion funcion : lunes) {
-	        Pelicula pelicula = funcion.getPelicula();
-	        if (pelicula != null) {
-	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Lunes");
+	        if (funcion != null) {
+	            Pelicula pelicula = funcion.getPelicula();
+	            if (pelicula != null) {
+	                calificaciones.add("Película: " + pelicula.getTitulo() +
+	                                   " - Calificación: " + pelicula.getCalificacionPromedio() +
+	                                   " - Día: Lunes");
+	            }
 	        }
 	    }
+
+	    // Procesar funciones del martes
 	    for (Funcion funcion : martes) {
-	        Pelicula pelicula = funcion.getPelicula();
-	        if (pelicula != null) {
-	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Martes");
+	        if (funcion != null) {
+	            Pelicula pelicula = funcion.getPelicula();
+	            if (pelicula != null) {
+	                calificaciones.add("Película: " + pelicula.getTitulo() +
+	                                   " - Calificación: " + pelicula.getCalificacionPromedio() +
+	                                   " - Día: Martes");
+	            }
 	        }
 	    }
+
+	    // Procesar funciones del jueves
 	    for (Funcion funcion : jueves) {
-	        Pelicula pelicula = funcion.getPelicula();
-	        if (pelicula != null) {
-	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Jueves");
+	        if (funcion != null) {
+	            Pelicula pelicula = funcion.getPelicula();
+	            if (pelicula != null) {
+	                calificaciones.add("Película: " + pelicula.getTitulo() +
+	                                   " - Calificación: " + pelicula.getCalificacionPromedio() +
+	                                   " - Día: Jueves");
+	            }
 	        }
 	    }
+
+	    // Procesar funciones del viernes
 	    for (Funcion funcion : viernes) {
-	        Pelicula pelicula = funcion.getPelicula();
-	        if (pelicula != null) {
-	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Viernes");
+	        if (funcion != null) {
+	            Pelicula pelicula = funcion.getPelicula();
+	            if (pelicula != null) {
+	                calificaciones.add("Película: " + pelicula.getTitulo() +
+	                                   " - Calificación: " + pelicula.getCalificacionPromedio() +
+	                                   " - Día: Viernes");
+	            }
 	        }
 	    }
+
+	    // Procesar funciones del sábado
 	    for (Funcion funcion : sabado) {
-	        Pelicula pelicula = funcion.getPelicula();
-	        if (pelicula != null) {
-	            calificaciones.add("Película: " + pelicula.getTitulo() + " - Calificación: " + pelicula.getCalificacionPromedio() + " - Día: Sabado");
+	        if (funcion != null) {
+	            Pelicula pelicula = funcion.getPelicula();
+	            if (pelicula != null) {
+	                calificaciones.add("Película: " + pelicula.getTitulo() +
+	                                   " - Calificación: " + pelicula.getCalificacionPromedio() +
+	                                   " - Día: Sábado");
+	            }
 	        }
 	    }
+
 	    return calificaciones;
 	}
 		
@@ -316,7 +431,7 @@ public class Cine {
 	}
 	
 	public String toString() {
-        return "Cine: " + nombre + ", Funciones: " + (lunes.size() + martes.size() + jueves.size() + viernes.size() + sabado.size()) + " Zona de juegos: " + zonaDeJuegos;
+        return "Cine: " + nombre + ", Funciones: " +( lunes.length + martes.length + jueves.length + viernes.length) + sabado.length + " Zona de juegos: " + zonaDeJuegos;
     }
 }
 

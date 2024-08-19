@@ -12,12 +12,12 @@ public class Admin{
         Interfaz.crearObjetos();
         int opcion;
         boolean finalizar=false;
-
+        
         while(!finalizar){
             System.out.println("-------Sistema para la compra de boletos de cine-----------");
             System.out.println("1.- Comprar boletos para un cine");
             System.out.println("2.- Gestionar Zona de Juegos");
-            System.out.println("3.- Tercera operación");
+            System.out.println("3.- Gestionar Peliculas");
             System.out.println("4.- Cuarta operaciòn");
             System.out.println("5.- Quinta operaciòn");
             System.out.println("------------------");
@@ -36,6 +36,9 @@ public class Admin{
                     break;
                 case 2:
                     Interfaz.gestionarZonaDeJuegos();
+                    break;
+                case 3:
+                    Interfaz.gestionarPeliculas();
                     break;
                 case 6:
                     Interfaz.comprarBoletaJuegos();
