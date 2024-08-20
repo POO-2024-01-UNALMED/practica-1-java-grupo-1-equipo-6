@@ -111,28 +111,49 @@ public class Cine {
 	
 	public boolean hayPelicula(Pelicula pelicula) {		
 		for (Funcion funcionLunes: this.lunes){
-			if (funcionLunes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
-				return true;
+			if (funcionLunes != null){
+				if(funcionLunes.getPelicula() != null){
+					if (funcionLunes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+						return true;
+					}
+				}
 			}
 		}
 		for (Funcion funcionMartes: this.martes){
-			if (funcionMartes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
-				return true;
+			if (funcionMartes != null){
+				if(funcionMartes.getPelicula() != null){
+					if (funcionMartes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+						return true;
+					}
+				}
 			}
 		}
+			
 		for (Funcion funcionJueves: this.jueves){
-			if (funcionJueves.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
-				return true;
+			if(funcionJueves != null){
+				if(funcionJueves.getPelicula() != null){
+					if (funcionJueves.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+						return true;
+					}
+				}
 			}
 		}
 		for (Funcion funcionViernes: this.viernes){
-			if (funcionViernes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
-				return true;
+			if (funcionViernes != null) {
+				if(funcionViernes.getPelicula() != null){
+					if (funcionViernes.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+						return true;
+					}
+				}
 			}
 		}
 		for (Funcion funcionSabado: this.sabado){
-			if (funcionSabado.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
-				return true;
+			if (funcionSabado != null){
+				if(funcionSabado.getPelicula() != null){
+					if (funcionSabado.getPelicula().getTitulo().equals(pelicula.getTitulo()) && this.obtenerFunciones(pelicula).size() > 0){
+						return true;
+					}
+				}
 			}
 		}
 		return false;
@@ -152,9 +173,13 @@ public class Cine {
 	            }
 	        }
 	    }
-	    lunes += "\n";
-	    peliculasMostradas.clear();
-
+			if(peliculasMostradas.size() == 0){
+				lunes += "No hay películas\n";
+			} else{
+				lunes += "\n";
+				peliculasMostradas.clear();
+			}
+	  
 	    // Procesar funciones del martes
 	    for (Funcion funcionMartes : this.martes) {
 	        if (funcionMartes != null && funcionMartes.getPelicula() != null) {
@@ -165,8 +190,12 @@ public class Cine {
 	            }
 	        }
 	    }
-	    martes += "\n";
-	    peliculasMostradas.clear();
+		if(peliculasMostradas.size() == 0){
+			martes += "No hay películas\n";
+		} else{
+			martes += "\n";
+			peliculasMostradas.clear();
+		}
 
 	    // Procesar funciones del jueves
 	    for (Funcion funcionJueves : this.jueves) {
@@ -178,8 +207,12 @@ public class Cine {
 	            }
 	        }
 	    }
-	    jueves += "\n";
-	    peliculasMostradas.clear();
+		if(peliculasMostradas.size() == 0){
+			jueves += "No hay películas\n";
+		} else{
+			jueves += "\n";
+			peliculasMostradas.clear();
+		}
 
 	    // Procesar funciones del viernes
 	    for (Funcion funcionViernes : this.viernes) {
@@ -191,8 +224,12 @@ public class Cine {
 	            }
 	        }
 	    }
-	    viernes += "\n";
-	    peliculasMostradas.clear();
+		if(peliculasMostradas.size() == 0){
+			viernes += "No hay películas\n";
+		} else{
+			viernes += "\n";
+			peliculasMostradas.clear();
+		}
 
 	    // Procesar funciones del sábado
 	    for (Funcion funcionSabado : this.sabado) {
@@ -204,6 +241,12 @@ public class Cine {
 	            }
 	        }
 	    }
+		if(peliculasMostradas.size() == 0){
+			sabado += "No hay películas\n";
+		} else{
+			sabado += "\n";
+			peliculasMostradas.clear();
+		}
 
 	    return lunes + martes + jueves + viernes + sabado;
 	}
@@ -268,28 +311,48 @@ public class Cine {
 	public ArrayList<Funcion> obtenerFunciones(Pelicula pelicula){
 		ArrayList<Funcion> posibilidades = new ArrayList<Funcion>();
 		for( Funcion funcionLunes: this.lunes){
-			if (funcionLunes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionLunes.getSala().hayAsientosLibres()){
-				posibilidades.add(funcionLunes);
+			if(funcionLunes != null){
+				if(funcionLunes.getPelicula()!= null){
+					if (funcionLunes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionLunes.getSala().hayAsientosLibres()){
+						posibilidades.add(funcionLunes);
+					}
+				}
 			}
 		}
 		for( Funcion funcionMartes: this.martes){
-			if (funcionMartes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionMartes.getSala().hayAsientosLibres()){
-				posibilidades.add(funcionMartes);
+			if (funcionMartes != null){
+				if(funcionMartes.getPelicula() != null){
+					if (funcionMartes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionMartes.getSala().hayAsientosLibres()){
+						posibilidades.add(funcionMartes);
+					}
+				}
 			}
 		}
 		for( Funcion funcionJueves: this.jueves){
-			if (funcionJueves.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionJueves.getSala().hayAsientosLibres()){
-				posibilidades.add(funcionJueves);
+			if (funcionJueves != null){
+				if(funcionJueves.getPelicula() != null){
+					if (funcionJueves.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionJueves.getSala().hayAsientosLibres()){
+						posibilidades.add(funcionJueves);
+					}
+				}		
 			}
 		}
 		for( Funcion funcionViernes: this.viernes){
-			if (funcionViernes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionViernes.getSala().hayAsientosLibres()){
-				posibilidades.add(funcionViernes);
+			if(funcionViernes != null){
+				if(funcionViernes.getPelicula() != null){
+					if (funcionViernes.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionViernes.getSala().hayAsientosLibres()){
+						posibilidades.add(funcionViernes);
+					}
+				}
 			}
-		}
+		}	
 		for( Funcion funcionSabado: this.sabado){
-			if (funcionSabado.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionSabado.getSala().hayAsientosLibres()){
-				posibilidades.add(funcionSabado);
+			if (funcionSabado != null){
+				if(funcionSabado.getPelicula() != null){
+					if (funcionSabado.getPelicula().getTitulo().equalsIgnoreCase(pelicula.getTitulo()) && funcionSabado.getSala().hayAsientosLibres()){
+						posibilidades.add(funcionSabado);
+					}
+				}
 			}
 		}
 		return posibilidades;
@@ -297,58 +360,33 @@ public class Cine {
  	
 	public void ajustarFunciones() {
 		for (Funcion funcion: this.lunes){
-			funcion.setDia("Lunes");
-			if (funcion.getPelicula().getGenero().equalsIgnoreCase("Terror") || funcion.getPelicula().getGenero().equalsIgnoreCase("+18")){
-				funcion.setMomentoDelDia("pm");
-			} else if (funcion.getPelicula().getGenero().equalsIgnoreCase("Infantil")){
-				funcion.setMomentoDelDia("am");
-			}
-			else{
-				funcion.setMomentoDelDia("pm");
+			if (funcion != null){
+				funcion.setDia("Lunes");
+				funcion.definirMomentoDelDia();
 			}
 		}
 		for (Funcion funcionMartes: this.martes){
-			funcionMartes.setDia("Martes");
-			if (funcionMartes.getPelicula().getGenero().equalsIgnoreCase("Terror") || funcionMartes.getPelicula().getGenero().equalsIgnoreCase("+18")){
-				funcionMartes.setMomentoDelDia("pm");
-			} else if (funcionMartes.getPelicula().getGenero().equalsIgnoreCase("Infantil")){
-				funcionMartes.setMomentoDelDia("am");
-			}
-			else{
-				funcionMartes.setMomentoDelDia("pm");
+			if (funcionMartes != null){
+				funcionMartes.setDia("Martes");
+				funcionMartes.definirMomentoDelDia();
 			}
 		}
 			for (Funcion funcionJueves: this.jueves){
-				funcionJueves.setDia("Jueves");
-				if (funcionJueves.getPelicula().getGenero().equalsIgnoreCase("Terror") || funcionJueves.getPelicula().getGenero().equalsIgnoreCase("+18")){
-					funcionJueves.setMomentoDelDia("pm");
-				} else if (funcionJueves.getPelicula().getGenero().equalsIgnoreCase("Infantil")){
-					funcionJueves.setMomentoDelDia("am");
-				}
-				else{
-					funcionJueves.setMomentoDelDia("pm");
+				if (funcionJueves != null){
+					funcionJueves.setDia("Jueves");
+					funcionJueves.definirMomentoDelDia();
 				}
 			}
 				for (Funcion funcionViernes: this.viernes){
-					funcionViernes.setDia("Viernes");
-					if (funcionViernes.getPelicula().getGenero().equalsIgnoreCase("Terror") || funcionViernes.getPelicula().getGenero().equalsIgnoreCase("+18")){
-						funcionViernes.setMomentoDelDia("pm");
-					} else if (funcionViernes.getPelicula().getGenero().equalsIgnoreCase("Infantil")){
-						funcionViernes.setMomentoDelDia("am");
-					}
-					else{
-						funcionViernes.setMomentoDelDia("pm");
+					if (funcionViernes != null){
+						funcionViernes.setDia("Viernes");
+						funcionViernes.definirMomentoDelDia();
 					}
 				}
 				for (Funcion funcionSabado: this.sabado){
-					funcionSabado.setDia("Sabado");
-					if (funcionSabado.getPelicula().getGenero().equalsIgnoreCase("Terror") || funcionSabado.getPelicula().getGenero().equalsIgnoreCase("+18")){
-						funcionSabado.setMomentoDelDia("pm");
-					} else if (funcionSabado.getPelicula().getGenero().equalsIgnoreCase("Infantil")){
-						funcionSabado.setMomentoDelDia("am");
-					}
-					else{
-						funcionSabado.setMomentoDelDia("pm");
+					if(funcionSabado != null){
+						funcionSabado.setDia("Sábado");
+						funcionSabado.definirMomentoDelDia();
 					}
 				}
 	}
