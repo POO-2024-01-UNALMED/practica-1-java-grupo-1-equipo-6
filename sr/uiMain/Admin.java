@@ -53,6 +53,8 @@ public class Admin{
                 case 3:
                     Interfaz.gestionarPeliculas();
                     break;
+                case 5:
+                	Interfaz.comprarTarjeta();
                 case 6:
                     Interfaz.comprarBoletaJuegos();
                     break;
