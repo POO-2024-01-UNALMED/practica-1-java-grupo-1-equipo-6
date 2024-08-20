@@ -1,5 +1,7 @@
+package gestorAplicacion;
 
 public class Recibo {
+
 	private String planSeleccionado;
 	private double costo;
 	private int puntosOtorgados;
@@ -32,5 +34,4 @@ public void setPuntosOtorgados(int puntosOtorgados) {
 	public int getPuntosOtorgados() {
 		return puntosOtorgados;
 	}
-
 }
