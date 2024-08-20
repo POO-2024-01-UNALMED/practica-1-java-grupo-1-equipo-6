@@ -893,13 +893,13 @@ public static void comprarTarjeta() {
                         int respuestaTipo = scanner.nextInt();
                         switch (respuestaTipo) {
                             case 1:
-                                System.out.println("La tarjeta bronce es la mejor opción si estás interesado en tener beneficios pero sin sobrepasarte con tus gastos.");
+                                System.out.println("La tarjeta bronce es la mejor opción si estás interesado en tener beneficios pero sin sobrepasarte con tus gastos, recibiras 5000 puntos automaticamente despues de tu compra ");
                                 break;
                             case 2:
-                                System.out.println("La tarjeta platino es la mejor opción si tu estadía en nuestras salas es muy frecuente, con un excelente precio y muchos beneficios.");
+                                System.out.println("La tarjeta platino es la mejor opción si tu estadía en nuestras salas es muy frecuente, con un excelente precio y muchos beneficios, recibiras 10000 puntos automaticamente despues de tu compra");
                                 break;
                             case 3:
-                                System.out.println("La tarjeta oro es la mejor opción si te consideras un completo amante del cine, con beneficios que no cuenta ninguna otra tarjeta.");
+                                System.out.println("La tarjeta oro es la mejor opción si te consideras un completo amante del cine, con beneficios que no cuenta ninguna otra tarjeta, recibiras 30000 puntos automaticamente despues de tu compra");
                                 break;
                             case 4:
                                 break;  // Regresa al menú anterior
@@ -923,12 +923,37 @@ public static void comprarTarjeta() {
                                         System.out.println("La compra de la Tarjeta Bronce ha sido exitosa...");
                                         cliente.setTipoTarjeta("Tarjeta Bronce");
                                         cliente.setTarjeta(true);
+                                        cine.tarjetasVendidasBronce.add(cliente);
+                                        System.out.println("La tarjeta con la informacion del cliente se agrego correctamente.");
+                                        scanner.nextLine();
+                                        System.out.println("¿Desea imprimir el recibo?  " + "\n 1) SI"+ "\n 2)NO");
+                                        Recibo recibo = new Recibo(cliente.getTipoTarjeta, Cliente.PRECIO_TARJETA_BRONCE, 5000)
+                                        int respuesta2 = scanner.nextInt();
+                                        switch(respuesta2) {
+                                        case 1:
+                                        	cliente.imprimirRecibo(recibo);
+                                        	break
+                                        case 2:
+                                        	break
+                                        	
+                                        default:
+                                        	break
+                                        }
+                                        
+                                        
+                                        
                                     } else {
                                         System.out.println("No tienes suficiente dinero para la compra.");
+                                        Recibo recibo = new Recibo(null, 0, 0);
+                                        cliente.imprimirRecibo();
                                     }
+                                    
                                 } else {
                                     System.out.println("Ya no hay tarjetas bronce disponibles en este cine.");
+                                    Recibo recibo = new Recibo(null, 0, 0);
+                                    cliente.imprimirRecibo();
                                 }
+                                
                                 break;
                             case 2:
                                 if (cine.getTarjetasVendidasPlatino() < Cine.LIMITE_TARJETAS) {  
@@ -936,11 +961,33 @@ public static void comprarTarjeta() {
                                         System.out.println("La compra de la Tarjeta Platino ha sido exitosa...");
                                         cliente.setTipoTarjeta("Tarjeta Platino");
                                         cliente.setTarjeta(true);
+                                        cine.tarjetasVendidasBronce.add(cliente);
+                                        System.out.println("La tarjeta con la informacion del cliente se agrego correctamente.");
+                                        scanner.nextLine();
+                                        System.out.println("¿Desea imprimir el recibo?  " + "\n 1) SI"+ "\n 2)NO");
+                                        Recibo recibo = new Recibo(cliente.getTipoTarjeta, Cliente.PRECIO_TARJETA_PLATINO, 10000)
+                                        int respuesta2 = scanner.nextInt();
+                                        switch(respuesta2) {
+                                        case 1:
+                                        	cliente.imprimirRecibo(recibo);
+                                        	break
+                                        case 2:
+                                        	break
+                                        	
+                                        default:
+                                        	break
+                                        }
+                                        
                                     } else {
                                         System.out.println("No tienes suficiente dinero para la compra.");
+                                        Recibo recibo = new Recibo(null, 0, 0);
+                                        cliente.imprimirRecibo();
                                     }
+                                    
                                 } else {
                                     System.out.println("Ya no hay tarjetas platino disponibles en este cine.");
+                                    Recibo recibo = new Recibo(null, 0, 0);
+                                    cliente.imprimirRecibo();
                                 }
                                 break;
                             case 3:
@@ -949,11 +996,32 @@ public static void comprarTarjeta() {
                                         System.out.println("La compra de la Tarjeta Oro ha sido exitosa...");
                                         cliente.setTipoTarjeta("Tarjeta Oro");
                                         cliente.setTarjeta(true);
+                                        scanner.nextLine();
+                                        cine.tarjetasVendidasBronce.add(cliente);
+                                        System.out.println("La tarjeta con la informacion del cliente se agrego correctamente.");
+                                        System.out.println("¿Desea imprimir el recibo?  " + "\n 1) SI"+ "\n 2)NO");
+                                        Recibo recibo = new Recibo(cliente.getTipoTarjeta, Cliente.PRECIO_TARJETA_ORO, 30000)
+                                        int respuesta2 = scanner.nextInt();
+                                        switch(respuesta2) {
+                                        case 1:
+                                        	cliente.imprimirRecibo(recibo);
+                                        	break
+                                        case 2:
+                                        	break
+                                        	
+                                        default:
+                                        	break
+                                        }
+                                        
                                     } else {
                                         System.out.println("No tienes suficiente dinero para la compra.");
+                                        Recibo recibo = new Recibo(null, 0, 0);
+                                        cliente.imprimirRecibo();
                                     }
                                 } else {
                                     System.out.println("Ya no hay tarjetas oro disponibles en este cine.");
+                                    Recibo recibo = new Recibo(null, 0, 0);
+                                    cliente.imprimirRecibo();
                                 }
                                 break;
                             default:

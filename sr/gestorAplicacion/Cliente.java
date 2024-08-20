@@ -3,6 +3,7 @@ import uiMain.Interfaz;
 import java.util.ArrayList;
 
 public class Cliente {
+	Recibo recibo;
 	private String nombre;
 	private int identificacion;
 	private double saldo;
@@ -27,7 +28,12 @@ public class Cliente {
 		this(nombre,saldo,"Generico",identificacion);
 	}
 	
-	
+	public void imprimirRecibo(Recibo recibo) {
+		this.recibo = recibo;
+		
+		System.out.println("Compra de: " + recibo.getPlanSeleccionado() + "\nA nombre de" + nombre + "\ncon un costo de: " + recibo.getCosto() + "\nSe le otorga la cantidad de " + recibo.getPuntosOtorgados() + "Puntos"  );
+		
+	}
 	public double getSaldo() {
 		return saldo;
 	}

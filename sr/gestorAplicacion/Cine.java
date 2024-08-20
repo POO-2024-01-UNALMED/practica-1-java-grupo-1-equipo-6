@@ -5,9 +5,9 @@ import java.util.List;
 import uiMain.Interfaz;
 
 public class Cine {
-	private int tarjetasVendidasBronce;
-	private int tarjetasVendidasPlatino;
-	private int tarjetasVendidasOro;
+	private ArrayList<Cliente> tarjetasVendidasBronce;
+	private ArrayList<Cliente> tarjetasVendidasPlatino;
+	private ArrayList<Cliente> tarjetasVendidasOro;
 	private String nombre;
 	private Funcion[] lunes = new Funcion[7];
 	private Funcion[] martes = new Funcion[7];
@@ -20,9 +20,9 @@ public class Cine {
 	public final static int LIMITE_TARJETAS = 10;
 
 	public Cine(String nombre, ZonaDeJuegos zonaDeJuegos){
-		tarjetasVendidasBronce = 0;
-		tarjetasVendidasPlatino = 0;
-		tarjetasVendidasOro = 0;
+		tarjetasVendidasBronce = new ArrayList<>();
+		tarjetasVendidasPlatino = new ArrayList<>();
+		tarjetasVendidasOro = new ArrayList<>();
 		this.nombre = nombre;
 		this.zonaDeJuegos = zonaDeJuegos;
 		if(zonaDeJuegos!=null) {
@@ -116,26 +116,18 @@ public class Cine {
         }
     }
     
-    public void setTarjetasVendidasBronce(int tarjetasVendidasBronce) {
-    	this.tarjetasVendidasBronce = tarjetasVendidasBronce;
-    }
     
-    public String getTarjetasVendidasBronce() {
-    	return tarjetasVendidasBronce;
+    // Método para obtener el tamaño del ArrayList
+    public int getTarjetasVendidasBronce() {
+        return tarjetasVendidasBronce.size();
     }
-    public void setTarjetasVendidasPlatino(int tarjetasVendidasPlatino) {
-    	this.tarjetasVendidasPlatino = tarjetasVendidasPlatino;
+    // Método para obtener el tamaño del ArrayList
+    public int getTarjetasVendidasPlatino() {
+        return tarjetasVendidasBronce.size();
     }
-    
-    public String getTarjetasVendidasPlatino() {
-    	return tarjetasVendidasPlatino;
-    }
-    public void setTarjetasVendidasOro(int tarjetasVendidasBronce) {
-    	this.tarjetasVendidasOro = tarjetasVendidasOro;
-    }
-    
-    public String getTarjetasVendidasOro() {
-    	return tarjetasVendidasOro;
+    // Método para obtener el tamaño del ArrayList
+    public int getTarjetasVendidasOro() {
+        return tarjetasVendidasBronce.size();
     }
 
 	
