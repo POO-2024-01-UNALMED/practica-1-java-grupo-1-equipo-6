@@ -7,7 +7,7 @@ public class Cliente {
 	private int identificacion;
 	private double saldo;
 	private String tipo;
-	private boolean tarjeta;
+	private boolean tarjeta = false;
 	private int puntosTarjeta;
 	private int saldoTarjeta;
 	private String tipoTarjeta;
@@ -72,6 +72,14 @@ public class Cliente {
 		this.tipoTarjeta = tarjeta;
 	}
 	
+	public boolean isTarjeta() {
+		if(tarjeta == true) {
+			return true
+			else {
+				return false;
+			}
+		}
+	}
 	public void calificarPelicula(Pelicula pelicula, double calificacion) {
 		if (calificacion>5 && calificacion<0) {
 			Interfaz.error();
