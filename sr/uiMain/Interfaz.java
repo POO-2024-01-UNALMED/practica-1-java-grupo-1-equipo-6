@@ -810,8 +810,12 @@ public static void gestionarPeliculas() {
             System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
         }
         int cineSeleccionado1 = scanner.nextInt() - 1;
-        Cine cine = Cine.cines.get(cineSeleccionado1);
-
+        if(cineSeleccionado1 < 0 || cineSeleccionado > Cine.cines.size()) {
+            System.out.println("Error");
+            return;
+             }else if(cineSeleccionado1 > 0 && cineSeleccionado < Cine.cines.size()){
+            	 Cine cine = Cine.cines.get(cineSeleccionado1);
+             }
         // Seleccionar la película en la que se desea aplicar el bono
         System.out.println("Seleccione la película a la que desea aplicar el bono:");
         List<Pelicula> peliculas1 = cine.peliculasActivas();
@@ -834,106 +838,131 @@ public static void gestionarPeliculas() {
 
 
 public static void comprarTarjeta() {
-	Scanner scanner = new Scanner(System.int);
-	System.out.print("Hola, a continuacion vas a proceder con la compra de tu Tarjeta, Ingrese su número de identificación: ");
-	//Identificamos el cliente
-	int idCliente = (int) scanner.nextDouble();
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Hola, a continuación vas a proceder con la compra de tu Tarjeta, ingresa su número de identificación: ");
+    
+    // Identificamos al cliente
+    int idCliente = (int) scanner.nextDouble();
     Cliente cliente = Cliente.buscarClientePorId(idCliente);
     
     if (cliente == null) {
-        System.out.println("Cliente no encontrado. ¿Desea crear uno nuevo? (1)Si/(2)No");
+        System.out.println("Cliente no encontrado. ¿Desea crear uno nuevo? (1) Sí / (2) No");
         int respuesta = scanner.nextInt();
         switch (respuesta) {
             case 1:
                 System.out.println("Ingresa tu nombre: ");
-                String nombre = scanner.nextLine();  // Lee la línea completa para el nombre
-                scanner.nextLine();
+                scanner.nextLine();  
+                String nombre = scanner.nextLine();
                 System.out.println("Ingresa tu saldo inicial: ");
-                double saldoInicial = scanner.nextDouble();  // Lee el saldo inicial (número)
-
-                scanner.nextLine();
+                double saldoInicial = scanner.nextDouble();
+                
                 cliente = new Cliente(nombre, saldoInicial, idCliente);
                 System.out.println("Cliente creado exitosamente.");
                 break;
             case 2:
-                return;
+                return;  // Salir del método si el cliente no desea crear uno nuevo
             default:
                 System.out.println("Selección inválida. Por favor, seleccione un número válido.");
-                return; // Salir del método si la selección es inválida
-        }else {
-         if(cliente.tarjeta == false) {
-        	 System.out.println("Seleccione el cine en el que desea comprar la tarjeta: ");
-             scanner.nextLine();
-        	 for (int i = 0; i < Cine.cines.size(); i++) {
-                 System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
-                 int cineSeleccionado1 = scanner.nextInt() - 1;
-                 if(cineSeleccionado1 < 0 || cineSeleccionado > Cine.cines.size()) {
-                System.out.println("Error");
-                return;
-                 }else if(cineSeleccionado1 > 0 && cineSeleccionado < Cine.cines.size()){
-                	 
-                 }
-                
-                
-                 Cine cine = Cine.cines.get(cineSeleccionado1);
-             }
-        	 System.out.println("1) Tipos de tarjeta \n 2) Precios \n 3)Comprar")
-        	 scanner.nextLine();
-        	 int respuesta = scanner.nextInt();
-        	 switch (respuesta) {
-        	     case 1: 
-        		 scanner.nextLine();
-        		 System.out.println("Seleccione que tipo de tarjeta le interesa para saber mas informacion");
-        		 System.out.println("1)Tarjeta bronce");
-        		 System.out.println("2)Tarjeta platino");
-        		 System.out.println("3)Tarjeta oro");
-        		 int respuesta = scanner.nextInt();
-        		 switch (respuesta) {
-        		 case 1:
-        			 System.out.println("La tarjeta bronce es la mejor opcion si estas interesado en tener beneficios pero sin sobrepasarte con tus gastos");
-        		 break
-        		 case 2:
-        			 System.out.println("La tarjeta platino es la mejor opcion si tu estadia en nuestras salas es muy frecuente, con un excelente precio y muchos beneficios");
-        	     break      	     
-        	     
-        		 case 3: 
-        	     System.out.println("La tarjeta oro es la mejor opcion si te consideras un completo amante del cine, con beneficios que no cuenta ninguna otra tarjeta");
-        		 break
-        	     default: 
-        	     System.out.println("Solo puedes poner numeros del 1 al 3");
-        	     return;
-        		 }
-        		 break;
-        	     case 2:
-        	    	 
-        	    	 System.out.println("Tarjeta bronce: 10.000$ \n Tarjeta platino: 50.000$ \n Tarjeta oro: 100.000$}");
-        	    break;
-        	     case 3:
-        	    	 scanner.nextLine();                  
-        	    	 System.out.println("Que tipo de tarjeta deseas comprar: \n 1)Tarjeta bronce \n 2)Tarjeta platino \n 3)Tarjeta oro");
-        	    	 int respuesta = scanner.nextInt();
-        	    	 switch(respuesta) {
-        	    	 case 1:
-        	    	if()	 
-        	    	cliente.setTipoTarjeta("Tarjeta Bronce");
-        	    	break
-        	    	 case 2:
-        	    		 
-        	    		 cliente.setTipoTarjeta("Tarjeta Platino");
-        	    		break
-        	    	 case 3: 
-        	    		 
-        	    		 cliente.setTipoTarja("Tarjeta Oro ")
-        	    	 }
-        		 }
- 	        	 
-        	 }
-        	 int servicio = scanner.nextInt()
-        	 System.out.println(¿"Que servicio de tarjeta desea comprar?");
-        	 scanner.nextLine();
-        	 int servicio = scanner.nextInt();
-         }
+                return;  // Salir del método si la selección es inválida
         }
+    } else {
+        if (!cliente.isTarjeta()) {  // Asumo que el método isTarjeta() verifica si el cliente ya tiene tarjeta
+            System.out.println("Seleccione el cine en el que desea comprar la tarjeta: ");
+            scanner.nextLine();  
+            for (int i = 0; i < Cine.cines.size(); i++) {
+                System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
+            }
+            int cineSeleccionado = scanner.nextInt() - 1;
+            
+            if (cineSeleccionado < 0 || cineSeleccionado >= Cine.cines.size()) {
+                System.out.println("Error: selección inválida.");
+            } else {
+                Cine cine = Cine.cines.get(cineSeleccionado);
+                System.out.println("El cine ha sido seleccionado correctamente... ¿Qué deseas hacer?");
+                System.out.println("1) Ver tipos de tarjeta\n2) Ver precios\n3) Comprar");
+                scanner.nextLine();  // Captura el salto de línea restante
+                int respuesta1 = scanner.nextInt();
+                switch (respuesta1) {
+                    case 1:
+                        scanner.nextLine();  // Captura el salto de línea restante
+                        System.out.println("Seleccione qué tipo de tarjeta le interesa para saber más información");
+                        System.out.println("1) Tarjeta bronce");
+                        System.out.println("2) Tarjeta platino");
+                        System.out.println("3) Tarjeta oro");
+                        System.out.println("4) Regresar");
+                        int respuestaTipo = scanner.nextInt();
+                        switch (respuestaTipo) {
+                            case 1:
+                                System.out.println("La tarjeta bronce es la mejor opción si estás interesado en tener beneficios pero sin sobrepasarte con tus gastos.");
+                                break;
+                            case 2:
+                                System.out.println("La tarjeta platino es la mejor opción si tu estadía en nuestras salas es muy frecuente, con un excelente precio y muchos beneficios.");
+                                break;
+                            case 3:
+                                System.out.println("La tarjeta oro es la mejor opción si te consideras un completo amante del cine, con beneficios que no cuenta ninguna otra tarjeta.");
+                                break;
+                            case 4:
+                                break;  // Regresa al menú anterior
+                            default:
+                                System.out.println("Solo puedes poner números del 1 al 4.");
+                                return;  // Salir del método si la selección es inválida
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Tarjeta bronce: 10.000$\nTarjeta platino: 50.000$\nTarjeta oro: 100.000$");
+                        break;
+                    case 3:
+                        scanner.nextLine();  // Captura el salto de línea restante
+                        System.out.println("¿Qué tipo de tarjeta deseas comprar?\n1) Tarjeta bronce\n2) Tarjeta platino\n3) Tarjeta oro");
+                        int respuestaCompra = scanner.nextInt();
+                        switch (respuestaCompra) {
+                            case 1:
+                                if (cine.getTarjetasVendidasBronce() < Cine.LIMITE_TARJETAS) {  // Asumo que getTarjetasVendidasBronce() devuelve el número de tarjetas bronce vendidas
+                                    if (cliente.getSaldo() > Cliente.PRECIO_TARJETA_BRONCE) {  // Asumo que getSaldo() devuelve el saldo del cliente
+                                        System.out.println("La compra de la Tarjeta Bronce ha sido exitosa...");
+                                        cliente.setTipoTarjeta("Tarjeta Bronce");  // Asumo que setTipoTarjeta() establece el tipo de tarjeta del cliente
+                                    } else {
+                                        System.out.println("No tienes suficiente dinero para la compra.");
+                                    }
+                                } else {
+                                    System.out.println("Ya no hay tarjetas bronce disponibles en este cine.");
+                                }
+                                break;
+                            case 2:
+                                if (cine.getTarjetasVendidasPlatino() < Cine.LIMITE_TARJETAS) {  // Asumo que getTarjetasVendidasPlatino() devuelve el número de tarjetas platino vendidas
+                                    if (cliente.getSaldo() > Cliente.PRECIO_TARJETA_PLATINO) {  // Asumo que PRECIO_TARJETA_PLATINO es el precio de la tarjeta platino
+                                        System.out.println("La compra de la Tarjeta Platino ha sido exitosa...");
+                                        cliente.setTipoTarjeta("Tarjeta Platino");
+                                    } else {
+                                        System.out.println("No tienes suficiente dinero para la compra.");
+                                    }
+                                } else {
+                                    System.out.println("Ya no hay tarjetas platino disponibles en este cine.");
+                                }
+                                break;
+                            case 3:
+                                if (cine.getTarjetasVendidasOro() < Cine.LIMITE_TARJETAS) {  
+                                    if (cliente.getSaldo() > Cliente.PRECIO_TARJETA_ORO) {  
+                                        System.out.println("La compra de la Tarjeta Oro ha sido exitosa...");
+                                        cliente.setTipoTarjeta("Tarjeta Oro");
+                                    } else {
+                                        System.out.println("No tienes suficiente dinero para la compra.");
+                                    }
+                                } else {
+                                    System.out.println("Ya no hay tarjetas oro disponibles en este cine.");
+                                }
+                                break;
+                            default:
+                                System.out.println("Selección inválida. Por favor, seleccione un número válido.");
+                        }
+                        break;
+                    default:
+                        System.out.println("Selección inválida. Por favor, seleccione un número válido.");
+                }
+            }
+        }
+    }
+}
 
 
 

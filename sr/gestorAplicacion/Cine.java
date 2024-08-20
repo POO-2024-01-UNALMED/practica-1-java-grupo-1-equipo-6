@@ -8,7 +8,6 @@ public class Cine {
 	private int tarjetasVendidasBronce;
 	private int tarjetasVendidasPlatino;
 	private int tarjetasVendidasOro;
-	private final static int LIMITE_TARJETAS = 10;
 	private String nombre;
 	private Funcion[] lunes = new Funcion[7];
 	private Funcion[] martes = new Funcion[7];
@@ -18,7 +17,7 @@ public class Cine {
 	public static ArrayList<Pelicula> peliculas=new ArrayList<>();
 	private ZonaDeJuegos zonaDeJuegos;
 	public static ArrayList<Cine> cines = new ArrayList<>();
-	
+	public final static int LIMITE_TARJETAS = 10;
 
 	public Cine(String nombre, ZonaDeJuegos zonaDeJuegos){
 		tarjetasVendidasBronce = 0;
@@ -116,7 +115,28 @@ public class Cine {
             throw new IllegalArgumentException("El arreglo debe tener exactamente 7 elementos.");
         }
     }
-
+    
+    public void setTarjetasVendidasBronce(int tarjetasVendidasBronce) {
+    	this.tarjetasVendidasBronce = tarjetasVendidasBronce;
+    }
+    
+    public String getTarjetasVendidasBronce() {
+    	return tarjetasVendidasBronce;
+    }
+    public void setTarjetasVendidasPlatino(int tarjetasVendidasPlatino) {
+    	this.tarjetasVendidasPlatino = tarjetasVendidasPlatino;
+    }
+    
+    public String getTarjetasVendidasPlatino() {
+    	return tarjetasVendidasPlatino;
+    }
+    public void setTarjetasVendidasOro(int tarjetasVendidasBronce) {
+    	this.tarjetasVendidasOro = tarjetasVendidasOro;
+    }
+    
+    public String getTarjetasVendidasOro() {
+    	return tarjetasVendidasOro;
+    }
 
 	
 	

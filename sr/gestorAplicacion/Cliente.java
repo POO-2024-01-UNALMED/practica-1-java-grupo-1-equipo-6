@@ -11,6 +11,9 @@ public class Cliente {
 	private int puntosTarjeta;
 	private int saldoTarjeta;
 	private String tipoTarjeta;
+	public static final double PRECIO_TARJETA_BRONCE = 20000;
+	public static final double PRECIO_TARJETA_PLATINO = 50000;
+	public static final double PRECIO_TARJETA_ORO = 100000;
 	public static ArrayList<Cliente> allClientes=new ArrayList<>();
 
 	public Cliente(String nombre, double saldo,String tipo,int identificacion){
