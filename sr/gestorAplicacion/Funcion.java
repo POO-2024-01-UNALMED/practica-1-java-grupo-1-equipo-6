@@ -1,6 +1,7 @@
 package gestorAplicacion;
 import java.util.ArrayList;
 import java.time.LocalTime; //Para el manejo de los horarios de las funciones
+import java.time.format.DateTimeFormatter;
 
 
 import gestorAplicacion.Cine;
@@ -186,14 +187,30 @@ public class Funcion {
         	respuesta="18:00";
             break;
         case 6:
-        	respuesta="18:00";
+        	respuesta="20:00";
             break;
-        
         default:
             respuesta="";
             break;
 	}
 		return respuesta;
+	}
+
+	public LocalTime definirMomentoDelDia(){
+		String inicio = this.getHoraInicio();
+		LocalTime medioDia = LocalTime.of(12,00);
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("HH mm");
+		String hora = inicio.substring(0, inicio.indexOf(":"));
+		String minutos = inicio.substring(inicio.indexOf(":") + 1);
+
+		LocalTime horaReal = LocalTime.parse(hora + " " + minutos, formato);
+		if(medioDia.isAfter(horaReal)){
+			this.setMomentoDelDia("am");
+		} else if(medioDia.isBefore(horaReal) || medioDia.equals(horaReal)){
+			this.setMomentoDelDia("pm");
+		}
+
+		return horaReal;
 	}
 	
 	
