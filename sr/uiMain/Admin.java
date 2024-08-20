@@ -2,13 +2,25 @@ package uiMain;
 import gestorAplicacion.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import BaseDatos.Serializador;
+
 import java.util.List;
 
 public class Admin{
 	public static void main(String[] args){ 
         
    	 Scanner entrada = new Scanner(System.in);
-   
+   	 	
+   	 	
+   	 	Cine.cargarCines();
+   	 	Cliente.cargarClientes();
+   	 	Funcion.cargarFunciones();
+   	 	Maquina.cargarMaquinas();
+   	 	Pelicula.cargarPeliculas();
+   	 	Sala.cargarSalas();
+   	 	ZonaDeJuegos.cargarZonasDeJuegos();
+   	 	
         Interfaz.crearObjetos();
         int opcion;
         boolean finalizar=false;
@@ -26,6 +38,7 @@ public class Admin{
             System.out.println("8. Asignaciones");
             System.out.println("9.- Terminar");
             System.out.println("Por favor elija la operación que desea hacer");
+            
 
             opcion = entrada.nextInt();
 
@@ -55,9 +68,18 @@ public class Admin{
 
                 case 9:
                   System.out.println("Hasta la proxima");
+                  Cine.guardarCines();
+                  Cliente.guardarClientes();
+                  Funcion.guardarFunciones();
+                  Maquina.guardarMaquinas();
+                  Pelicula.guardarPeliculas();
+                  Sala.guardarSalas();
+                  ZonaDeJuegos.guardarZonasDeJuegos();
                   System.exit(0);
                   break;
+                  
             }
+            
         }
 }
 }

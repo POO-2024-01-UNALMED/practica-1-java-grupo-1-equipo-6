@@ -4,9 +4,17 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
 import uiMain.Interfaz;
-
-public class Pelicula {
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+public class Pelicula implements Serializable{
+	
+	 private static final long serialVersionUID = 7L;
+	
 	private String titulo;
 	private String genero;
 	private double calificacionPromedio;
@@ -214,7 +222,25 @@ public class Pelicula {
         return "Bono "+ cliente.getTipo()+ " asignado a " + cliente.getNombre();
     }
 	
+	public static void cargarPeliculas() {
+        // Utiliza el Deserializador para cargar la lista de cines desde el archivo
+        ArrayList<Pelicula> listaPeliculas = Deserializador.deserializarPeliculas();
+
+        if (listaPeliculas != null) {
+            // Reemplaza la lista estática de cines con la lista deserializada
+            totalPeliculas = listaPeliculas;
+            
+        } else {
+        	Interfaz.error();
+        }
+    }
+
+    public static void guardarPeliculas() {
+        Serializador.serializarPelicula(totalPeliculas);
+    }
+	
 	
 	
 
 }
+

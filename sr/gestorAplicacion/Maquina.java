@@ -2,8 +2,19 @@ package gestorAplicacion;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
+import uiMain.Interfaz;
 
-public class Maquina {
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Maquina implements Serializable {
+	
+	private static final long serialVersionUID = 6L;
+	
     private String nombre;
     private int usos;
     private int materialesNecesarios;
@@ -24,17 +35,30 @@ public class Maquina {
         this.bonoActivo=false;
         allMaquinas.add(this);
     }
+    
+    public int getUsos() {
+    	return this.usos;
+    }
+    
+    public void setUsos(int usos) {
+    	this.usos=usos;
+    }
 
     public String getNombre() {
         return nombre;
     }
 
     public boolean estaDisponible() {
-        return disponible;
+        if (necesitaMantenimiento()==true) {
+        	return false;
+        }
+        else {
+        	return true;
+        }
     }
 
     public boolean necesitaMantenimiento() {
-        return usos >= 2;
+        return usos >= 12;
     }
 
     public void usar() {
@@ -134,6 +158,23 @@ public class Maquina {
             
         }
         return "Bono "+ cliente.getTipo()+ " asignado a " + cliente.getNombre();
+    }
+	
+	public static void cargarMaquinas() {
+        // Utiliza el Deserializador para cargar la lista de cines desde el archivo
+        ArrayList<Maquina> listaMaquinas = Deserializador.deserializarMaquinas();
+
+        if (listaMaquinas != null) {
+            // Reemplaza la lista estática de cines con la lista deserializada
+            allMaquinas = listaMaquinas;
+            
+        } else {
+        	Interfaz.error();
+        }
+    }
+
+    public static void guardarMaquinas() {
+        Serializador.serializarMaquina(allMaquinas);
     }
 }
 

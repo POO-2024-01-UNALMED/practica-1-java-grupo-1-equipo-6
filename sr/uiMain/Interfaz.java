@@ -3,6 +3,10 @@ import gestorAplicacion.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
+
 import java.util.List;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -428,17 +432,6 @@ public class Interfaz{
         sala2.setCine(cine2);
         sala3.setCine(cine3);
        
-    
-        
-        
-        
-        zona1.agregarMaquina(arcade1);
-        zona1.agregarMaquina(danceDance1);
-        zona2.agregarMaquina(boxing1);
-        zona3.agregarMaquina(basket1);
-        zona3.agregarMaquina(mesaDeDiscos1);
-        zona4.agregarMaquina(arcade2);
-        zona4.agregarMaquina(mesaDeDiscos2);
         sala1.setCine(cine1);
         sala2.setCine(cine2);
         sala3.setCine(cine3);
@@ -524,6 +517,21 @@ public class Interfaz{
         funcion23.getPelicula().setCalificacionPromedio(2.7);
         funcion24.getPelicula().setCalificacionPromedio(2.6);
         funcion25.getPelicula().setCalificacionPromedio(4.5);
+        
+        arcade1.setUsos(10);
+        danceDance1.setUsos(9);
+        mesaDeDiscos1.setUsos(8);
+        basket1.setUsos(13);
+        mesaDeDiscos2.setUsos(14);
+        arcade2.setUsos(4);
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     
@@ -541,32 +549,8 @@ public class Interfaz{
 public static void gestionarZonaDeJuegos() {
 	Scanner entrada = new Scanner(System.in);
 
-	// Simulación de uso de máquinas
-	for (int i = 0; i < 3; i++) {
-        arcade1.usar();
-        
-    }
-    for (int i = 0; i < 1; i++) {
-        danceDance1.usar();
-        
-    }
-    for (int i = 0; i < 2; i++) {
-    	mesaDeDiscos1.usar();
-        
-    }
-    for (int i = 0; i <1; i++) {
-    	basket1.usar();
-        
-    }
-    
-    for (int i = 0; i < 1; i++) {
-    	mesaDeDiscos2.usar();
-        
-    }
-    for (int i = 0; i < 1; i++) {
-    	arcade2.usar();
-        
-    }
+
+	Bodega bodega=Deserializador.deserializarBodega();
 
 
 	// Actualización de dinero recaudado en todas las zonas
@@ -579,6 +563,7 @@ public static void gestionarZonaDeJuegos() {
 	for (ZonaDeJuegos zona : ZonaDeJuegos.zonasDeJuegos) {
 	    System.out.println(zona.informeMaquinas());
 	}
+	
 
 	// Selección de zona y máquina para reparar
 	System.out.print("Seleccione el número de la zona de la máquina que desea reparar: ");
@@ -696,6 +681,8 @@ public static void gestionarZonaDeJuegos() {
 	    zona.actualizarDineroRecaudado();
 	    System.out.println("Dinero recaudado por " + zona.getNombre() + ": " + zona.getDineroRecaudado());
 	}
+	
+	 Serializador.serializarBodega(bodega);
 
     
 }

@@ -1,12 +1,24 @@
 package gestorAplicacion;
 import java.util.ArrayList;
+
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
+
 import java.time.LocalTime; //Para el manejo de los horarios de las funciones
 import java.time.format.DateTimeFormatter;
 
 
 import gestorAplicacion.Cine;
+import uiMain.Interfaz;
 
-public class Funcion {
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+public class Funcion implements Serializable {
+	
+	private static final long serialVersionUID = 5L;
+	
 	private Pelicula pelicula;
 	private String tipo;
 	private Sala sala;
@@ -281,8 +293,21 @@ public class Funcion {
         
         return "Día no encontrado"; // Si no se encuentra el día
     }
-}
-	
-	
-	
+    
+    public static void cargarFunciones() {
+        // Utiliza el Deserializador para cargar la lista de cines desde el archivo
+        ArrayList<Funcion> listaFunciones = Deserializador.deserializarFunciones();
 
+        if (listaFunciones != null) {
+            // Reemplaza la lista estática de cines con la lista deserializada
+            allFunciones = listaFunciones;
+           
+        } else {
+        	Interfaz.error();
+        }
+    }
+
+    public static void guardarFunciones() {
+        Serializador.serializarFuncion(allFunciones);
+    }
+}

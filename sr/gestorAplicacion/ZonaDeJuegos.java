@@ -2,22 +2,30 @@ package gestorAplicacion;
 import java.util.ArrayList;
 import java.util.List;
 
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
+import uiMain.Interfaz;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class ZonaDeJuegos extends Establecimiento {
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+public class ZonaDeJuegos extends Establecimiento implements Serializable{
+	
+	private static final long serialVersionUID = 9L;
+	
     private String horario;
     private List<Maquina> maquinas;
     private Cine cine;
-    public static List<ZonaDeJuegos> zonasDeJuegos=new ArrayList<>(); 
+    public static ArrayList<ZonaDeJuegos> zonasDeJuegos = new ArrayList<>();
 
     public ZonaDeJuegos(String nombre, String horario) {
         super(nombre);
         this.horario = horario;
         this.maquinas = new ArrayList<>();
         ZonaDeJuegos.zonasDeJuegos.add(this);
-      
     }
 
     public void agregarMaquina(Maquina maquina) {
@@ -59,6 +67,7 @@ public class ZonaDeJuegos extends Establecimiento {
 
         return informe.toString();
     }
+
     public String moverMaquina(ZonaDeJuegos zonaDestino, int indiceMaquina) {
         Maquina maquina = maquinas.remove(indiceMaquina);
         zonaDestino.agregarMaquina(maquina);
@@ -67,10 +76,10 @@ public class ZonaDeJuegos extends Establecimiento {
 
     public String recomendarMovimiento(Maquina maquinaReparada) {
         double porcentajeDependencia = (maquinaReparada.getDineroRecaudado() / this.getDineroRecaudado()) * 100;
-        
+
         // Verificar si la máquina es crucial para la zona actual
         if (porcentajeDependencia >= 70) {
-            return "No se recomienda mover la máquina " + maquinaReparada.getNombre() + 
+            return "No se recomienda mover la máquina " + maquinaReparada.getNombre() +
                    " ya que representa el " + String.format("%.2f", porcentajeDependencia) + "% de los ingresos de la zona actual.";
         }
 
@@ -91,12 +100,12 @@ public class ZonaDeJuegos extends Establecimiento {
                     mejorZonaDestino = zona;
                 }
             }
-            return "Se recomienda mover la máquina " + maquinaReparada.getNombre() + 
-                   " a la zona " + mejorZonaDestino.getNombre() + 
-                   " ya que tiene menores ingresos y no cuenta con una máquina del tipo " + 
+            return "Se recomienda mover la máquina " + maquinaReparada.getNombre() +
+                   " a la zona " + mejorZonaDestino.getNombre() +
+                   " ya que tiene menores ingresos y no cuenta con una máquina del tipo " +
                    maquinaReparada.getTipo() + ".";
         } else {
-            return "No se recomienda mover la máquina " + maquinaReparada.getNombre() + 
+            return "No se recomienda mover la máquina " + maquinaReparada.getNombre() +
                    ". La zona actual tiene mejores ingresos o todas las otras zonas ya tienen una máquina del mismo tipo.";
         }
     }
@@ -132,16 +141,42 @@ public class ZonaDeJuegos extends Establecimiento {
         return false;
     }
 
-	public Cine getCine() {
-		return cine;
-	}
+    public Cine getCine() {
+        return cine;
+    }
 
-	public void setCine(Cine cine) {
-		this.cine = cine;
-	}
-	public String toString() {
-        return "ZonaDeJuegos: " + nombre + "Horario: " + horario + " Maquinas: " + maquinas.size();
+    public void setCine(Cine cine) {
+        this.cine = cine;
+    }
+
+    @Override
+    public void aplicarPromocion() {
+        // Implementación específica de la ZonaDeJuegos si es necesario
+        System.out.println("Aplicando promoción en la zona de juegos " + getNombre() + ".");
+    }
+
+    @Override
+    public String toString() {
+        return "ZonaDeJuegos: " + nombre + ", Horario: " + horario + ", Máquinas: " + maquinas.size();
+    }
+    
+    public static void cargarZonasDeJuegos() {
+        // Utiliza el Deserializador para cargar la lista de cines desde el archivo
+        ArrayList<ZonaDeJuegos> listaZonas = Deserializador.deserializarZonasDeJuegos();
+
+        if (listaZonas != null) {
+            // Reemplaza la lista estática de cines con la lista deserializada
+            zonasDeJuegos = listaZonas;
+            
+        } else {
+            Interfaz.error();
+        }
+    }
+
+    public static void guardarZonasDeJuegos() {
+        Serializador.serializarZonaDeJuegos(zonasDeJuegos);
     }
 }
+
 
 
