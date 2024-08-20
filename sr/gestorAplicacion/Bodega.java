@@ -1,11 +1,25 @@
 package gestorAplicacion;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Bodega extends Establecimiento {
-    private int materialesDisponibles;
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
+import uiMain.Interfaz;
+
+public class Bodega extends Establecimiento implements Serializable {
+	 private static final long serialVersionUID = 1L;
+	 
+	 public static ArrayList<Bodega> allBodegas = new ArrayList<>();
+	
+	private int materialesDisponibles;
 
     public Bodega(String nombre, int materialesDisponibles) {
         super(nombre);
         this.materialesDisponibles = materialesDisponibles;
+        allBodegas.add(this);
     }
 
     public boolean tieneMaterialesSuficientes(int cantidadNecesaria) {
@@ -34,7 +48,17 @@ public class Bodega extends Establecimiento {
             return "No hay suficientes materiales para reparar la máquina " + maquinaSeleccionada.getNombre();
         }
     }
+
+    @Override
+    public void aplicarPromocion() {
+        // Implementación específica de la Bodega si es necesario
+        System.out.println("Aplicando promoción en la bodega " + getNombre() + ".");
+    }
+
+    @Override
     public String toString() {
         return "Bodega: " + nombre + ", Materiales disponibles " + materialesDisponibles;
     }
+    
+    
 }

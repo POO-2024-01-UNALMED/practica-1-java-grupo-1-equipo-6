@@ -1,8 +1,17 @@
 package gestorAplicacion;
 import uiMain.Interfaz;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cliente {
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
+
+public class Cliente implements Serializable{
+	 private static final long serialVersionUID = 3L;
+			 
 	private String nombre;
 	private int identificacion;
 	private double saldo;
@@ -158,6 +167,23 @@ public class Cliente {
 	public int getIdentificacion() {
 		return identificacion;
 	}
+	
+	public static void cargarClientes() {
+        // Utiliza el Deserializador para cargar la lista de cines desde el archivo
+        ArrayList<Cliente> listaCliente = Deserializador.deserializarClientes();
+
+        if (listaCliente != null) {
+            // Reemplaza la lista estática de cines con la lista deserializada
+            allClientes = listaCliente;
+         
+        } else {
+        	Interfaz.error();
+        }
+    }
+
+    public static void guardarClientes() {
+        Serializador.serializarCliente(allClientes);
+    }
 	
 	public String toString() {
         return "Cliente: " + nombre + ", Saldo: " + saldo + ", Tipo: " + tipo;

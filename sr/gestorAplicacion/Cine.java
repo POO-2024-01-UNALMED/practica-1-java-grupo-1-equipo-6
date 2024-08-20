@@ -2,9 +2,21 @@ package gestorAplicacion;
 import java.util.ArrayList;
 import java.util.List;
 
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
 import uiMain.Interfaz;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Cine {
+
+public class Cine implements Serializable {
+	
+	 private static final long serialVersionUID = 2L;
+	
 	private String nombre;
 	private Funcion[] lunes = new Funcion[7];
 	private Funcion[] martes = new Funcion[7];
@@ -526,6 +538,29 @@ public class Cine {
 	    // Verificar si la posición deseada está libre
 	    return funciones[posicionDeseada] == null;
 	}
+	
+	public static void cargarCines() {
+        // Utiliza el Deserializador para cargar la lista de cines desde el archivo
+        ArrayList<Cine> listaCines = Deserializador.deserializarCines();
+
+        if (listaCines != null) {
+            // Reemplaza la lista estática de cines con la lista deserializada
+            cines = listaCines;
+           
+        } else {
+        	Interfaz.error();
+        }
+    }
+
+    public static void guardarCines() {
+        Serializador.serializarCine(cines);
+    }
+	      
+    
+    
+	
+	 
+
 	
 	public String toString() {
         return "Cine: " + nombre + ", Funciones: " +( lunes.length + martes.length + jueves.length + viernes.length) + sabado.length + " Zona de juegos: " + zonaDeJuegos;

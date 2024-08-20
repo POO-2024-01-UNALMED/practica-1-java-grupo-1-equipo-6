@@ -1,8 +1,18 @@
 package gestorAplicacion;
-
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Sala {
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
+import uiMain.Interfaz;
+
+public class Sala implements Serializable{
+	
+	private static final long serialVersionUID = 8L;
+	
 	private int numero;
 	private boolean[][] sillas;
 	private Cine cine;
@@ -110,5 +120,23 @@ public class Sala {
         return "Sala: " + numero + ", Capacidad: " + capacidad  ;
     }
 	
+	public static void cargarSalas() {
+        // Utiliza el Deserializador para cargar la lista de cines desde el archivo
+        ArrayList<Sala> listaSalas = Deserializador.deserializarSalas();
+
+        if (listaSalas != null) {
+            // Reemplaza la lista estática de cines con la lista deserializada
+            allSalas = listaSalas;
+            
+        } else {
+        	Interfaz.error();
+        }
+    }
+
+    public static void guardarSalas() {
+        Serializador.serializarSala(allSalas);
+    }
+	
 
 }
+
