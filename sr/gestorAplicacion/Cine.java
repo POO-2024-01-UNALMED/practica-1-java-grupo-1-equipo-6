@@ -5,6 +5,10 @@ import java.util.List;
 import uiMain.Interfaz;
 
 public class Cine {
+	private int tarjetasVendidasBronce;
+	private int tarjetasVendidasPlatino;
+	private int tarjetasVendidasOro;
+	private final static int LIMITE_TARJETAS = 10;
 	private String nombre;
 	private Funcion[] lunes = new Funcion[7];
 	private Funcion[] martes = new Funcion[7];
@@ -17,6 +21,9 @@ public class Cine {
 	
 
 	public Cine(String nombre, ZonaDeJuegos zonaDeJuegos){
+		tarjetasVendidasBronce = 0;
+		tarjetasVendidasPlatino = 0;
+		tarjetasVendidasOro = 0;
 		this.nombre = nombre;
 		this.zonaDeJuegos = zonaDeJuegos;
 		if(zonaDeJuegos!=null) {
@@ -26,8 +33,12 @@ public class Cine {
 	}
 	
 	public Cine(String nombre){
+		tarjetasVendidasBronce = 0;
+		tarjetasVendidasPlatino = 0;
+		tarjetasVendidasOro = 0;
 		this(nombre,null);
 	}
+	
 	
 	
 	public String getNombre() {
