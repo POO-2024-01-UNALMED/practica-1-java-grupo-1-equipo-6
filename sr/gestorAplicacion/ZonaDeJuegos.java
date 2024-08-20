@@ -25,7 +25,9 @@ public class ZonaDeJuegos extends Establecimiento implements Serializable{
         super(nombre);
         this.horario = horario;
         this.maquinas = new ArrayList<>();
-        ZonaDeJuegos.zonasDeJuegos.add(this);
+        if (!zonasDeJuegos.contains(this)) {
+		    zonasDeJuegos.add(this);
+		}
     }
 
     public void agregarMaquina(Maquina maquina) {
@@ -177,6 +179,8 @@ public class ZonaDeJuegos extends Establecimiento implements Serializable{
         Serializador.serializarZonaDeJuegos(zonasDeJuegos);
     }
 }
+
+
 
 
 

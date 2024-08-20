@@ -4,18 +4,9 @@ import java.util.List;
 import BaseDatos.Deserializador;
 import BaseDatos.Serializador;
 import uiMain.Interfaz;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 
 public class Cine {
-	private ArrayList<Cliente> tarjetasVendidasBronce;
-	private ArrayList<Cliente> tarjetasVendidasPlatino;
-	private ArrayList<Cliente> tarjetasVendidasOro;
 	
 	 private static final long serialVersionUID = 2L;
 	 private String nombre;
@@ -30,18 +21,16 @@ public class Cine {
 	 public final static int LIMITE_TARJETAS = 10;
 
 	 public Cine(String nombre, ZonaDeJuegos zonaDeJuegos){
-		tarjetasVendidasBronce = new ArrayList<>();
-		tarjetasVendidasPlatino = new ArrayList<>();
-		tarjetasVendidasOro = new ArrayList<>();
+		
 		this.nombre = nombre;
 		this.zonaDeJuegos = zonaDeJuegos;
 		if(zonaDeJuegos!=null) {
 		this.zonaDeJuegos.setCine(this);
 		}
-		cines.add(this);
-		tarjetasVendidasBronce = new ArrayList<>();
-		tarjetasVendidasPlatino = new ArrayList<>();
-		tarjetasVendidasOro = new ArrayList<>();
+		if (!cines.contains(this)) {
+		    cines.add(this);
+		}
+
 	}
 	
 	public Cine(String nombre){
@@ -128,18 +117,8 @@ public class Cine {
     }
     
     
-    // Método para obtener el tamaño del ArrayList
-    public int getTarjetasVendidasBronce() {
-        return tarjetasVendidasBronce.size();
-    }
-    // Método para obtener el tamaño del ArrayList
-    public int getTarjetasVendidasPlatino() {
-        return tarjetasVendidasBronce.size();
-    }
-    // Método para obtener el tamaño del ArrayList
-    public int getTarjetasVendidasOro() {
-        return tarjetasVendidasBronce.size();
-    }
+    
+    
 
 	
 	
@@ -585,7 +564,7 @@ public class Cine {
 
 	
 	public String toString() {
-        return "Cine: " + nombre + ", Funciones: " +( lunes.length + martes.length + jueves.length + viernes.length) + sabado.length + " Zona de juegos: " + zonaDeJuegos;
+        return "Cine: " + nombre + ", Funciones: " +( lunes.length + martes.length + jueves.length + viernes.length + sabado.length) + " Zona de juegos: " + zonaDeJuegos;
     }
 }
 

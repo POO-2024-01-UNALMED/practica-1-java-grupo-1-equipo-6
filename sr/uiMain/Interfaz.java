@@ -4,17 +4,13 @@ import gestorAplicacion.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import BaseDatos.Deserializador;
-import BaseDatos.Serializador;
+
 
 import java.util.List;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 public class Interfaz{
-    
-    static Cliente usuario = new Cliente("Juan Manuel",200000,123);
-
     static Maquina arcade1 = new Maquina("Arcade1","Arcade",10,20);
     static Maquina arcade2 = new Maquina("Arcade2","Arcade",10,20);
     static Maquina danceDance1 = new Maquina("Dance Dance1","Dance Dance",12,20);
@@ -43,37 +39,37 @@ public class Interfaz{
     
     static Sala sala1 = new Sala(1, 6, 5);  // Sala 1, 6 filas y 5 columnas
     static Sala sala2 = new Sala(2, 8, 6);  // Sala 2, 8 filas y 6 columnas
-    static Sala sala3 = new Sala(3, 10, 8); // Sala 3, 10 filas y 8 columnas
+    static Sala sala3 = new Sala(3, 9, 8); // Sala 3, 10 filas y 8 columnas
     static Sala sala4 = new Sala(4, 7, 6);  // Sala 4, 7 filas y 6 columnas
     static Sala sala5 = new Sala(5, 9, 7);  // Sala 5, 9 filas y 7 columnas
     static Sala sala6 = new Sala(6, 5, 5);  // Sala 6, 5 filas y 5 columnas
     static Sala sala7 = new Sala(7, 8, 5);  // Sala 7, 8 filas y 5 columnas
-    static Sala sala8 = new Sala(8, 10, 10); // Sala 8, 10 filas y 10 columnas
+    static Sala sala8 = new Sala(8, 9, 9); // Sala 8, 10 filas y 10 columnas
     static Sala sala9 = new Sala(9, 7, 8);  // Sala 9, 7 filas y 8 columnas
     static Sala sala10 = new Sala(10, 9, 8); // Sala 10, 9 filas y 8 columnas
     static Sala sala11 = new Sala(11, 6, 6); // Sala 11, 6 filas y 6 columnas
     static Sala sala12 = new Sala(12, 8, 7); // Sala 12, 8 filas y 7 columnas
-    static Sala sala13 = new Sala(13, 10, 10); // Sala 13, 10 filas y 10 columnas
+    static Sala sala13 = new Sala(13, 8, 9); // Sala 13, 10 filas y 10 columnas
     static Sala sala14 = new Sala(14, 7, 7); // Sala 14, 7 filas y 7 columnas
     static Sala sala15 = new Sala(15, 9, 9); // Sala 15, 9 filas y 9 columnas
-    static Sala sala16 = new Sala(16, 10, 8); // Sala 16, 10 filas y 8 columnas
+    static Sala sala16 = new Sala(16, 9, 8); // Sala 16, 10 filas y 8 columnas
     static Sala sala17 = new Sala(17, 8, 6); // Sala 17, 8 filas y 6 columnas
     static Sala sala18 = new Sala(18, 5, 5); // Sala 18, 5 filas y 5 columnas
     static Sala sala19 = new Sala(19, 7, 6); // Sala 19, 7 filas y 6 columnas
     static Sala sala20 = new Sala(20, 8, 8); // Sala 20, 8 filas y 8 columnas
     static Sala sala21 = new Sala(21, 6, 6); // Sala 21, 6 filas y 6 columnas
     static Sala sala22 = new Sala(22, 8, 7); // Sala 22, 8 filas y 7 columnas
-    static Sala sala23 = new Sala(23, 10, 9); // Sala 23, 10 filas y 9 columnas
+    static Sala sala23 = new Sala(23, 8, 9); // Sala 23, 10 filas y 9 columnas
     static Sala sala24 = new Sala(24, 9, 8); // Sala 24, 9 filas y 8 columnas
-    static Sala sala25 = new Sala(25, 10, 10); // Sala 25, 10 filas y 10 columnas
+    static Sala sala25 = new Sala(25, 9, 9); // Sala 25, 10 filas y 10 columnas
 
-     static Funcion funcion1 = new Funcion(pelicula1, "Normal", sala1, 200);
-     static Funcion funcion2 = new Funcion(pelicula2, "Normal", sala2, 250);
-     static Funcion funcion3 = new Funcion(pelicula3, "Normal", sala3, 300);
-     static Funcion funcion4 = new Funcion(pelicula4, "Normal", sala4, 400);
-     static Funcion funcion5 = new Funcion(pelicula5, "Normal", sala5, 500);
-     static Funcion funcion6 = new Funcion(pelicula6, "Normal", sala6, 120);
-     static Funcion funcion7 = new Funcion(pelicula7, "Normal", sala7, 220);
+     static Funcion funcion1 = new Funcion(pelicula1, "Normal", sala1, 45000);
+     static Funcion funcion2 = new Funcion(pelicula2, "Normal", sala2, 25000);
+     static Funcion funcion3 = new Funcion(pelicula3, "Normal", sala3, 30000);
+     static Funcion funcion4 = new Funcion(pelicula4, "Normal", sala4, 40000);
+     static Funcion funcion5 = new Funcion(pelicula5, "Normal", sala5, 50000);
+     static Funcion funcion6 = new Funcion(pelicula6, "Normal", sala6, 12000);
+     static Funcion funcion7 = new Funcion(pelicula7, "Normal", sala7, 22000);
 
      // Cine 2
      static Funcion funcion8 = new Funcion(pelicula8, "Normal", sala8, 280);
@@ -116,13 +112,181 @@ public class Interfaz{
 
     public static void primeraOperacion() {
         limpiarConsola();
+        ArrayList<Cine> cines = Cine.cines; // El arraylist que contiene todos los cines creados.
         Scanner entrada = new Scanner(System.in);
+        Cliente usuario;
 
-        System.out.println("Has elegido la opcion de comprar boleta, ingresa el número del cine para ver la película");
+        System.out.println("Has elegido la opcion de comprar boleta, por favor ingresa tu número de identificación:");
+
+        // Le pedimos al usuario que ingrese su número de identificación para localizarlo en el sistema..
+        // Si no aparece, le pedimos que ingrese sus datos y le ofrecemos una tarjeta de membresía.
+        int identificacionUsuario;
+        while (true){
+            identificacionUsuario = entrada.nextInt();
+            usuario = Cliente.buscarClientePorId(identificacionUsuario);
+            if (usuario == null){
+                    System.out.println("Cliente no encontrado. ¿Desea crear uno nuevo?:\n1. Sí\n2. No");
+                    int respuesta = entrada.nextInt();
+                    switch (respuesta) {
+                        case 1:
+                            System.out.println("Ingresa tu nombre: ");
+                            String nombre = entrada.nextLine();  // Lee la línea completa para el nombre
+                            entrada.nextLine();
+                            System.out.println("Ingresa tu saldo inicial: ");
+                            double saldoInicial = entrada.nextDouble();  // Lee el saldo inicial
+
+                            // Limpia el buffer de entrada para evitar problemas con nextLine()
+                            entrada.nextLine();
+                            usuario = new Cliente(nombre, saldoInicial, identificacionUsuario);
+                            System.out.println("Cliente creado exitosamente.");
+                            break;
+                        case 2:
+                            System.out.println("Necesita estar en el sistema para continuar.");
+                            return;
+                        default:
+                            System.out.println("Selección inválida. Por favor, seleccione un número válido.");
+                            return; // Salir del método si la selección es inválida
+                    }
+                    System.out.println("¿Deseas adquirir una tarjeta de membresía para usar en nuestros cines?\n1. Sí\n2. No");
+                    int eleccion = 0;
+                    while(true){
+                        eleccion = entrada.nextInt();
+                        if (eleccion <= 0 || eleccion >2){
+                            System.out.println("Entrada no válida, intente nuevamente.");
+                            continue;
+                        }
+                        else if (eleccion == 2){
+                            break;
+                        }
+                        else if(eleccion == 1){
+                            System.out.println("Tenemos los siguientes planes de tarjeta: \n1. Plan Platino. Obtienes 200 puntos por cada compra realizada. El costo de tramitarla es de 25.000$\n2. Plan Oro. Obtienes 150 puntos por cada compra realizada. El costo de tramitarla es de 17.000$\n3. Plan Bronce. Obtienes 100 puntos por cada compra realizada. El costo de tramitarla es de 10.000$");
+                            System.out.println("Este es tu saldo: " + usuario.getSaldo());
+                            System.out.println("Elige la opción de tarjeta de tu preferencia, o ingresa 4 para salir");
+                            int tarjeta = 0; boolean operacion = false;
+                            while(true){
+                                tarjeta = entrada.nextInt();
+                                if (tarjeta <= 0 || tarjeta >4){
+                                    System.out.println("Entrada no válida. Intente nuevamente");
+                                    continue;
+                                }
+                                else if(tarjeta == 4){
+                                    break;
+                                }
+                                else if(tarjeta == 1){
+                                    operacion = usuario.adquirirTarjeta(25000);
+                                    if (operacion){
+                                        System.out.println("Ahora cuentas con una tarjeta Platino");
+                                        break;
+                                    } else{
+                                        System.out.println("No tienes el dinero suficiente para este plan");
+                                        if (usuario.getSaldo() < 17000 && usuario.getSaldo() < 10000){
+                                            System.out.println("No tienes dinero suficiente para ninguna tarjeta");
+                                            break;
+                                        } else{
+                                            System.out.println("¿Te interesa otro plan distinto a Platino?\n1. Sí\n2.No");
+                                            int otroPlan = entrada.nextInt();
+                                            if (otroPlan == 2){
+                                                break;
+                                            } else if (otroPlan == 1){
+                                                boolean mayorOro = usuario.getSaldo() >= 17000;
+                                                if (mayorOro){
+                                                    System.out.println("Elige:\n1.Plan Oro\n2.Plan Bronce");
+                                                    int planSegundo = entrada.nextInt();
+                                                    if (planSegundo == 1){
+                                                        usuario.adquirirTarjeta(17000);
+                                                        System.out.println("Ahora cuentas con una tarjeta Oro");
+                                                        break;
+                                                    } else if (planSegundo == 2){
+                                                        usuario.adquirirTarjeta(10000);
+                                                        System.out.println("Ahora cuentas con una tarjeta Bronce");
+                                                        break;
+                                                    }
+                                                }
+                                                else{
+                                                    usuario.adquirirTarjeta(10000);
+                                                    System.out.println("Ahora cuentas con una tarjeta Bronce");
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                } 
+                                else if (tarjeta == 2){
+                                    operacion = usuario.adquirirTarjeta(17000);
+                                    if (operacion){
+                                        System.out.println("Ahora cuentas con una tarjeta Oro");
+                                        break;
+                                    } else{
+                                        System.out.println("No tienes suficiente dinero para la tarjeta Oro");
+                                        if (usuario.getSaldo() >= 10000){
+                                            System.out.println("¿Te interesa una tarjeta del plan Bronce?: \n1.Sí\n2.No");
+                                            int otroPlan = entrada.nextInt();
+                                            if (otroPlan == 1){
+                                                usuario.adquirirTarjeta(10000);
+                                                System.out.println("Ahora cuentas con una tarjeta Bronce");
+                                                break;
+                                            } else{
+                                                break;
+                                            }
+                                        } else{
+                                            System.out.println("Como no tienes suficiente dinero para el plan Bronce, se da por finalizada la adquisición de la tarjeta");
+                                            break;
+                                        }
+                                        
+                                    }
+                                } 
+                                else if(tarjeta == 3){
+                                    operacion = usuario.adquirirTarjeta(10000);
+                                    if (operacion){
+                                        System.out.println("Ahora cuentas con una tarjeta Bronce.");
+                                        break;
+                                    } else{
+                                        System.out.println("No tienes suficiente dinero para la tarjeta Bronce.");
+                                        break;
+                                    }
+                                }
+                            }//Fin tercer While
+                            break;
+                        }//Fin bloque comprar tarjeta.
+                        
+                    }
+                    if (usuario.getTarjeta()){
+                    	System.out.println("¿Desea recargar el saldo de su tarjeta?\n1. Sí\n2. No");
+                    	int recarga = entrada.nextInt();
+                    	if (recarga == 1 && usuario.getSaldo() > 0){
+                    		System.out.println("Indique la cantidad a depositar");
+                    		int cantidad;
+                    		while (true) {
+                    			cantidad = entrada.nextInt();
+                    			if(usuario.recargarTarjeta(cantidad)) {
+                    				System.out.println(cantidad + "$ añadidos al saldo de tu tarjeta");
+                    				break;
+                    			}else {
+                    				System.out.println("No tienes tal cantidad. Intenta con otra");
+                    				continue;
+                    			}
+                    		}
+                    	}else if(recarga ==2) {
+                    		break;
+                    	}
+                    	else{
+                    		System.out.println("No tienes dinero para depositar");
+                    	}
+                    }//Fin segundo While
+                    break;
+            } else{ //Fin primer while
+            	System.out.println("Cliente Encontrado.");
+                break;
+            }
+        }
+        
+
+        System.out.println("A continuación se listan todos los cines posibles, elige el que prefieres:");
 
         //Para mostrar en pantalla cada uno de los cines
-        for (int i = 1; i <= cines.length; i++){
-          System.out.println(i + ". " +cines[i-1].getNombre());
+        for (int i = 1; i <= cines.size(); i++){
+          cines.get(i-1).ajustarFunciones();
+          System.out.println(i + ". " +cines.get(i-1).getNombre());
         }
 
         boolean condicion = true;
@@ -132,13 +296,12 @@ public class Interfaz{
         //En este bucle nos aseguramos de que el usuario haga una elección válida
         while(condicion){
           eleccion = entrada.nextInt();
-
-          if(eleccion > cines.length || eleccion <= 0){
-            System.out.println("Debes ingresar un número entre 1 y " + cines.length);
+          if(eleccion > cines.size() || eleccion <= 0){
+            System.out.println("Debes ingresar un número entre 1 y " + cines.size());
             continue; //Volvemos a llevar a cabo el bucle, para volver a pedir el cine.
           }
-          cineEscogido = cines[eleccion - 1]; //Almacenamos el cine en una variable.
-          condicion = false;
+           cineEscogido = cines.get(eleccion - 1); //Almacenamos el cine en una variable.
+           condicion = false;
         }
         condicion = true;
 
@@ -200,7 +363,8 @@ public class Interfaz{
         System.out.println("A continuación se muestran la/las funciones que puede elegir para ver " + peliculaElegida.getTitulo());
         ArrayList<Funcion> funcionesPosibles = cineEscogido.obtenerFunciones(peliculaElegida);
         for (int i = 1; i<=funcionesPosibles.size();i++){
-            System.out.println(i + ". " +funcionesPosibles.get(i-1).getDia() + ", sala " +funcionesPosibles.get(i-1).getSala().getNumero() + ", a las " + funcionesPosibles.get(i-1).getHorario() + funcionesPosibles.get(i-1).getMomentoDelDia());
+            LocalTime horaFuncion = funcionesPosibles.get(i-1).definirMomentoDelDia();
+            System.out.println(i + ". " +funcionesPosibles.get(i-1).getDia() + ", sala " +funcionesPosibles.get(i-1).getSala().getNumero() + ", a las " + horaFuncion + funcionesPosibles.get(i-1).getMomentoDelDia() + ".");
         }
         //Muy importante preguntarle al usuario si quiere continuar con el proceso o darlo por terminado.
         System.out.println("¿Desea hacer una reserva? \n1. Sí\n2. No. Salir.");
@@ -235,7 +399,7 @@ public class Interfaz{
             }
         }
         condicion = true; 
-
+        LocalTime horaFuncion = funcionElegida.definirMomentoDelDia();
         //Ahora mostramos en pantalla todas las sillas de sala, y le decimos que elija por fila y columna el asiento:
         System.out.println("Esta es la distribución de las sillas de la sala en la función escogida:");
         System.out.println(funcionElegida.getSala().estadoSilleteria());
@@ -256,16 +420,17 @@ public class Interfaz{
             }
         }
         condicion = true;
-        int precioBoleto = funcionElegida.getPrecio(); //Precio de la entrada.
+        double precioBoleto = funcionElegida.getPrecio(); //Precio de la entrada.
         //Ahora se continúa con el pago de la entrada, si el usuario no tiene tarjeta, directamente vamos al pago con su saldo personal.
         System.out.println("Se procede con el pago de su boleto");
         boolean tieneTarjeta = usuario.getTarjeta(); //Si tiene tarjeta o no.
         if (!tieneTarjeta){
             System.out.println("Como no tiene ninguna tarjeta a su nombre, se procede al pago con su saldo");
+            System.out.println("Precio de la entrada: "+ precioBoleto + "     Su saldo: " + usuario.getSaldo());
             boolean resultado = usuario.pagarConSaldo(precioBoleto); 
             if (resultado){
                 funcionElegida.getSala().reservarSilla(fila-1, columna -1); //Marcar como ocupado el asiento.
-                System.out.println("Se ha realizado exitosamente el pago.\nDetalles de la operación:\nNombre del Cliente: " + usuario.getNombre() + "\nIdentificacion: " + usuario.getIdentificacion() + "\nPelícula: " + peliculaElegida.getTitulo() + "\nSala de la proyección: " + funcionElegida.getSala().getNumero() + "\nDia: " + funcionElegida.getDia() + "\nCine: " + cineEscogido.getNombre() + "\nAsiento: fila " + fila + " y columna " + columna + "\nPrecio de la boleta: " + precioBoleto); //Detalles de la compra
+                System.out.println("Se ha realizado exitosamente el pago.\nDetalles de la operación:\nNombre del Cliente: " + usuario.getNombre() + "\nIdentificacion: " + usuario.getIdentificacion() + "\nPelícula: " + peliculaElegida.getTitulo() + "\nSala de la proyección: " + funcionElegida.getSala().getNumero() + "\nDia: " + funcionElegida.getDia()+ "\nHora de la función: " + horaFuncion + funcionElegida.getMomentoDelDia() + "\nCine: " + cineEscogido.getNombre() + "\nAsiento: fila " + fila + " y columna " + columna + "\nPrecio de la boleta: " + precioBoleto); //Detalles de la compra
                 return;
             } else{
                 System.out.println("No tienes suficiente dinero para comprar la boleta");
@@ -281,10 +446,11 @@ public class Interfaz{
             }
             else if (pago == 2){
                 System.out.println("Se procede entonces con el pago desde su saldo");
+                System.out.println("Precio de la entrada: "+ precioBoleto + "     Su saldo: " +usuario.getSaldo());
                 boolean resultado = usuario.pagarConSaldo(precioBoleto);
                 if (resultado){
                     funcionElegida.getSala().reservarSilla(fila-1, columna -1);
-                    System.out.println("Se ha realizado exitosamente el pago.\nDetalles de la operación:\nNombre del Cliente: " + usuario.getNombre() + "\nIdentificacion: " + usuario.getIdentificacion() + "\nPelícula: " + peliculaElegida.getTitulo() + "\nSala de la proyección: " + funcionElegida.getSala().getNumero()+ "\nDia: " + funcionElegida.getDia() + "\nCine: " + cineEscogido.getNombre() + "\nAsiento: fila " + fila + " y columna " + columna + "\nPrecio de la boleta: " + precioBoleto); //Detalles de la compra.
+                    System.out.println("Se ha realizado exitosamente el pago.\nDetalles de la operación:\nNombre del Cliente: " + usuario.getNombre() + "\nIdentificacion: " + usuario.getIdentificacion() + "\nPelícula: " + peliculaElegida.getTitulo() + "\nSala de la proyección: " + funcionElegida.getSala().getNumero()+ "\nDia: " + funcionElegida.getDia() + "\nHora de la función: " + horaFuncion + funcionElegida.getMomentoDelDia() +"\nCine: " + cineEscogido.getNombre() + "\nAsiento: fila " + fila + " y columna " + columna + "\nPrecio de la boleta: " + precioBoleto); //Detalles de la compra.
                 condicion = false;
                 return;
                 } else{
@@ -303,18 +469,20 @@ public class Interfaz{
             System.out.println("Desea pagar con:\n1. El saldo de su tarjeta\n2. Los puntos de su tarjeta");
             int pago = entrada.nextInt();
             if (pago == 1){
+                System.out.println("Precio de la entrada: "+ precioBoleto + "   Saldo de su tarjeta: " + usuario.getSaldoTarjeta());
                 if(usuario.pagarSaldoTarjeta(precioBoleto)){
                     funcionElegida.getSala().reservarSilla(fila-1, columna -1);
                     int puntosGanados = usuario.agregarPuntos(); //Si se completa el pago con el saldo de la tarjeta, se agregan los puntos correspondientes de acuerdo al plan de la tarjeta.
                     System.out.println("Has ganado " + puntosGanados + " puntos por tu compra, gracias a que tienes plan " + usuario.getTipoTarjeta() +"."); //Se le informa al usuario sobre los puntos.
                     condicion = false;
                 } else{
-                    System.out.println("No tiene saldo suficiente en su tarjeta. ¿Quiere pagar con los puntos de la tarjeta:\n1. Sí\n.2. Finalizar Proceso");
+                    System.out.println("No tiene saldo suficiente en su tarjeta. ¿Quiere pagar con los puntos de la tarjeta?:\n1. Sí\n2. Finalizar Proceso");
                     int otroPago = entrada.nextInt();
                     if (otroPago == 1){
+                        precioBoleto = funcionElegida.getPrecio()/100; //Si paga con los puntos de la tarjeta se hace la conversión de los puntos gastados.
+                        System.out.println("Precio de la entrada a puntos: "+precioBoleto + "   Puntos de su tarjeta: " + usuario.getPuntosTarjeta());
                         if(usuario.pagarPuntosTarjeta(precioBoleto)){
                             funcionElegida.getSala().reservarSilla(fila-1, columna -1);
-                            precioBoleto = funcionElegida.getPrecio()/100; //Si paga con los puntos de la tarjeta se hace la conversión de los puntos gastados.
                             condicion = false;
                         } else{
                             System.out.println("No tienes tampoco puntos suficientes en la tarjeta. Finalizando el prceso.");
@@ -329,6 +497,7 @@ public class Interfaz{
                     }
                 }
             } else if (pago == 2){
+                System.out.println("Precio de la entrada a puntos: "+precioBoleto + "   Puntos de su tarjeta: " + usuario.getPuntosTarjeta());
                 if (usuario.pagarPuntosTarjeta(precioBoleto)){
                     funcionElegida.getSala().reservarSilla(fila-1, columna -1);
                     precioBoleto = funcionElegida.getPrecio()/100;
@@ -338,6 +507,7 @@ public class Interfaz{
                     System.out.println("No tiene suficientes puntos en su tarjeta. ¿Quiere pagar con el saldo de la tarjeta:\n1. Sí\n2. Finalizar Proceso");
                     int otroPago = entrada.nextInt();
                     if (otroPago == 1){
+                        System.out.println("Precio de la entrada: "+ precioBoleto + "   Saldo de su tarjeta: " + usuario.getSaldoTarjeta());
                         if (usuario.pagarSaldoTarjeta(precioBoleto)){
                             funcionElegida.getSala().reservarSilla(fila-1, columna -1);
                             int puntosGanados = usuario.agregarPuntos();
@@ -357,20 +527,21 @@ public class Interfaz{
                 }
             }
         }
-        System.out.println("Se ha realizado exitosamente el pago.\nDetalles de la operación:\nNombre del Cliente: " + usuario.getNombre() + "\nIdentificacion: " + usuario.getIdentificacion() + "\nPelícula: " + peliculaElegida.getTitulo() + "\nSala de la proyección: " + funcionElegida.getSala().getNumero() + "\nDia: " + funcionElegida.getDia() + "\nCine: " + cineEscogido.getNombre() + "\nAsiento: fila " + fila + " y columna " + columna + "\nPrecio de la boleta: " + precioBoleto); //Detalles de la compra.
+        System.out.println("Se ha realizado exitosamente el pago.\nDetalles de la operación:\nNombre del Cliente: " + usuario.getNombre() + "\nIdentificacion: " + usuario.getIdentificacion() + "\nPelícula: " + peliculaElegida.getTitulo() + "\nSala de la proyección: " + funcionElegida.getSala().getNumero() + "\nDia: " + funcionElegida.getDia() + "\nHora de la función: " + horaFuncion + funcionElegida.getMomentoDelDia() + "\nCine: " + cineEscogido.getNombre() + "\nAsiento: fila " + fila + " y columna " + columna + "\nPrecio de la boleta: " + precioBoleto); //Detalles de la compra.
     }
 
     public static Cine cambioCine(Cine cine, Pelicula pelicula){
+        ArrayList<Cine> cines = Cine.cines;
         Scanner entrada = new Scanner(System.in);
         ArrayList<Cine> cinesConPelicula = new ArrayList<Cine>();
         Cine cineEscogido = null;
 
         /*En caso de que el usuario quiera cambiar de cine,se buscan todos los que tengan verdaderamente
         funciones para la película.*/
-        for(int j = 0; j<cines.length; j++){
-          if(cines[j] != cine){
-            if(cines[j].hayPelicula(pelicula)){
-              cinesConPelicula.add(cines[j]);
+        for(int j = 0; j<cines.size(); j++){
+          if(cines.get(j) != cine){
+            if(cines.get(j).hayPelicula(pelicula)){
+              cinesConPelicula.add(cines.get(j));
             }
           }
         }
@@ -423,7 +594,8 @@ public class Interfaz{
             condicion = false;
         }
         return peliculaEscogida; //Retornamos la nueva película.
-      }
+    }
+    
     
     public static void crearObjetos(){
         
@@ -487,10 +659,7 @@ public class Interfaz{
         zona4.agregarMaquina(arcade2);
         zona4.agregarMaquina(mesaDeDiscos2);
 
-        usuario.setTarjeta(true);
-        usuario.setTipoTarjeta("Oro");
-        usuario.setSaldoTarjeta(56000);
-        usuario.setPuntosTarjeta(400);
+       
         
         funcion1.getPelicula().setCalificacionPromedio(4.0);
         funcion2.getPelicula().setCalificacionPromedio(3.0);
@@ -550,8 +719,7 @@ public static void gestionarZonaDeJuegos() {
 	Scanner entrada = new Scanner(System.in);
 
 
-	Bodega bodega=Deserializador.deserializarBodega();
-
+	
 
 	// Actualización de dinero recaudado en todas las zonas
 	for (ZonaDeJuegos zona : ZonaDeJuegos.zonasDeJuegos) {
@@ -682,8 +850,7 @@ public static void gestionarZonaDeJuegos() {
 	    System.out.println("Dinero recaudado por " + zona.getNombre() + ": " + zona.getDineroRecaudado());
 	}
 	
-	 Serializador.serializarBodega(bodega);
-
+	
     
 }
 
@@ -797,12 +964,8 @@ public static void gestionarPeliculas() {
             System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
         }
         int cineSeleccionado1 = scanner.nextInt() - 1;
-        if(cineSeleccionado1 < 0 || cineSeleccionado > Cine.cines.size()) {
-            System.out.println("Error");
-            return;
-             }else if(cineSeleccionado1 > 0 && cineSeleccionado < Cine.cines.size()){
-            	 Cine cine = Cine.cines.get(cineSeleccionado1);
-             }
+        Cine cine = Cine.cines.get(cineSeleccionado1);
+
         // Seleccionar la película en la que se desea aplicar el bono
         System.out.println("Seleccione la película a la que desea aplicar el bono:");
         List<Pelicula> peliculas1 = cine.peliculasActivas();
@@ -824,240 +987,7 @@ public static void gestionarPeliculas() {
 }
 
 
-public static void comprarTarjeta() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("Hola, a continuación vas a proceder con la compra de tu Tarjeta, ingresa su número de identificación: ");
-    
-    // Identificamos al cliente
-    int idCliente = (int) scanner.nextDouble();
-    Cliente cliente = Cliente.buscarClientePorId(idCliente);
-    
-    if (cliente == null) {
-        System.out.println("Cliente no encontrado. ¿Desea crear uno nuevo? (1) Sí / (2) No");
-        int respuesta = scanner.nextInt();
-        switch (respuesta) {
-            case 1:
-                System.out.println("Ingresa tu nombre: ");
-                scanner.nextLine();  
-                String nombre = scanner.nextLine();
-                System.out.println("Ingresa tu saldo inicial: ");
-                double saldoInicial = scanner.nextDouble();
-                
-                cliente = new Cliente(nombre, saldoInicial, idCliente);
-                System.out.println("Cliente creado exitosamente.");
-                break;
-            case 2:
-                return;  // Salir del método si el cliente no desea crear uno nuevo
-            default:
-                System.out.println("Selección inválida. Por favor, seleccione un número válido.");
-                return;  // Salir del método si la selección es inválida
-        }
-    } else {
-        if (!cliente.isTarjeta()) {  // Asumo que el método isTarjeta() verifica si el cliente ya tiene tarjeta
-            System.out.println("Seleccione el cine en el que desea comprar la tarjeta: ");
-            scanner.nextLine();  
-            for (int i = 0; i < Cine.cines.size(); i++) {
-                System.out.println((i + 1) + ". " + Cine.cines.get(i).getNombre());
-            }
-            int cineSeleccionado = scanner.nextInt() - 1;
-            
-            if (cineSeleccionado < 0 || cineSeleccionado >= Cine.cines.size()) {
-                System.out.println("Error: selección inválida.");
-            } else {
-                Cine cine = Cine.cines.get(cineSeleccionado);
-                System.out.println("El cine ha sido seleccionado correctamente... ¿Qué deseas hacer?");
-                System.out.println("1) Ver tipos de tarjeta\n2) Ver precios\n3) Comprar");
-                scanner.nextLine();  // Captura el salto de línea restante
-                int respuesta1 = scanner.nextInt();
-                switch (respuesta1) {
-                    case 1:
-                        scanner.nextLine();  // Captura el salto de línea restante
-                        System.out.println("Seleccione qué tipo de tarjeta le interesa para saber más información");
-                        System.out.println("1) Tarjeta bronce");
-                        System.out.println("2) Tarjeta platino");
-                        System.out.println("3) Tarjeta oro");
-                        System.out.println("4) Regresar");
-                        int respuestaTipo = scanner.nextInt();
-                        switch (respuestaTipo) {
-                            case 1:
-                                System.out.println("La tarjeta bronce es la mejor opción si estás interesado en tener beneficios pero sin sobrepasarte con tus gastos, recibiras 5000 puntos automaticamente despues de tu compra ");
-                                break;
-                            case 2:
-                                System.out.println("La tarjeta platino es la mejor opción si tu estadía en nuestras salas es muy frecuente, con un excelente precio y muchos beneficios, recibiras 10000 puntos automaticamente despues de tu compra");
-                                break;
-                            case 3:
-                                System.out.println("La tarjeta oro es la mejor opción si te consideras un completo amante del cine, con beneficios que no cuenta ninguna otra tarjeta, recibiras 30000 puntos automaticamente despues de tu compra");
-                                break;
-                            case 4:
-                                break;  // Regresa al menú anterior
-                            default:
-                                System.out.println("Solo puedes poner números del 1 al 4.");
-                                return;  // Salir del método si la selección es inválida
-                        }
-                        break;
-                    case 2:
-                        System.out.println("Tarjeta bronce:" + Cliente.PRECIO_TARJETA_BRONCE+ "$" + "\nTarjeta platino:" + Cliente.PRECIO_TARJETA_PLATINO + "$"+ "\nTarjeta oro: " + Cliente.PRECIO_TARJETA_ORO + "$");
-                        break;
-                        
-                    case 3:
-                        scanner.nextLine();  
-                        System.out.println("¿Qué tipo de tarjeta deseas comprar?\n1) Tarjeta bronce\n2) Tarjeta platino\n3) Tarjeta oro");
-                        int respuestaCompra = scanner.nextInt();
-                        switch (respuestaCompra) {
-                            case 1:
-                                if (cine.getTarjetasVendidasBronce() < Cine.LIMITE_TARJETAS) {  
-                                    if (cliente.getSaldo() > Cliente.PRECIO_TARJETA_BRONCE) {  
-                                        System.out.println("La compra de la Tarjeta Bronce ha sido exitosa...");
-                                        cliente.setTipoTarjeta("Tarjeta Bronce");
-                                        cliente.setTarjeta(true);
-                                        cine.tarjetasVendidasBronce.add(cliente);
-                                        System.out.println("La tarjeta con la informacion del cliente se agrego correctamente.");
-                                        scanner.nextLine();
-                                        System.out.println("¿Desea imprimir el recibo?  " + "\n 1) SI"+ "\n 2)NO");
-                                        Recibo recibo = new Recibo(cliente.getTipoTarjeta, Cliente.PRECIO_TARJETA_BRONCE, 5000)
-                                        int respuesta2 = scanner.nextInt();
-                                        switch(respuesta2) {
-                                        case 1:
-                                        	cliente.imprimirRecibo(recibo);
-                                        	break
-                                        case 2:
-                                        	break
-                                        	
-                                        default:
-                                        	break
-                                        }
-                                        
-                                        
-                                        
-                                    } else {
-                                        System.out.println("No tienes suficiente dinero para la compra.");
-                                        Recibo recibo = new Recibo(null, 0, 0);
-                                        cliente.imprimirRecibo();
-                                    }
-                                    
-                                } else {
-                                    System.out.println("Ya no hay tarjetas bronce disponibles en este cine.");
-                                    Recibo recibo = new Recibo(null, 0, 0);
-                                    cliente.imprimirRecibo();
-                                }
-                                
-                                break;
-                            case 2:
-                                if (cine.getTarjetasVendidasPlatino() < Cine.LIMITE_TARJETAS) {  
-                                    if (cliente.getSaldo() > Cliente.PRECIO_TARJETA_PLATINO) {  
-                                        System.out.println("La compra de la Tarjeta Platino ha sido exitosa...");
-                                        cliente.setTipoTarjeta("Tarjeta Platino");
-                                        cliente.setTarjeta(true);
-                                        cine.tarjetasVendidasBronce.add(cliente);
-                                        System.out.println("La tarjeta con la informacion del cliente se agrego correctamente.");
-                                        scanner.nextLine();
-                                        System.out.println("¿Desea imprimir el recibo?  " + "\n 1) SI"+ "\n 2)NO");
-                                        Recibo recibo = new Recibo(cliente.getTipoTarjeta, Cliente.PRECIO_TARJETA_PLATINO, 10000)
-                                        int respuesta2 = scanner.nextInt();
-                                        switch(respuesta2) {
-                                        case 1:
-                                        	cliente.imprimirRecibo(recibo);
-                                        	break
-                                        case 2:
-                                        	break
-                                        	
-                                        default:
-                                        	break
-                                        }
-                                        
-                                    } else {
-                                        System.out.println("No tienes suficiente dinero para la compra.");
-                                        Recibo recibo = new Recibo(null, 0, 0);
-                                        cliente.imprimirRecibo();
-                                    }
-                                    
-                                } else {
-                                    System.out.println("Ya no hay tarjetas platino disponibles en este cine.");
-                                    Recibo recibo = new Recibo(null, 0, 0);
-                                    cliente.imprimirRecibo();
-                                }
-                                break;
-                            case 3:
-                                if (cine.getTarjetasVendidasOro() < Cine.LIMITE_TARJETAS) {  
-                                    if (cliente.getSaldo() > Cliente.PRECIO_TARJETA_ORO) {  
-                                        System.out.println("La compra de la Tarjeta Oro ha sido exitosa...");
-                                        cliente.setTipoTarjeta("Tarjeta Oro");
-                                        cliente.setTarjeta(true);
-                                        scanner.nextLine();
-                                        cine.tarjetasVendidasBronce.add(cliente);
-                                        System.out.println("La tarjeta con la informacion del cliente se agrego correctamente.");
-                                        System.out.println("¿Desea imprimir el recibo?  " + "\n 1) SI"+ "\n 2)NO");
-                                        Recibo recibo = new Recibo(cliente.getTipoTarjeta, Cliente.PRECIO_TARJETA_ORO, 30000)
-                                        int respuesta2 = scanner.nextInt();
-                                        switch(respuesta2) {
-                                        case 1:
-                                        	cliente.imprimirRecibo(recibo);
-                                        	break
-                                        case 2:
-                                        	break
-                                        	
-                                        default:
-                                        	break
-                                        }
-                                        
-                                    } else {
-                                        System.out.println("No tienes suficiente dinero para la compra.");
-                                        Recibo recibo = new Recibo(null, 0, 0);
-                                        cliente.imprimirRecibo();
-                                    }
-                                } else {
-                                    System.out.println("Ya no hay tarjetas oro disponibles en este cine.");
-                                    Recibo recibo = new Recibo(null, 0, 0);
-                                    cliente.imprimirRecibo();
-                                }
-                                break;
-                            default:
-                                System.out.println("Selección inválida. Por favor, seleccione un número válido.");
-                        }
-                        break;
-                    default:
-                        System.out.println("Selección inválida. Por favor, seleccione un número válido.");
-                }
-            }
-        }else {
-  
-        	// Cliente ya tiene una tarjeta vinculada
-            System.out.println("Ya cuentas con una tarjeta vinculada.");
 
-            // Mostrar información sobre la tarjeta vinculada
-            System.out.println("Tipo de tarjeta vinculada: " + cliente.getTipoTarjeta());
-            System.out.println("Saldo actual: " + cliente.getSaldo());
-
-            // Opciones para el usuario
-            System.out.println("¿Qué deseas hacer a continuación?");
-            System.out.println("1) Ver detalles de tu tarjeta");
-            System.out.println("2) Finalizar");
-
-            // Leer la opción del usuario
-            int opcion = scanner.nextInt();
-
-            switch (opcion) {
-                case 1:
-                    // Mostrar detalles de la tarjeta
-                    System.out.println("Detalles de tu tarjeta:");
-                    System.out.println("Tipo de tarjeta: " + cliente.getTipoTarjeta());
-                    System.out.println("Saldo: " + cliente.getSaldo());
-                    break;
-       
-                case 2:
-                    // Finalizar proceso
-                    System.out.println("Proceso finalizado con exito");
-                    
-                    return;  // Salir del método para no realizar ninguna otra acción;
-                default:
-                    System.out.println("Opción no válida. Por favor, selecciona una opción del 1 al 2.");
-                    break;
-        
-        
-        }
-        
-        
-}
 
 
 
@@ -1658,3 +1588,5 @@ public static void asignacion() {
 
     
 }
+
+    

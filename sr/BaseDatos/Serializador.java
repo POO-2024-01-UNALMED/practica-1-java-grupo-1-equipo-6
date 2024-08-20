@@ -19,29 +19,19 @@ import uiMain.Interfaz;
 
 public class Serializador {
 
-    // Método para serializar un objeto y reemplazar el archivo existente
-    public static void serializarObjeto(Serializable objeto, String nombreArchivo) {
-        File archivo = new File(nombreArchivo);
-        
-        // Eliminar el archivo existente si ya existe
-        if (archivo.exists()) {
-            if (!archivo.delete()) {
-                
-                return;  // Si no se puede eliminar, no continúa con la serialización
-            }
-        }
+// Método para serializar un objeto sin borrar el archivo existente
+	    public static void serializarObjeto(Serializable objeto, String nombreArchivo) {
+	        // Guardar el objeto en el archivo existente sin eliminarlo
+	        try (FileOutputStream fileOut = new FileOutputStream(nombreArchivo);
+	             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
 
-        // Crear un nuevo archivo y serializar el objeto
-        try (FileOutputStream fileOut = new FileOutputStream(nombreArchivo);
-             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+	            out.writeObject(objeto);
 
-            out.writeObject(objeto);
-            
-
-        } catch (IOException e) {
-            Interfaz.error();  // Maneja el error según tu implementación
-        }
-    }
+	        } catch (IOException e) {
+	            Interfaz.error();  // Maneja el error según tu implementación
+	        }
+	    }
+	
 
     // Métodos específicos para serializar listas completas de cada tipo de objeto
     public static void serializarCine(ArrayList<Cine> cines) {
@@ -72,7 +62,7 @@ public class Serializador {
         serializarObjeto(zonasDeJuegos, "sr/BaseDatos/temp/ZonaDeJuegos.txt");
     }
 
-    public static void serializarBodega(Bodega bodega) {
-        serializarObjeto(bodega, "sr/BaseDatos/temp/Bodega.txt");
+    public static void serializarBodega(ArrayList<Bodega> bodegas) {
+        serializarObjeto(bodegas, "sr/BaseDatos/temp/Bodega.txt");
     }
 }

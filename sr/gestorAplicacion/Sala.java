@@ -27,7 +27,9 @@ public class Sala implements Serializable{
 						sillas[i][j] = true;
 					}
 				}
-		allSalas.add(this);
+				if (!allSalas.contains(this)) {
+				    allSalas.add(this);
+				}
     }
 	
 	

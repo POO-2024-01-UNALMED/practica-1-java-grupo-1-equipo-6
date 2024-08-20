@@ -1,11 +1,9 @@
 package uiMain;
-import gestorAplicacion.*;
-import java.util.ArrayList;
+
+
 import java.util.Scanner;
 
-import BaseDatos.Serializador;
 
-import java.util.List;
 
 public class Admin{
 	public static void main(String[] args){ 
@@ -13,14 +11,14 @@ public class Admin{
    	 Scanner entrada = new Scanner(System.in);
    	 	
    	 	
-   	 	Cine.cargarCines();
-   	 	Cliente.cargarClientes();
-   	 	Funcion.cargarFunciones();
-   	 	Maquina.cargarMaquinas();
-   	 	Pelicula.cargarPeliculas();
-   	 	Sala.cargarSalas();
-   	 	ZonaDeJuegos.cargarZonasDeJuegos();
-   	 	
+   	 	//Cine.cargarCines();
+   	 	//Cliente.cargarClientes();
+   	 	//Funcion.cargarFunciones();
+   	 	//Maquina.cargarMaquinas();
+   	 	//Pelicula.cargarPeliculas();
+   	 	//Sala.cargarSalas();
+   	 	//ZonaDeJuegos.cargarZonasDeJuegos();
+   	 	//Bodega.cargarBodegas();
         Interfaz.crearObjetos();
         int opcion;
         boolean finalizar=false;
@@ -30,8 +28,6 @@ public class Admin{
             System.out.println("1.- Comprar boletos para un cine");
             System.out.println("2.- Gestionar Zona de Juegos");
             System.out.println("3.- Gestionar Peliculas");
-            System.out.println("4.- Cuarta operaciòn");
-            System.out.println("5.- Quinta operaciòn");
             System.out.println("------------------");
             System.out.println("6. Comprar boleta para jugar maquinitas");
             System.out.println("7. Menu de Creacion");
@@ -53,8 +49,6 @@ public class Admin{
                 case 3:
                     Interfaz.gestionarPeliculas();
                     break;
-                case 5:
-                	Interfaz.comprarTarjeta();
                 case 6:
                     Interfaz.comprarBoletaJuegos();
                     break;
@@ -70,13 +64,14 @@ public class Admin{
 
                 case 9:
                   System.out.println("Hasta la proxima");
-                  Cine.guardarCines();
-                  Cliente.guardarClientes();
-                  Funcion.guardarFunciones();
-                  Maquina.guardarMaquinas();
-                  Pelicula.guardarPeliculas();
-                  Sala.guardarSalas();
-                  ZonaDeJuegos.guardarZonasDeJuegos();
+                  //Cine.guardarCines();
+                  //Cliente.guardarClientes();
+                  //Funcion.guardarFunciones();
+                  //Maquina.guardarMaquinas();
+                  //Pelicula.guardarPeliculas();
+                  //Sala.guardarSalas();
+                  //ZonaDeJuegos.guardarZonasDeJuegos();
+                  //Bodega.guardarBodegas();
                   System.exit(0);
                   break;
                   
@@ -84,18 +79,4 @@ public class Admin{
             
         }
 }
-}
-
-
-
-
-    
-    
-
-    
-     
-    
-
-    
-
-        
+}    

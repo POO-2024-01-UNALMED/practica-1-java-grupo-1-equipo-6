@@ -1,26 +1,22 @@
 package gestorAplicacion;
 import uiMain.Interfaz;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import BaseDatos.Deserializador;
+import BaseDatos.Serializador;
 
-public class Cliente {
-Recibo recibo;
-private static final long serialVersionUID = 3L;
-private String nombre;
-private int identificacion;
-private double saldo;
-private String tipo;
-private boolean tarjeta = false;
+public class Cliente implements Serializable{
+	 private static final long serialVersionUID = 3L;
+			 
+	private String nombre;
+	private int identificacion;
+	private double saldo;
+	private String tipo;
+	private boolean tarjeta;
 	private int puntosTarjeta;
 	private int saldoTarjeta;
 	private String tipoTarjeta;
-	public static final double PRECIO_TARJETA_BRONCE = 20000;
-	public static final double PRECIO_TARJETA_PLATINO = 50000;
-	public static final double PRECIO_TARJETA_ORO = 100000;
 	public static ArrayList<Cliente> allClientes=new ArrayList<>();
 
 	public Cliente(String nombre, double saldo,String tipo,int identificacion){
@@ -34,12 +30,7 @@ private boolean tarjeta = false;
 		this(nombre,saldo,"Generico",identificacion);
 	}
 	
-	public void imprimirRecibo(Recibo recibo) {
-		this.recibo = recibo;
-		
-		System.out.println("Compra de: " + recibo.getPlanSeleccionado() + "\nA nombre de" + nombre + "\ncon un costo de: " + recibo.getCosto() + "\nSe le otorga la cantidad de " + recibo.getPuntosOtorgados() + "Puntos"  );
-		
-	}
+	
 	public double getSaldo() {
 		return saldo;
 	}
@@ -84,14 +75,6 @@ private boolean tarjeta = false;
 		this.tipoTarjeta = tarjeta;
 	}
 	
-	public boolean isTarjeta() {
-		if(tarjeta == true) {
-			return true
-			else {
-				return false;
-			}
-		}
-	}
 	public void calificarPelicula(Pelicula pelicula, double calificacion) {
 		if (calificacion>5 && calificacion<0) {
 			Interfaz.error();
@@ -153,6 +136,15 @@ private boolean tarjeta = false;
 		}
 		return false;
 	}
+	
+	public boolean recargarTarjeta(double cantidad) {
+		if(this.saldo >= cantidad) {
+			this.saldoTarjeta += cantidad;
+			this.pagarConSaldo(cantidad);
+			return true;
+		}
+		return false;
+	}
 
 
 	public int agregarPuntos(){
@@ -168,6 +160,39 @@ private boolean tarjeta = false;
 			this.puntosTarjeta += aumento;
 		}
 		return aumento;
+	}
+
+	public boolean adquirirTarjeta(int costoTarjeta){
+		if (costoTarjeta == 10000){
+			if (this.getSaldo() >= costoTarjeta){
+				this.pagarConSaldo(costoTarjeta);
+				this.setTarjeta(true);
+				this.setTipoTarjeta("Bronce");
+				return true;
+			} else{
+				return false;
+			}
+		}
+		else if (costoTarjeta == 17000){
+			if (this.getSaldo() >= costoTarjeta){
+				this.pagarConSaldo(costoTarjeta);
+				this.setTarjeta(true);
+				this.setTipoTarjeta("Oro");
+				return true;
+			} else{
+				return false;
+			}
+		}
+		else{
+			if (this.getSaldo() >= costoTarjeta){
+				this.pagarConSaldo(costoTarjeta);
+				this.setTarjeta(true);
+				this.setTipoTarjeta("Platino");
+				return true;
+			} else{
+				return false;
+			}
+		}
 	}
 
 	public String getTipo() {

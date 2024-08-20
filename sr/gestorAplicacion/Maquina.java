@@ -33,7 +33,9 @@ public class Maquina implements Serializable {
         this.precioUso = precioUso;
         this.setTipo(tipo);
         this.bonoActivo=false;
-        allMaquinas.add(this);
+        if (!allMaquinas.contains(this)) {
+		    allMaquinas.add(this);
+		}
     }
     
     public int getUsos() {
@@ -58,18 +60,26 @@ public class Maquina implements Serializable {
     }
 
     public boolean necesitaMantenimiento() {
-        return usos >= 12;
+        if( usos >= 12) {
+        	disponible=false;
+        	return true;
+        }
+        else {
+        	disponible=true;
+        	return false;
+        }
     }
 
     public void usar() {
         if (disponible) {
-            usos++;
+            usos+=1;
             dineroRecaudado += precioUso;
-            if (necesitaMantenimiento()) {
+        }
+        else if (necesitaMantenimiento()) {
                 disponible = false;
             }
         }
-    }
+    
     public void setPrecioUso(double precio) {
     	precioUso=precio;
     }
@@ -177,4 +187,5 @@ public class Maquina implements Serializable {
         Serializador.serializarMaquina(allMaquinas);
     }
 }
+
 

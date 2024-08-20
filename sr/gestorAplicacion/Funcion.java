@@ -34,7 +34,9 @@ public class Funcion implements Serializable {
 		this.tipo = tipo;
 		this.sala = sala;
 		this.precio = precio;
-		allFunciones.add(this);
+		if (!allFunciones.contains(this)) {
+		    allFunciones.add(this);
+		}
 		if(this.pelicula!=null) {
 			this.pelicula.getFunciones().add(this);
 			}

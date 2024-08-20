@@ -19,7 +19,9 @@ public class Bodega extends Establecimiento implements Serializable {
     public Bodega(String nombre, int materialesDisponibles) {
         super(nombre);
         this.materialesDisponibles = materialesDisponibles;
-        allBodegas.add(this);
+        if (!allBodegas.contains(this)) {
+		    allBodegas.add(this);
+		}
     }
 
     public boolean tieneMaterialesSuficientes(int cantidadNecesaria) {
@@ -38,7 +40,7 @@ public class Bodega extends Establecimiento implements Serializable {
     }
 
     public String realizarMantenimiento(ZonaDeJuegos zona, int indiceMaquina) {
-        Maquina maquinaSeleccionada = zona.getMaquinas().get(indiceMaquina);
+        Maquina maquinaSeleccionada = zona.getMaquinasDañadas().get(indiceMaquina);
 
         if (tieneMaterialesSuficientes(maquinaSeleccionada.getMaterialesNecesarios())) {
             usarMateriales(maquinaSeleccionada.getMaterialesNecesarios());
@@ -60,5 +62,20 @@ public class Bodega extends Establecimiento implements Serializable {
         return "Bodega: " + nombre + ", Materiales disponibles " + materialesDisponibles;
     }
     
-    
+    public static void cargarBodegas() {
+        // Utiliza el Deserializador para cargar la lista de cines desde el archivo
+        ArrayList<Bodega> listaBodegas = Deserializador.deserializarBodegas();
+
+        if (listaBodegas != null) {
+            // Reemplaza la lista estática de cines con la lista deserializada
+        	allBodegas= listaBodegas;
+           
+        } else {
+        	Interfaz.error();
+        }
+    }
+
+    public static void guardarBodegas() {
+        Serializador.serializarBodega(allBodegas);
+    }
 }

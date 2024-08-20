@@ -116,13 +116,17 @@ public class Deserializador {
         return new ArrayList<>();
     }
 
-    public static Bodega deserializarBodega() {
+    public static ArrayList<Bodega> deserializarBodegas() {
         Serializable objeto = deserializarObjeto("sr/BaseDatos/temp/Bodega.txt");
-        if (objeto instanceof Bodega) {
-            return (Bodega) objeto;
+        if (objeto instanceof ArrayList<?>) {
+        	ArrayList<?> lista = (ArrayList<?>) objeto;
+        	if (!lista.isEmpty() && lista.get(0) instanceof Bodega) {
+        		return (ArrayList<Bodega>) lista;
+        		}
         }
         
-        return new Bodega("bodega",123);  // Devuelve una nueva instancia por defecto si es necesario
-    }
+        return new ArrayList<>();  
+}
+    
 }
 

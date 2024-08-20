@@ -29,7 +29,9 @@ public class Pelicula implements Serializable{
 		this.titulo = titulo;
 		this.genero = genero;
 		this.duracion=duracion;
-		Pelicula.totalPeliculas.add(this);
+		if (!totalPeliculas.contains(this)) {
+		    totalPeliculas.add(this);
+		}
 		Cine.peliculas.add(this);
 		this.bonoActivo=false;
 	}
@@ -238,9 +240,11 @@ public class Pelicula implements Serializable{
     public static void guardarPeliculas() {
         Serializador.serializarPelicula(totalPeliculas);
     }
+
+}
 	
 	
 	
 
-}
+
 
